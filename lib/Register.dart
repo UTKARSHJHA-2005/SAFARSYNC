@@ -118,6 +118,55 @@ class _RegisterStep1State extends State<RegisterStep1> {
                     ),
 
                     const SizedBox(height: 16),
+                    const SizedBox(height: 16),
+
+                    // PHONE NUMBER
+                    const Text("Phone Number"),
+                    const SizedBox(height: 6),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: phoneController,
+                            keyboardType: TextInputType.phone,
+                            decoration: customFieldDecoration(
+                              "Enter Phone Number",
+                            ),
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return "Phone number is required";
+                              }
+                              if (value.length < 10) {
+                                return "Enter valid phone number";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+
+                        ElevatedButton(
+                          onPressed: () {
+                            if (phoneController.text.length >= 10) {
+                              setState(() {
+                                generatedOtp =
+                                    (1000 + (DateTime.now().millisecond % 9000))
+                                        .toString();
+                                otpSent = true;
+                              });
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("OTP Sent: $generatedOtp"),
+                                ),
+                              );
+                            }
+                          },
+                          child: const Text("Send OTP"),
+                        ),
+                      ],
+                    ),
+
                     termsText(),
                   ],
                 ),
