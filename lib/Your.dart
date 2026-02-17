@@ -249,7 +249,7 @@ class _RegisterStep3State extends State<RegisterStep3>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    "Almost There!",
+                                    "Create Account",
                                     style: TextStyle(
                                       fontSize: 28,
                                       fontWeight: FontWeight.w800,
@@ -260,7 +260,7 @@ class _RegisterStep3State extends State<RegisterStep3>
                                   ),
                                   const SizedBox(height: 2),
                                   Text(
-                                    "Final Step  •  Your Story",
+                                    "Step 3 of 3 •  Your Story",
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: _ink.withOpacity(0.5),
