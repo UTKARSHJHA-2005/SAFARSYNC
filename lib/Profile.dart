@@ -104,7 +104,7 @@ class _RegisterStep2State extends State<RegisterStep2>
             ),
           ],
         ),
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -465,7 +465,7 @@ class _RegisterStep2State extends State<RegisterStep2>
 
                     // ── Main Card ─────────────────────────────────────────
                     Container(
-                      padding: const EdgeInsets.all(24),
+                      padding: const EdgeInsets.all(17),
                       decoration: BoxDecoration(
                         color: _surface,
                         borderRadius: BorderRadius.circular(24),
@@ -542,7 +542,7 @@ class _RegisterStep2State extends State<RegisterStep2>
                               children: [
                                 _tip(Icons.face_outlined, "Clear face"),
                                 const SizedBox(width: 8),
-                                _tip(Icons.wb_sunny_outlined, "Good lighting"),
+                                _tip(Icons.wb_sunny_outlined, "lighting"),
                                 const SizedBox(width: 8),
                                 _tip(Icons.person_outlined, "Solo"),
                               ],
