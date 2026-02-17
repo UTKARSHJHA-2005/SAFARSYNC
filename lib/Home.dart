@@ -68,6 +68,7 @@ class _HomeState extends State<Home> {
                           style: TextStyle(
                             fontSize: 19,
                             fontWeight: FontWeight.w600,
+                            fontFamily: "Montserrat",
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -154,12 +155,14 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    Expanded(
-                      child: _squareImageCard(
-                        label: "",
-                        place: "Assam",
-                        image: "assets/assam.jpg",
-                      ),
+                    _squareImageCard(
+                      label: "",
+                      place: "Assam",
+                      images: [
+                        "assets/assam.jpg",
+                        "assets/kaziranga.webp",
+                        "assets/handicraft.jpg",
+                      ],
                     ),
                   ],
                 ),
@@ -462,50 +465,110 @@ class _HomeState extends State<Home> {
   Widget _squareImageCard({
     required String label,
     required String place,
-    required String image,
+    required List<String> images,
   }) {
-    return Container(
-      height: 150,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.12),
-            blurRadius: 12,
-            offset: const Offset(0, 6),
+    PageController controller = PageController();
+    ValueNotifier<int> currentPage = ValueNotifier(0);
+
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return Container(
+          height: 150,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.12),
+                blurRadius: 12,
+                offset: const Offset(0, 6),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            left: 12,
-            bottom: 12,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Stack(
               children: [
-                Text(
-                  label,
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
+                PageView.builder(
+                  controller: controller,
+                  itemCount: images.length,
+                  onPageChanged: (index) {
+                    currentPage.value = index;
+                  },
+                  itemBuilder: (context, index) {
+                    return Image.asset(images[index], fit: BoxFit.cover);
+                  },
+                ),
+
+                // Gradient overlay
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.black.withOpacity(0.6),
+                        Colors.transparent,
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
                   ),
                 ),
-                Text(
-                  place,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w900,
+
+                Positioned(
+                  left: 12,
+                  bottom: 12,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        label,
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Text(
+                        place,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Positioned(
+                  bottom: 8,
+                  right: 12,
+                  child: ValueListenableBuilder<int>(
+                    valueListenable: currentPage,
+                    builder: (context, value, _) {
+                      return Row(
+                        children: List.generate(
+                          images.length,
+                          (index) => Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 3),
+                            width: value == index ? 10 : 6,
+                            height: 6,
+                            decoration: BoxDecoration(
+                              color: value == index
+                                  ? Colors.white
+                                  : Colors.white54,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 

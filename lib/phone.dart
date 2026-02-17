@@ -98,7 +98,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen> {
                     ),
                   ),
                   child: const Text(
-                    "Sign up",
+                    "Sign In",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
@@ -118,12 +118,9 @@ class _PhoneInputScreenState extends State<PhoneInputScreen> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
+                      Text("Newbie? ", style: TextStyle(color: Colors.black54)),
                       Text(
-                        "Already a user? ",
-                        style: TextStyle(color: Colors.black54),
-                      ),
-                      Text(
-                        "Login",
+                        "Signup",
                         style: TextStyle(
                           color: Color.fromARGB(255, 57, 39, 60),
                           fontWeight: FontWeight.bold,
