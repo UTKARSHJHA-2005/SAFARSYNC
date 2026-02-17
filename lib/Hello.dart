@@ -57,7 +57,7 @@ class Hello extends StatelessWidget {
                         colors: [Color(0xFF6A6CFF), Color(0xFF4E8CFF)],
                       ).createShader(bounds),
                       child: const Text(
-                        "ORIZON",
+                        "SafarSync",
                         style: TextStyle(
                           fontSize: 54,
                           fontWeight: FontWeight.w900,

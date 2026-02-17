@@ -131,7 +131,7 @@ class _EventsState extends State<Events> {
               ),
               const SizedBox(height: 14),
               SizedBox(
-                height: 330,
+                height: 300,
                 child: ListView.separated(
                   padding: const EdgeInsets.only(left: 20),
                   scrollDirection: Axis.horizontal,
