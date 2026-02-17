@@ -697,7 +697,7 @@ class _RegisterStep2State extends State<RegisterStep2>
                         ),
                       ),
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 110),
                   ],
                 ),
               ),
