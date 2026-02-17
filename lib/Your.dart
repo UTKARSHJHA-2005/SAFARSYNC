@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
+import 'package:safarsync/Contact.dart';
 
 class RegisterStep3 extends StatefulWidget {
   const RegisterStep3({super.key});
@@ -180,8 +181,16 @@ class _RegisterStep3State extends State<RegisterStep3>
               height: 56,
               child: ElevatedButton(
                 onPressed: () {
-                  // Navigate to home
+                  _handleSubmit(); // if you still need validation
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const EmergencyContactsPage(),
+                    ),
+                  );
                 },
+
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _accent,
                   foregroundColor: Colors.white,
