@@ -650,17 +650,12 @@ class _RegisterStep3State extends State<RegisterStep3>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Complete Registration",
+                                    "Continue ->",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700,
                                       letterSpacing: 0.4,
                                     ),
-                                  ),
-                                  SizedBox(width: 10),
-                                  Icon(
-                                    Icons.check_circle_outline_rounded,
-                                    size: 20,
                                   ),
                                 ],
                               ),
