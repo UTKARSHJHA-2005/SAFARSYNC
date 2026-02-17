@@ -700,47 +700,6 @@ class _RegisterStep2State extends State<RegisterStep2>
 
                     const SizedBox(height: 16),
 
-                    // Skip option
-                    Center(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                                      const RegisterStep3(),
-                              transitionsBuilder:
-                                  (
-                                    context,
-                                    animation,
-                                    secondaryAnimation,
-                                    child,
-                                  ) {
-                                    return FadeTransition(
-                                      opacity: animation,
-                                      child: child,
-                                    );
-                                  },
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: _muted,
-                          elevation: 0,
-                        ),
-                        child: const Text(
-                          "Skip for now",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: _muted,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-
                     const SizedBox(height: 40),
                   ],
                 ),
