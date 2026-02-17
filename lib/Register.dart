@@ -47,14 +47,11 @@ class _RegisterStep1State extends State<RegisterStep1> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 60),
-
                   const Text(
                     "Register",
                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                   ),
-
                   const SizedBox(height: 20),
-
                   // MAIN CONTAINER
                   Container(
                     padding: const EdgeInsets.all(20),
