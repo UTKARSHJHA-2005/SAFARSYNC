@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
-import 'package:flutter_contact_picker/flutter_contact_picker.dart';
+import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class EmergencyContactsPage extends StatefulWidget {

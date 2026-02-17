@@ -33,10 +33,10 @@ dependencies:
   flutter_osm_plugin: ^1.2.7
   google_maps_flutter: ^2.5.0
   flutter_native_splash: ^2.4.0
-  flutter_contact_picker: ^5.0.0
-  permission_handler: ^11.0.0
   flutter:
     sdk: flutter
+  fluttercontactpicker: ^4.7.0
+  permission_handler: ^11.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -111,5 +111,5 @@ flutter_native_splash:
   android: true
   ios: true
 
-flutter_contact_picker: ^5.0.0
+fluttercontactpicker: ^4.7.0
 permission_handler: ^11.0.0
