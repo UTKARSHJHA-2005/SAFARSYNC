@@ -24,6 +24,14 @@ class _RegisterStep1State extends State<RegisterStep1> {
 
   String generatedOtp = "";
   String? selectedSex;
+  @override
+  void dispose() {
+    nameController.dispose();
+    ageController.dispose();
+    phoneController.dispose();
+    otpController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
