@@ -1,0 +1,541 @@
+// home.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'package:safarsync/Events.dart'; // keep your Events page import
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  late MapController mapController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize controller to start with user tracking (v1.2.7 API)
+    mapController = MapController.withUserPosition(
+      trackUserLocation: const UserTrackingOption(
+        enableTracking: true,
+        unFollowUser: false,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    mapController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _addSampleMarker() async {
+    // Example: add a marker at a fixed location
+    await mapController.addMarker(
+      GeoPoint(latitude: 37.7749, longitude: -122.4194),
+      markerIcon: const MarkerIcon(
+        icon: Icon(Icons.location_on, size: 48, color: Colors.red),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFFEAF2FF), Color(0xFF6B75FF)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Good Morning, SafarSync",
+                          style: TextStyle(
+                            fontSize: 19,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          "12 Aug, 2025",
+                          style: TextStyle(color: Colors.black54, fontSize: 14),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    const Icon(Icons.notifications_none_rounded, size: 26),
+                    const SizedBox(width: 16),
+                    const Icon(Icons.menu, size: 26),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade600,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(6),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.star,
+                          color: Colors.blue,
+                          size: 20,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      const Text(
+                        "10",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      const Text(
+                        "Badges Collected",
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                      const Spacer(),
+                      const Icon(
+                        Icons.my_location_outlined,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(width: 12),
+                      const Icon(Icons.person_outline, color: Colors.white),
+                      const SizedBox(width: 12),
+                      const Icon(Icons.settings, color: Colors.white),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: _squareCard(
+                        title: "Wingman",
+                        subtitle: "Powered by AI",
+                        image: "assets/wing.png",
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _squareImageCard(
+                        label: "",
+                        place: "Assam",
+                        image: "assets/assam.jpg",
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: SizedBox(
+                  width: 366,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const Events()),
+                      );
+                    },
+                    child: _squareCard(
+                      title: "Events Near You!",
+                      subtitle: "Discover meetups & pop-up now.",
+                      image: "assets/events.jpeg",
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Icon(
+                Icons.keyboard_arrow_up_rounded,
+                size: 30,
+                color: Colors.white,
+              ),
+              const SizedBox(height: 10),
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(150),
+                  ),
+                  child: Container(
+                    color: Colors.black87,
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: OSMFlutter(
+                            controller: mapController,
+                            osmOption: OSMOption(
+                              zoomOption: const ZoomOption(
+                                initZoom: 14,
+                                minZoomLevel: 3,
+                                maxZoomLevel: 19,
+                              ),
+                              userLocationMarker: UserLocationMaker(
+                                personMarker: const MarkerIcon(
+                                  icon: Icon(
+                                    Icons.person_pin_circle,
+                                    color: Colors.blue,
+                                    size: 56,
+                                  ),
+                                ),
+                                directionArrowMarker: const MarkerIcon(
+                                  icon: Icon(
+                                    Icons.navigation,
+                                    color: Colors.blue,
+                                    size: 44,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            onMapIsReady: (isReady) async {
+                              if (isReady) {
+                                try {
+                                  await mapController.currentLocation();
+                                } catch (e) {
+                                  debugPrint('currentLocation error: $e');
+                                }
+                                await _addSampleMarker();
+                              }
+                            },
+                            onGeoPointClicked: (geoPoint) {
+                              debugPrint(
+                                'Clicked marker at: ${geoPoint.toMap()}',
+                              );
+                            },
+                          ),
+                        ),
+                        bottomActionButtons(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget bottomActionButtons() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _actionButton(
+            icon: Icons.local_police,
+            label: "Police",
+            bg: Colors.white,
+            iconColor: Colors.black,
+          ),
+
+          _sosMainButton(),
+
+          _actionButton(
+            icon: Icons.local_hospital,
+            label: "Hospital",
+            bg: Colors.white,
+            iconColor: Colors.black,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _actionButton({
+    required IconData icon,
+    required String label,
+    required Color bg,
+    required Color iconColor,
+  }) {
+    return Column(
+      children: [
+        CircleAvatar(
+          radius: 26,
+          backgroundColor: bg.withOpacity(0.9),
+          child: Icon(icon, color: iconColor, size: 26),
+        ),
+        const SizedBox(height: 8),
+        Text(label, style: const TextStyle(color: Colors.black, fontSize: 14)),
+      ],
+    );
+  }
+
+  Widget _sosMainButton() {
+    return CircleAvatar(
+      radius: 40,
+      backgroundColor: Colors.redAccent,
+      child: const Text(
+        "SOS",
+        style: TextStyle(
+          fontSize: 24,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  void showEmergencySheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 5,
+                width: 50,
+                margin: const EdgeInsets.only(bottom: 20),
+                decoration: BoxDecoration(
+                  color: Colors.black26,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Report Emergency",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                ),
+              ),
+              const SizedBox(height: 20),
+              _emItem(Icons.gavel, Colors.red, "Armed Robbery"),
+              _emItem(Icons.sensor_door_outlined, Colors.yellow, "Break In"),
+              _emItem(
+                Icons.local_fire_department,
+                Colors.orange,
+                "Fire Outbreak",
+              ),
+              _emItem(Icons.local_hospital, Colors.green, "Medical Emergency"),
+              _emItem(Icons.visibility, Colors.purple, "Suspicious Activity"),
+              _emItem(Icons.call, Colors.blue, "Other Emergency"),
+              const SizedBox(height: 30),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text("Cancel"),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                      ),
+                      onPressed: () {},
+                      child: const Text("Proceed"),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _emItem(IconData icon, Color color, String label) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 22,
+            backgroundColor: color.withOpacity(0.2),
+            child: Icon(icon, color: color, size: 22),
+          ),
+          const SizedBox(width: 15),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _squareCard({
+    required String title,
+    required String subtitle,
+    required String image,
+  }) {
+    return Container(
+      height: 150,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.12),
+            blurRadius: 10,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            colors: [Colors.black.withOpacity(0.6), Colors.transparent],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          ),
+        ),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              subtitle,
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.85),
+                fontSize: 13,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _squareImageCard({
+    required String label,
+    required String place,
+    required String image,
+  }) {
+    return Container(
+      height: 150,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.12),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            left: 12,
+            bottom: 12,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  place,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _mapAction(IconData icon, String label) {
+    return Column(
+      children: [
+        CircleAvatar(
+          backgroundColor: Colors.white.withOpacity(0.9),
+          radius: 20,
+          child: Icon(icon, color: Colors.black),
+        ),
+        const SizedBox(height: 6),
+        Text(label, style: const TextStyle(color: Colors.white)),
+      ],
+    );
+  }
+
+  Widget _sosButton(BuildContext context) {
+    return GestureDetector(
+      onTap: () => showEmergencySheet(context),
+      child: const CircleAvatar(
+        radius: 40,
+        backgroundColor: Colors.redAccent,
+        child: Text(
+          "SOS",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
+        ),
+      ),
+    );
+  }
+}
