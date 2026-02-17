@@ -166,6 +166,47 @@ class _RegisterStep1State extends State<RegisterStep1> {
                         ),
                       ],
                     ),
+                    if (otpSent) ...[
+                      const SizedBox(height: 16),
+
+                      const Text("Enter OTP"),
+                      const SizedBox(height: 6),
+
+                      TextFormField(
+                        controller: otpController,
+                        keyboardType: TextInputType.number,
+                        decoration: customFieldDecoration("Enter OTP"),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      ElevatedButton(
+                        onPressed: () {
+                          if (otpController.text == generatedOtp) {
+                            setState(() {
+                              otpVerified = true;
+                            });
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("OTP Verified ✅")),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Invalid OTP ❌")),
+                            );
+                          }
+                        },
+                        child: const Text("Verify OTP"),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      if (otpVerified)
+                        const Text(
+                          "Phone Verified Successfully",
+                          style: TextStyle(color: Colors.green),
+                        ),
+                    ],
 
                     termsText(),
                   ],
@@ -176,6 +217,14 @@ class _RegisterStep1State extends State<RegisterStep1> {
 
               nextBtn(() {
                 if (_formKey.currentState!.validate()) {
+                  if (!otpVerified) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Please verify phone number first"),
+                      ),
+                    );
+                    return;
+                  }
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (_) => const RegisterStep2()),
