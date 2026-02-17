@@ -16,7 +16,13 @@ class _RegisterStep1State extends State<RegisterStep1> {
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController otpController = TextEditingController();
 
+  bool otpSent = false;
+  bool otpVerified = false;
+
+  String generatedOtp = "";
   String? selectedSex;
 
   @override
