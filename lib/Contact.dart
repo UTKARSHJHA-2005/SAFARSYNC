@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:safarsync/components/gradient.dart';
 import 'package:flutter_contact_picker/flutter_contact_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -9,148 +10,250 @@ class EmergencyContactsPage extends StatefulWidget {
   State<EmergencyContactsPage> createState() => _EmergencyContactsPageState();
 }
 
-class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
+class _EmergencyContactsPageState extends State<EmergencyContactsPage>
+    with TickerProviderStateMixin {
+  static const Color _ink = Color(0xFF1A1A2E);
+  static const Color _accent = Color(0xFF4F6EF7);
+  static const Color _border = Color(0xFFE8EAF2);
+  static const Color _surface = Colors.white;
+
   List<PhoneContact> contacts = [];
 
   Future<void> pickContact() async {
     PermissionStatus permission = await Permission.contacts.request();
 
     if (permission.isGranted) {
-      try {
-        PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
+      PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
 
-        if (contact.phoneNumber != null) {
-          setState(() {
-            contacts.add(contact);
-          });
-        }
-      } catch (e) {
-        debugPrint("Error picking contact: $e");
+      if (contact.phoneNumber != null) {
+        setState(() {
+          contacts.add(contact);
+        });
       }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Contacts permission denied")),
-      );
     }
   }
 
-  void removeContact(int index) {
-    setState(() {
-      contacts.removeAt(index);
-    });
+  Widget _nextButton(VoidCallback onTap) {
+    return SizedBox(
+      width: double.infinity,
+      height: 56,
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: _accent,
+          foregroundColor: Colors.white,
+          elevation: 4,
+          shadowColor: _accent.withOpacity(0.4),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Continue",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.5,
+              ),
+            ),
+            SizedBox(width: 10),
+            Icon(Icons.arrow_forward_rounded, size: 20),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Emergency Contacts")),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Add at least 2 emergency contacts",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              "These numbers will be called during emergency situations.",
-              style: TextStyle(color: Colors.grey),
-            ),
-            const SizedBox(height: 20),
+      resizeToAvoidBottomInset: true,
+      body: GradientBackground(
+        // ✅ SAME BACKGROUND
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 22),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 52),
 
-            /// Contact List
-            Expanded(
-              child: contacts.isEmpty
-                  ? const Center(
-                      child: Text(
-                        "No contacts added yet",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: contacts.length,
-                      itemBuilder: (context, index) {
-                        final contact = contacts[index];
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: ListTile(
-                            leading: const Icon(Icons.contact_phone),
-                            title: Text(contact.fullName ?? "No Name"),
-                            subtitle: Text(contact.phoneNumber?.number ?? ""),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                              onPressed: () => removeContact(index),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-            ),
-
-            const SizedBox(height: 10),
-
-            /// Add Button
-            SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: ElevatedButton.icon(
-                icon: const Icon(Icons.add),
-                label: const Text("Add Contact"),
-                onPressed: pickContact,
-              ),
-            ),
-
-            const SizedBox(height: 15),
-
-            /// Continue Button
-            SizedBox(
-              width: double.infinity,
-              height: 56,
-              child: ElevatedButton(
-                onPressed: contacts.length >= 2
-                    ? () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              "Emergency contacts saved successfully",
-                            ),
-                          ),
-                        );
-
-                        // Navigate next if needed
-                      }
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: _accent,
-                  foregroundColor: Colors.white,
-                  elevation: 4,
-                  shadowColor: _accent.withOpacity(0.4),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                /// HEADER (matching previous page)
+                Row(
                   children: [
-                    Text(
-                      "Continue",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0.4,
+                    Container(
+                      width: 4,
+                      height: 36,
+                      decoration: BoxDecoration(
+                        color: _accent,
+                        borderRadius: BorderRadius.circular(4),
                       ),
                     ),
-                    SizedBox(width: 10),
-                    Icon(Icons.arrow_forward_rounded, size: 20),
+                    const SizedBox(width: 14),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Emergency Contacts",
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w800,
+                            color: _ink,
+                            letterSpacing: -0.5,
+                            fontFamily: 'Georgia',
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          "Step 2 of 2  •  Safety Setup",
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: _ink.withOpacity(0.5),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              ),
+
+                const SizedBox(height: 24),
+
+                /// MAIN CARD
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: _surface,
+                    borderRadius: BorderRadius.circular(24),
+                    boxShadow: [
+                      BoxShadow(
+                        color: _accent.withOpacity(0.08),
+                        blurRadius: 24,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Add at least 2 trusted contacts",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: _ink,
+                        ),
+                      ),
+
+                      const SizedBox(height: 8),
+
+                      Text(
+                        "These numbers will be contacted during emergencies.",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: _ink.withOpacity(0.5),
+                        ),
+                      ),
+
+                      const SizedBox(height: 20),
+
+                      /// CONTACT LIST
+                      ...contacts.map((contact) {
+                        return Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          padding: const EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: _border),
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.contact_phone, color: _accent),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      contact.fullName ?? "No Name",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Text(
+                                      contact.phoneNumber?.number ?? "",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: _ink.withOpacity(0.5),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    contacts.remove(contact);
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+
+                      const SizedBox(height: 10),
+
+                      /// ADD CONTACT BUTTON
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: OutlinedButton.icon(
+                          onPressed: pickContact,
+                          icon: const Icon(Icons.add),
+                          label: const Text("Add Contact"),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: _accent,
+                            side: const BorderSide(color: _accent),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 28),
+
+                /// CONTINUE BUTTON (SAME STYLE)
+                _nextButton(() {
+                  if (contacts.length < 2) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "Please add at least 2 emergency contacts",
+                        ),
+                      ),
+                    );
+                    return;
+                  }
+
+                  // Navigate to profile or home
+                }),
+
+                const SizedBox(height: 40),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
