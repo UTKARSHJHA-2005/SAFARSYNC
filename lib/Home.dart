@@ -1,7 +1,6 @@
-// home.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
-import 'package:safarsync/Events.dart'; // keep your Events page import
+import 'package:safarsync/Events.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -63,18 +62,21 @@ class _HomeState extends State<Home> {
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           "Good Morning, SafarSync",
                           style: TextStyle(
                             fontSize: 19,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Text(
-                          "12 Aug, 2025",
-                          style: TextStyle(color: Colors.black54, fontSize: 14),
+                          DateTime.now().toString().substring(0, 10),
+                          style: const TextStyle(
+                            color: Colors.black54,
+                            fontSize: 14,
+                          ),
                         ),
                       ],
                     ),
