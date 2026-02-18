@@ -72,7 +72,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: GradientBackground(
-        // ✅ SAME BACKGROUND
         child: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 22),
@@ -80,8 +79,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 52),
-
-                /// HEADER (matching previous page)
                 Row(
                   children: [
                     Container(
@@ -122,7 +119,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
 
                 const SizedBox(height: 24),
 
-                /// MAIN CARD
                 Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
