@@ -20,14 +20,33 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
   List<Contact> contacts = [];
 
   Future<void> pickContact() async {
-    if (await FlutterContacts.requestPermission()) {
-      final contact = await FlutterContacts.openExternalPick();
+    final permission = await FlutterContacts.requestPermission();
 
-      if (contact != null && contact.phones.isNotEmpty) {
-        setState(() {
-          contacts.add(contact);
-        });
-      }
+    print("Permission granted: $permission");
+
+    if (!permission) return;
+
+    final picked = await FlutterContacts.openExternalPick();
+
+    print("Picked contact: $picked");
+
+    if (picked == null) return;
+
+    final fullContact = await FlutterContacts.getContact(
+      picked.id,
+      withProperties: true,
+    );
+
+    print("Full contact phones: ${fullContact?.phones}");
+
+    if (fullContact != null && fullContact.phones.isNotEmpty) {
+      setState(() {
+        contacts.add(fullContact);
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Selected contact has no phone number")),
+      );
     }
   }
 
