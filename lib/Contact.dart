@@ -178,7 +178,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                                       ),
                                     ),
                                     Text(
-                                      contact.phoneNumber?.number ?? "",
+                                      contact.phones.first.number ?? "",
                                       style: TextStyle(
                                         fontSize: 12,
                                         color: _ink.withOpacity(0.5),
