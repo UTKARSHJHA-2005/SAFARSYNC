@@ -122,7 +122,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          "Step 2 of 2  •  Safety Setup",
+                          "Step 4 of 4  •  Safety Setup",
                           style: TextStyle(
                             fontSize: 13,
                             color: _ink.withOpacity(0.5),
@@ -132,6 +132,28 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                       ],
                     ),
                   ],
+                ),
+
+                const SizedBox(height: 18),
+
+                Container(
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: _border,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: FractionallySizedBox(
+                    alignment: Alignment.centerLeft,
+                    widthFactor: 1.0, // Step 4 of 4 = full
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [_accent, Color(0xFF7C93F8)],
+                        ),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  ),
                 ),
 
                 const SizedBox(height: 24),
