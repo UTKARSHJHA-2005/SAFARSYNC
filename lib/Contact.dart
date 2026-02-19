@@ -290,8 +290,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                     );
                     return;
                   }
-
-                  // Navigate to profile or home
                 }),
 
                 const SizedBox(height: 40),
