@@ -198,53 +198,61 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                       const SizedBox(height: 20),
 
                       /// CONTACT LIST
-                      ...contacts.map((contact) {
-                        return Container(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: _border),
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.contact_phone, color: _accent),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      contact.displayName ?? "No Name",
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: contacts.length,
+                        itemBuilder: (context, index) {
+                          final contact = contacts[index];
+
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: 12),
+                            padding: const EdgeInsets.all(14),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: _border),
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.contact_phone, color: _accent),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        contact.displayName,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      contact.phones.first.number ?? "",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: _ink.withOpacity(0.5),
+                                      Text(
+                                        contact.phones.first.number,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: _ink.withOpacity(0.5),
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.close,
-                                  color: Colors.red,
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.close,
+                                    color: Colors.red,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      contacts.removeAt(index);
+                                    });
+                                  },
                                 ),
-                                onPressed: () {
-                                  setState(() {
-                                    contacts.remove(contact);
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      }),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
 
                       const SizedBox(height: 10),
 
