@@ -279,7 +279,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
 
                 const SizedBox(height: 28),
 
-                /// CONTINUE BUTTON (SAME STYLE)
                 _nextButton(() {
                   if (contacts.length < 2) {
                     ScaffoldMessenger.of(context).showSnackBar(
