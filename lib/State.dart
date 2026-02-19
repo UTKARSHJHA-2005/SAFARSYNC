@@ -198,7 +198,7 @@ class _SelectStatePageState extends State<SelectStatePage> {
 
                       DropdownButtonFormField<String>(
                         value: selectedState,
-                        isExpanded: true, // ✅ IMPORTANT FIX
+                        isExpanded: true,
                         decoration: InputDecoration(
                           hintText: "Select State",
                           filled: true,
@@ -219,11 +219,7 @@ class _SelectStatePageState extends State<SelectStatePage> {
                         items: indianStates.map((state) {
                           return DropdownMenuItem<String>(
                             value: state,
-                            child: Text(
-                              state,
-                              overflow:
-                                  TextOverflow.ellipsis, // ✅ Prevent overflow
-                            ),
+                            child: Text(state, overflow: TextOverflow.ellipsis),
                           );
                         }).toList(),
                         onChanged: (value) {
