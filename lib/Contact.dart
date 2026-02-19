@@ -41,7 +41,9 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
 
     if (fullContact != null && fullContact.phones.isNotEmpty) {
       setState(() {
-        contacts.add(fullContact);
+        if (!contacts.any((c) => c.id == fullContact.id)) {
+          contacts.add(fullContact);
+        }
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
