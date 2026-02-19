@@ -295,7 +295,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
 
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => const Home()),
+                    MaterialPageRoute(builder: (_) => const SelectStatePage()),
                   );
                 }),
 
