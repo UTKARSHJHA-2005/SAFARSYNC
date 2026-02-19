@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:safarsync/Home.dart';
 
 class EmergencyContactsPage extends StatefulWidget {
   const EmergencyContactsPage({super.key});
@@ -57,7 +58,12 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
       width: double.infinity,
       height: 56,
       child: ElevatedButton(
-        onPressed: onTap,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const Home()),
+          );
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: _accent,
           foregroundColor: Colors.white,
