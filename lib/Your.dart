@@ -242,7 +242,7 @@ class _RegisterStep3State extends State<RegisterStep3>
                                   ),
                                   const SizedBox(height: 2),
                                   Text(
-                                    "Step 3 of 3 •  Your Story",
+                                    "Step 3 of 4 •  Your Story",
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: _ink.withOpacity(0.5),
@@ -267,7 +267,7 @@ class _RegisterStep3State extends State<RegisterStep3>
                             ),
                             child: FractionallySizedBox(
                               alignment: Alignment.centerLeft,
-                              widthFactor: 0.85,
+                              widthFactor: 0.8,
                               child: Container(
                                 decoration: BoxDecoration(
                                   gradient: const LinearGradient(
