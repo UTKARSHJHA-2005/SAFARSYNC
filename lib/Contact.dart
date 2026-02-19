@@ -3,6 +3,7 @@ import 'package:safarsync/components/gradient.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:safarsync/Home.dart';
+import 'package:safarsync/State.dart';
 
 class EmergencyContactsPage extends StatefulWidget {
   const EmergencyContactsPage({super.key});
