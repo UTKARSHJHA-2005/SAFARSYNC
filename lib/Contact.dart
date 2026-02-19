@@ -172,7 +172,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      contact.fullName ?? "No Name",
+                                      contact.displayName ?? "No Name",
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                       ),
