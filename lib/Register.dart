@@ -269,6 +269,7 @@ import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
 import 'package:safarsync/Profile.dart';
 import 'package:safarsync/components/input.dart';
+import 'package:country_list_pick/country_list_pick.dart';
 
 class RegisterStep1 extends StatefulWidget {
   const RegisterStep1({super.key});
@@ -607,6 +608,8 @@ class _RegisterStep1State extends State<RegisterStep1>
     );
   }
 
+  String? selectedCountry;
+
   // ── Build ────────────────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
@@ -654,7 +657,7 @@ class _RegisterStep1State extends State<RegisterStep1>
                               ),
                               const SizedBox(height: 2),
                               Text(
-                                "Step 1 of 2  •  Personal Details",
+                                "Step 1 of 4  •  Personal Details",
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: _ink.withOpacity(0.5),
@@ -679,7 +682,7 @@ class _RegisterStep1State extends State<RegisterStep1>
                         ),
                         child: FractionallySizedBox(
                           alignment: Alignment.centerLeft,
-                          widthFactor: 0.5,
+                          widthFactor: 0.2,
                           child: Container(
                             decoration: BoxDecoration(
                               gradient: const LinearGradient(
@@ -858,22 +861,24 @@ class _RegisterStep1State extends State<RegisterStep1>
                               ],
                             ),
                             _label("Country"),
-                            TextFormField(
-                              controller: nameController,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: _ink,
-                                fontWeight: FontWeight.w500,
+
+                            CountryListPick(
+                              appBar: AppBar(
+                                backgroundColor: _accent,
+                                title: const Text("Select Country"),
                               ),
-                              decoration: _fieldDec(
-                                "e.g. India",
-                                icon: Icons.person_outline_rounded,
+                              theme: CountryTheme(
+                                isShowFlag: true,
+                                isShowTitle: true,
+                                isShowCode: false,
+                                isDownIcon: true,
+                                showEnglishName: true,
                               ),
-                              validator: (value) {
-                                if (value == null || value.trim().isEmpty) {
-                                  return "Full name is required";
-                                }
-                                return null;
+                              initialSelection: '+91',
+                              onChanged: (CountryCode? code) {
+                                setState(() {
+                                  selectedCountry = code?.name;
+                                });
                               },
                             ),
 

@@ -399,7 +399,6 @@ class _RegisterStep2State extends State<RegisterStep2>
                   children: [
                     const SizedBox(height: 52),
 
-                    // ── Header (matches Step 1) ───────────────────────────
                     Row(
                       children: [
                         Container(
