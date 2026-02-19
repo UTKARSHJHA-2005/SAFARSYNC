@@ -130,15 +130,6 @@ class _SelectStatePageState extends State<SelectStatePage> {
                               fontFamily: 'Georgia',
                             ),
                           ),
-                          const SizedBox(height: 2),
-                          Text(
-                            "Step 5 of 5  •  Final Setup",
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: _ink.withOpacity(0.5),
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
                         ],
                       ),
                     ),
