@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
-import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class EmergencyContactsPage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
   static const Color _border = Color(0xFFE8EAF2);
   static const Color _surface = Colors.white;
 
-  List<PhoneContact> contacts = [];
+  List<Contact> contacts = [];
 
   Future<void> pickContact() async {
     PermissionStatus permission = await Permission.contacts.request();
