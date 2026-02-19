@@ -144,7 +144,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                   ),
                   child: FractionallySizedBox(
                     alignment: Alignment.centerLeft,
-                    widthFactor: 1.0, // Step 4 of 4 = full
+                    widthFactor: 1.0,
                     child: Container(
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
