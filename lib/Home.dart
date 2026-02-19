@@ -155,14 +155,17 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    _squareImageCard(
-                      label: "",
-                      place: "Assam",
-                      images: [
-                        "assets/assam.jpg",
-                        "assets/kaziranga.webp",
-                        "assets/handicraft.jpg",
-                      ],
+                    Expanded(
+                      // ✅ ADD THIS
+                      child: _squareImageCard(
+                        label: "",
+                        place: "Assam",
+                        images: [
+                          "assets/assam.jpg",
+                          "assets/kaziranga.webp",
+                          "assets/handicraft.jpg",
+                        ],
+                      ),
                     ),
                   ],
                 ),

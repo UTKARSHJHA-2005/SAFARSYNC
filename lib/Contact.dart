@@ -58,29 +58,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
       width: double.infinity,
       height: 56,
       child: ElevatedButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: const Text("Setup Complete"),
-                content: const Text(
-                  "Your safety setup is now complete! You can modify your profile and emergency contacts anytime from the app settings.",
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text("OK"),
-                  ),
-                ],
-              );
-            },
-          );
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const Home()),
-          );
-        },
+        onPressed: onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor: _accent,
           foregroundColor: Colors.white,
@@ -313,6 +291,11 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                     );
                     return;
                   }
+
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => const Home()),
+                  );
                 }),
 
                 const SizedBox(height: 40),
