@@ -11,7 +11,6 @@ class _SelectStatePageState extends State<SelectStatePage> {
   String? selectedState;
 
   final List<String> indianStates = [
-    // States
     "Andhra Pradesh",
     "Arunachal Pradesh",
     "Assam",
@@ -40,8 +39,6 @@ class _SelectStatePageState extends State<SelectStatePage> {
     "Uttar Pradesh",
     "Uttarakhand",
     "West Bengal",
-
-    // Union Territories
     "Andaman and Nicobar Islands",
     "Chandigarh",
     "Dadra and Nagar Haveli and Daman and Diu",
