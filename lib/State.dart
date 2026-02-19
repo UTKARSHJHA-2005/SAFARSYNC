@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:safarsync/components/gradient.dart';
+import 'package:safarsync/Home.dart';
 
 class SelectStatePage extends StatefulWidget {
   const SelectStatePage({super.key});
@@ -8,6 +10,11 @@ class SelectStatePage extends StatefulWidget {
 }
 
 class _SelectStatePageState extends State<SelectStatePage> {
+  static const Color _ink = Color(0xFF1A1A2E);
+  static const Color _accent = Color(0xFF4F6EF7);
+  static const Color _border = Color(0xFFE8EAF2);
+  static const Color _surface = Colors.white;
+
   String? selectedState;
 
   final List<String> indianStates = [
@@ -49,76 +56,202 @@ class _SelectStatePageState extends State<SelectStatePage> {
     "Puducherry",
   ];
 
+  Widget _nextButton(VoidCallback onTap) {
+    return SizedBox(
+      width: double.infinity,
+      height: 56,
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: _accent,
+          foregroundColor: Colors.white,
+          elevation: 4,
+          shadowColor: _accent.withOpacity(0.4),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Continue",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.5,
+              ),
+            ),
+            SizedBox(width: 10),
+            Icon(Icons.arrow_forward_rounded, size: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Select Your State"),
-        backgroundColor: Colors.orange,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Which Indian State are you currently in?",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 20),
+      resizeToAvoidBottomInset: true,
+      body: GradientBackground(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 22),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 52),
 
-            /// Dropdown
-            DropdownButtonFormField<String>(
-              value: selectedState,
-              decoration: InputDecoration(
-                hintText: "Select State",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                /// HEADER
+                Row(
+                  children: [
+                    Container(
+                      width: 4,
+                      height: 36,
+                      decoration: BoxDecoration(
+                        color: _accent,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                    const SizedBox(width: 14),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Your Location",
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w800,
+                            color: _ink,
+                            letterSpacing: -0.5,
+                            fontFamily: 'Georgia',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
-              ),
-              items: indianStates.map((state) {
-                return DropdownMenuItem<String>(
-                  value: state,
-                  child: Text(state),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedState = value;
-                });
-              },
-            ),
 
-            const SizedBox(height: 30),
+                const SizedBox(height: 18),
 
-            /// Continue Button
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                /// PROGRESS BAR
+                Container(
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: _border,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: FractionallySizedBox(
+                    alignment: Alignment.centerLeft,
+                    widthFactor: 1.0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [_accent, Color(0xFF7C93F8)],
+                        ),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
                   ),
                 ),
-                onPressed: selectedState == null
-                    ? null
-                    : () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text("You selected: $selectedState"),
+
+                const SizedBox(height: 24),
+
+                /// CARD
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: _surface,
+                    borderRadius: BorderRadius.circular(24),
+                    boxShadow: [
+                      BoxShadow(
+                        color: _accent.withOpacity(0.08),
+                        blurRadius: 24,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Select the state you are currently in",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: _ink,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        "This helps us provide localized safety assistance.",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: _ink.withOpacity(0.5),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      /// DROPDOWN
+                      DropdownButtonFormField<String>(
+                        value: selectedState,
+                        decoration: InputDecoration(
+                          hintText: "Select State",
+                          filled: true,
+                          fillColor: Colors.grey.shade50,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 14,
                           ),
-                        );
-                      },
-                child: const Text("Continue", style: TextStyle(fontSize: 16)),
-              ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(14),
+                            borderSide: BorderSide(color: _border),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(14),
+                            borderSide: BorderSide(color: _border),
+                          ),
+                        ),
+                        items: indianStates
+                            .map(
+                              (state) => DropdownMenuItem(
+                                value: state,
+                                child: Text(state),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedState = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 28),
+
+                /// CONTINUE BUTTON
+                _nextButton(() {
+                  if (selectedState == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Please select your state")),
+                    );
+                    return;
+                  }
+
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => const Home()),
+                  );
+                }),
+
+                const SizedBox(height: 40),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
