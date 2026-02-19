@@ -857,6 +857,27 @@ class _RegisterStep1State extends State<RegisterStep1>
                                 ),
                               ],
                             ),
+                            _label("Country"),
+                            TextFormField(
+                              controller: nameController,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: _ink,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              decoration: _fieldDec(
+                                "e.g. India",
+                                icon: Icons.person_outline_rounded,
+                              ),
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return "Full name is required";
+                                }
+                                return null;
+                              },
+                            ),
+
+                            const SizedBox(height: 16),
 
                             _sectionDivider(),
 
