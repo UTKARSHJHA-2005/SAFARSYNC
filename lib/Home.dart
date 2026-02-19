@@ -84,7 +84,7 @@ class _HomeState extends State<Home> {
                     const Spacer(),
                     const Icon(Icons.notifications_none_rounded, size: 26),
                     const SizedBox(width: 16),
-                    const Icon(Icons.menu, size: 26),
+                    const Icon(Icons.settings, size: 26, color: Colors.black54),
                   ],
                 ),
               ),
