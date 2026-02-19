@@ -425,7 +425,7 @@ class _RegisterStep2State extends State<RegisterStep2>
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              "Step 2 of 2  •  Profile Photo",
+                              "Step 2 of 4  •  Profile Photo",
                               style: TextStyle(
                                 fontSize: 13,
                                 color: _ink.withOpacity(0.5),
@@ -440,7 +440,6 @@ class _RegisterStep2State extends State<RegisterStep2>
 
                     const SizedBox(height: 8),
 
-                    // ── Progress bar (full — step 2 of 2) ────────────────
                     Container(
                       margin: const EdgeInsets.only(top: 18, bottom: 24),
                       height: 4,
@@ -450,7 +449,7 @@ class _RegisterStep2State extends State<RegisterStep2>
                       ),
                       child: FractionallySizedBox(
                         alignment: Alignment.centerLeft,
-                        widthFactor: 1.0,
+                        widthFactor: 0.5,
                         child: Container(
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
