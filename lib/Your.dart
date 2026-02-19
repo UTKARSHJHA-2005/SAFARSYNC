@@ -107,31 +107,6 @@ class _RegisterStep3State extends State<RegisterStep3>
 
   double get _charProgress => (_charCount / _maxChars).clamp(0.0, 1.0);
 
-  void _handleSubmit() {
-    if (aboutController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Row(
-            children: [
-              Icon(Icons.warning_amber_rounded, color: Colors.white, size: 18),
-              SizedBox(width: 8),
-              Text("Tell us a little about yourself first"),
-            ],
-          ),
-          backgroundColor: const Color(0xFFF59E0B),
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      );
-      return;
-    }
-
-    setState(() => _submitted = true);
-    _successController.forward();
-  }
-
   // ── Success overlay ──────────────────────────────────────────────────────
   Widget _buildSuccessState() {
     return FadeTransition(
@@ -181,8 +156,6 @@ class _RegisterStep3State extends State<RegisterStep3>
               height: 56,
               child: ElevatedButton(
                 onPressed: () {
-                  _handleSubmit(); // if you still need validation
-
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -645,7 +618,15 @@ class _RegisterStep3State extends State<RegisterStep3>
                             width: double.infinity,
                             height: 56,
                             child: ElevatedButton(
-                              onPressed: _handleSubmit,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        const EmergencyContactsPage(),
+                                  ),
+                                );
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: _accent,
                                 foregroundColor: Colors.white,
