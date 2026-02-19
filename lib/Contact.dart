@@ -20,12 +20,10 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
   List<Contact> contacts = [];
 
   Future<void> pickContact() async {
-    PermissionStatus permission = await Permission.contacts.request();
+    if (await FlutterContacts.requestPermission()) {
+      final contact = await FlutterContacts.openExternalPick();
 
-    if (permission.isGranted) {
-      PhoneContact contact = await FlutterContactPicker.pickPhoneContact();
-
-      if (contact.phoneNumber != null) {
+      if (contact != null && contact.phones.isNotEmpty) {
         setState(() {
           contacts.add(contact);
         });
