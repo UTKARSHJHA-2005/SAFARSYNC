@@ -196,15 +196,15 @@ class _SelectStatePageState extends State<SelectStatePage> {
                       ),
                       const SizedBox(height: 20),
 
-                      /// DROPDOWN
                       DropdownButtonFormField<String>(
                         value: selectedState,
+                        isExpanded: true, // ✅ IMPORTANT FIX
                         decoration: InputDecoration(
                           hintText: "Select State",
                           filled: true,
                           fillColor: Colors.grey.shade50,
                           contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 12,
+                            horizontal: 16,
                             vertical: 14,
                           ),
                           border: OutlineInputBorder(
@@ -216,14 +216,16 @@ class _SelectStatePageState extends State<SelectStatePage> {
                             borderSide: BorderSide(color: _border),
                           ),
                         ),
-                        items: indianStates
-                            .map(
-                              (state) => DropdownMenuItem(
-                                value: state,
-                                child: Text(state),
-                              ),
-                            )
-                            .toList(),
+                        items: indianStates.map((state) {
+                          return DropdownMenuItem<String>(
+                            value: state,
+                            child: Text(
+                              state,
+                              overflow:
+                                  TextOverflow.ellipsis, // ✅ Prevent overflow
+                            ),
+                          );
+                        }).toList(),
                         onChanged: (value) {
                           setState(() {
                             selectedState = value;
