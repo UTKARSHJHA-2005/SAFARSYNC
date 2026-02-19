@@ -102,8 +102,6 @@ class _SelectStatePageState extends State<SelectStatePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 52),
-
-                /// HEADER
                 Row(
                   children: [
                     Container(
