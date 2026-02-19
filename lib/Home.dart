@@ -150,7 +150,7 @@ class _HomeState extends State<Home> {
                     Expanded(
                       child: _squareCard(
                         title: "Wingman",
-                        subtitle: "Powered by AI",
+                        subtitle: "Travel with AI",
                         image: "assets/wing.png",
                       ),
                     ),
