@@ -136,8 +136,6 @@ class _HomeState extends State<Home> {
                       ),
                       const SizedBox(width: 12),
                       const Icon(Icons.person_outline, color: Colors.white),
-                      const SizedBox(width: 12),
-                      const Icon(Icons.settings, color: Colors.white),
                     ],
                   ),
                 ),
