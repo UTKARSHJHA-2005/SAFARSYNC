@@ -103,6 +103,7 @@ class _SelectStatePageState extends State<SelectStatePage> {
               children: [
                 const SizedBox(height: 52),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       width: 4,
@@ -113,20 +114,33 @@ class _SelectStatePageState extends State<SelectStatePage> {
                       ),
                     ),
                     const SizedBox(width: 14),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Your Location",
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w800,
-                            color: _ink,
-                            letterSpacing: -0.5,
-                            fontFamily: 'Georgia',
+
+                    Expanded(
+                      // ✅ ADD THIS
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Your Location",
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w800,
+                              color: _ink,
+                              letterSpacing: -0.5,
+                              fontFamily: 'Georgia',
+                            ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 2),
+                          Text(
+                            "Step 5 of 5  •  Final Setup",
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: _ink.withOpacity(0.5),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -199,7 +213,7 @@ class _SelectStatePageState extends State<SelectStatePage> {
                           filled: true,
                           fillColor: Colors.grey.shade50,
                           contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16,
+                            horizontal: 12,
                             vertical: 14,
                           ),
                           border: OutlineInputBorder(
