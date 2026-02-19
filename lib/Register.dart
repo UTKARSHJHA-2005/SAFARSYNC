@@ -1132,31 +1132,7 @@ class _RegisterStep1State extends State<RegisterStep1>
                           );
                         }
                       }),
-
                       const SizedBox(height: 24),
-
-                      // ── Sign In Link ────────────────────────────────────
-                      Center(
-                        child: RichText(
-                          text: TextSpan(
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: _ink.withOpacity(0.5),
-                            ),
-                            children: const [
-                              TextSpan(text: "Already have an account? "),
-                              TextSpan(
-                                text: "Sign In",
-                                style: TextStyle(
-                                  color: _accent,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
                       const SizedBox(height: 40),
                     ],
                   ),
