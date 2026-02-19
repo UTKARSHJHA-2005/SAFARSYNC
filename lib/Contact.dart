@@ -59,6 +59,23 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
       height: 56,
       child: ElevatedButton(
         onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text("Setup Complete"),
+                content: const Text(
+                  "Your safety setup is now complete! You can modify your profile and emergency contacts anytime from the app settings.",
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("OK"),
+                  ),
+                ],
+              );
+            },
+          );
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => const Home()),
