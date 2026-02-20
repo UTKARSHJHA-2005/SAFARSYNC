@@ -476,7 +476,6 @@ class _HomeState extends State<Home> {
 
     return StatefulBuilder(
       builder: (context, setState) {
-        // Start auto slide once
         timer ??= Timer.periodic(const Duration(seconds: 3), (Timer t) {
           if (controller.hasClients) {
             int nextPage = currentPage.value + 1;
