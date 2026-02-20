@@ -74,13 +74,13 @@ class _EventsState extends State<Events> {
                     icon: const Icon(Icons.arrow_back),
                   ),
                   const Text(
-                    "Explore Bharat",
+                    "Events Near You!",
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
                   ),
                   const Spacer(),
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.notifications_outlined),
+                    icon: const Icon(Icons.refresh_rounded),
                   ),
                 ],
               ),
@@ -224,44 +224,121 @@ class _EventsState extends State<Events> {
 
   Widget _nearbyCard(Map<String, dynamic> data) {
     return Container(
-      width: 280,
+      width: 300,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.black12),
+        borderRadius: BorderRadius.circular(28),
         color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /// 🔹 IMAGE
           ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
             child: Image.asset(
               data["image"],
-              width: 280,
-              height: 170,
+              height: 200,
+              width: double.infinity,
               fit: BoxFit.cover,
             ),
           ),
+
+          /// 🔹 CONTENT
           Padding(
-            padding: const EdgeInsets.all(14),
+            padding: const EdgeInsets.all(18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                /// Tags
+                Row(
+                  children: [
+                    _tag("Safe place", const Color(0xFFE8ECF8)),
+                    const SizedBox(width: 10),
+                    _tag("Nature", const Color(0xFFF3E3E3)),
+                  ],
+                ),
+
+                const SizedBox(height: 14),
+
+                /// Title
                 Text(
                   data["title"],
                   style: const TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-                const SizedBox(height: 6),
+
+                const SizedBox(height: 10),
+
+                /// Location
                 Row(
                   children: [
-                    const Icon(Icons.location_on, size: 18, color: Colors.blue),
-                    const SizedBox(width: 4),
-                    Text(data["location"]),
+                    const Icon(Icons.location_on, size: 20, color: Colors.blue),
+                    const SizedBox(width: 6),
+                    Text(
+                      data["location"],
+                      style: const TextStyle(fontSize: 16, color: Colors.grey),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 18),
+
+                /// Avatar Row + Bucket text
+                Row(
+                  children: [
+                    _avatarStack(),
+                    const SizedBox(width: 12),
+                    const Text(
+                      "4500+ Bucket Listed",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ],
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _avatarStack() {
+    return SizedBox(
+      width: 70,
+      height: 40,
+      child: Stack(
+        children: [
+          Positioned(
+            left: 0,
+            child: CircleAvatar(
+              radius: 18,
+              backgroundImage: AssetImage("assets/user1.jpg"),
+            ),
+          ),
+          Positioned(
+            left: 22,
+            child: CircleAvatar(
+              radius: 18,
+              backgroundImage: AssetImage("assets/user2.jpg"),
+            ),
+          ),
+          Positioned(
+            left: 44,
+            child: CircleAvatar(
+              radius: 18,
+              backgroundImage: AssetImage("assets/user3.jpg"),
             ),
           ),
         ],

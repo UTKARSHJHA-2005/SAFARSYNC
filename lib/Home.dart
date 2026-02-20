@@ -482,7 +482,6 @@ class _HomeState extends State<Home> {
             if (nextPage >= images.length) {
               nextPage = 0;
             }
-
             controller.animateToPage(
               nextPage,
               duration: const Duration(milliseconds: 500),
@@ -520,7 +519,6 @@ class _HomeState extends State<Home> {
                   },
                 ),
 
-                // Gradient overlay
                 Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
