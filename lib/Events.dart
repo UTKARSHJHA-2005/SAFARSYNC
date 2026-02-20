@@ -394,17 +394,17 @@ class _EventsState extends State<Events> {
   }
 
   // TAG UI
-  Widget _tag(String text, Color bg) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-      ),
-    );
-  }
-}
+//   Widget _tag(String text, Color bg) {
+//     return Container(
+//       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+//       decoration: BoxDecoration(
+//         color: bg,
+//         borderRadius: BorderRadius.circular(20),
+//       ),
+//       child: Text(
+//         text,
+//         style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+//       ),
+//     );
+//   }
+// }
