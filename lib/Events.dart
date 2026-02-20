@@ -501,7 +501,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    _fadeController.dispose();
+    _fadeController?.dispose();
     super.dispose();
   }
 
