@@ -131,7 +131,7 @@ class _EventsState extends State<Events> {
               ),
               const SizedBox(height: 14),
               SizedBox(
-                height: 300,
+                height: 420,
                 child: ListView.separated(
                   padding: const EdgeInsets.only(left: 20),
                   scrollDirection: Axis.horizontal,
@@ -291,21 +291,6 @@ class _EventsState extends State<Events> {
                 ),
 
                 const SizedBox(height: 18),
-
-                /// Avatar Row + Bucket text
-                Row(
-                  children: [
-                    _avatarStack(),
-                    const SizedBox(width: 12),
-                    const Text(
-                      "4500+ Bucket Listed",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),
