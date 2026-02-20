@@ -289,8 +289,6 @@ class _EventsState extends State<Events> {
                     ),
                   ],
                 ),
-
-                const SizedBox(height: 18),
               ],
             ),
           ),
