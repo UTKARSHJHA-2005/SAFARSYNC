@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:safarsync/Events.dart';
+import 'dart:async';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -468,11 +469,31 @@ class _HomeState extends State<Home> {
     required String place,
     required List<String> images,
   }) {
-    PageController controller = PageController();
-    ValueNotifier<int> currentPage = ValueNotifier(0);
+    final PageController controller = PageController();
+    final ValueNotifier<int> currentPage = ValueNotifier(0);
+
+    Timer? timer;
 
     return StatefulBuilder(
       builder: (context, setState) {
+        // Start auto slide once
+        timer ??= Timer.periodic(const Duration(seconds: 3), (Timer t) {
+          if (controller.hasClients) {
+            int nextPage = currentPage.value + 1;
+            if (nextPage >= images.length) {
+              nextPage = 0;
+            }
+
+            controller.animateToPage(
+              nextPage,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+            );
+
+            currentPage.value = nextPage;
+          }
+        });
+
         return Container(
           height: 150,
           decoration: BoxDecoration(
