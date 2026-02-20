@@ -1020,7 +1020,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
   Widget _buildVocalGrid() {
     return FadeTransition(
-      opacity: _fadeAnimation,
+      opacity: _fadeAnimation ?? const AlwaysStoppedAnimation(1),
       child: filteredVocal.isEmpty
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
