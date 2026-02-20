@@ -813,7 +813,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
   Widget _buildNearbyList() {
     return FadeTransition(
-      opacity: _fadeAnimation,
+      opacity: _fadeAnimation ?? const AlwaysStoppedAnimation(1),
       child: SizedBox(
         height: 380,
         child: filteredNearby.isEmpty
