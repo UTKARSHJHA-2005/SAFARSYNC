@@ -969,7 +969,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          data["location"],
+                          location,
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.white70,
@@ -1132,7 +1132,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                     ),
                     const SizedBox(width: 3),
                     Text(
-                      data["location"],
+                      location,
                       style: TextStyle(
                         fontSize: 12,
                         color: palette[1]!.withOpacity(0.7),
