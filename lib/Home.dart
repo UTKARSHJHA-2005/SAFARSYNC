@@ -561,31 +561,31 @@ class _HomeState extends State<Home> {
                   ),
                 ),
 
-                Positioned(
-                  bottom: 8,
-                  right: 12,
-                  child: ValueListenableBuilder<int>(
-                    valueListenable: currentPage,
-                    builder: (context, value, _) {
-                      return Row(
-                        children: List.generate(
-                          images.length,
-                          (index) => Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 3),
-                            width: value == index ? 10 : 6,
-                            height: 6,
-                            decoration: BoxDecoration(
-                              color: value == index
-                                  ? Colors.white
-                                  : Colors.white54,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                // Positioned(
+                //   bottom: 8,
+                //   right: 12,
+                //   child: ValueListenableBuilder<int>(
+                //     valueListenable: currentPage,
+                //     builder: (context, value, _) {
+                //       return Row(
+                //         children: List.generate(
+                //           images.length,
+                //           (index) => Container(
+                //             margin: const EdgeInsets.symmetric(horizontal: 3),
+                //             width: value == index ? 10 : 6,
+                //             height: 6,
+                //             decoration: BoxDecoration(
+                //               color: value == index
+                //                   ? Colors.white
+                //                   : Colors.white54,
+                //               borderRadius: BorderRadius.circular(10),
+                //             ),
+                //           ),
+                //         ),
+                //       );
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),
