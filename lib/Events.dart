@@ -507,8 +507,8 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
   void _selectFilter(String filter) {
     setState(() => selectedFilter = filter);
-    _fadeController.reset();
-    _fadeController.forward();
+    _fadeController?.reset();
+    _fadeController?.forward();
   }
 
   @override
@@ -830,8 +830,9 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _nearbyCard(Map<String, dynamic> data, int index) {
-    final gradients = data["gradient"] as List<Color>;
-
+    final gradients =
+        (data["gradient"] as List<Color>?) ??
+        [const Color(0xFF1A1A1A), const Color(0xFF333333)];
     return Container(
       width: 290,
       decoration: BoxDecoration(
