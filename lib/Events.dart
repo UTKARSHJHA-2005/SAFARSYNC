@@ -418,7 +418,9 @@ class Events extends StatefulWidget {
 class _EventsState extends State<Events> with TickerProviderStateMixin {
   String selectedFilter = "For You";
   AnimationController? _fadeController;
-  Animation<double>? _fadeAnimation;
+  Animation<double> get _fadeAnimation => _fadeController != null
+      ? CurvedAnimation(parent: _fadeController!, curve: Curves.easeOut)
+      : const AlwaysStoppedAnimation(1.0);
 
   final List<Map<String, dynamic>> nearbyData = [
     {
@@ -429,7 +431,6 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       "tag1": "Wildlife",
       "tag2": "Nature",
       "rating": "4.9",
-      "gradient": [Color(0xFF1A3A2A), Color(0xFF2D6A4F)],
     },
     {
       "title": "Meghalaya\nTrek",
@@ -439,8 +440,12 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       "tag1": "Adventure",
       "tag2": "Scenic",
       "rating": "4.7",
-      "gradient": [Color(0xFF1A2A3A), Color(0xFF2D4A6A)],
     },
+  ];
+
+  static const List<List<Color>> _nearbyGradients = [
+    [Color(0xFF1A3A2A), Color(0xFF2D6A4F)],
+    [Color(0xFF1A2A3A), Color(0xFF2D4A6A)],
   ];
 
   final List<Map<String, dynamic>> vocalData = [
@@ -482,20 +487,12 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   @override
-  @override
   void initState() {
     super.initState();
-
     _fadeController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 600),
     );
-
-    _fadeAnimation = CurvedAnimation(
-      parent: _fadeController!,
-      curve: Curves.easeOut,
-    );
-
     _fadeController!.forward();
   }
 
@@ -508,7 +505,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   void _selectFilter(String filter) {
     setState(() => selectedFilter = filter);
     _fadeController?.reset();
-    _fadeController?.forward();
+    _fadeController!.forward();
   }
 
   @override
@@ -813,7 +810,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
   Widget _buildNearbyList() {
     return FadeTransition(
-      opacity: _fadeAnimation ?? const AlwaysStoppedAnimation(1),
+      opacity: _fadeAnimation,
       child: SizedBox(
         height: 380,
         child: filteredNearby.isEmpty
@@ -830,13 +827,8 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _nearbyCard(Map<String, dynamic> data, int index) {
-    final String title = data["title"] ?? "Unknown Place";
-    final String location = data["location"] ?? "Unknown Location";
-    final String image = data["image"] ?? "assets/default.jpg";
+    final gradients = _nearbyGradients[index % _nearbyGradients.length];
 
-    final List<Color> gradients =
-        (data["gradient"] as List<Color>?) ??
-        [const Color(0xFF1A1A1A), const Color(0xFF333333)];
     return Container(
       width: 290,
       decoration: BoxDecoration(
@@ -856,7 +848,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
             // Background image
             Positioned.fill(
               child: Image.asset(
-                image,
+                data["image"],
                 fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => Container(
                   decoration: BoxDecoration(
@@ -951,7 +943,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      data["title"],
                       style: const TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.w900,
@@ -969,7 +961,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          location,
+                          data["location"],
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.white70,
@@ -1025,7 +1017,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
   Widget _buildVocalGrid() {
     return FadeTransition(
-      opacity: _fadeAnimation ?? const AlwaysStoppedAnimation(1),
+      opacity: _fadeAnimation,
       child: filteredVocal.isEmpty
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1045,14 +1037,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _vocalCard(Map<String, dynamic> data, int index) {
-    final String title = data["title"] ?? "Unknown Place";
-    final String location = data["location"] ?? "Unknown Location";
-    final String image = data["image"] ?? "assets/default.jpg";
-
-    final List<Color> gradients =
-        (data["gradient"] as List<Color>?) ??
-        [const Color(0xFF1A1A1A), const Color(0xFF333333)];
-    final colors = [
+    const colors = [
       [const Color(0xFFFFF3E0), const Color(0xFFE65100)],
       [const Color(0xFFE8F5E9), const Color(0xFF2E7D32)],
       [const Color(0xFFE3F2FD), const Color(0xFF1565C0)],
@@ -1074,13 +1059,13 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 Image.asset(
-                  image,
+                  data["image"],
                   height: 110,
                   width: 190,
                   fit: BoxFit.cover,
                   errorBuilder: (_, __, ___) => Container(
                     height: 110,
-                    color: palette[1]!.withOpacity(0.2),
+                    color: palette[1].withOpacity(0.2),
                     child: Center(
                       child: Text(
                         data["emoji"],
@@ -1114,7 +1099,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  data["title"],
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w800,
@@ -1128,14 +1113,14 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                     Icon(
                       Icons.location_on_rounded,
                       size: 14,
-                      color: palette[1]!.withOpacity(0.6),
+                      color: palette[1].withOpacity(0.6),
                     ),
                     const SizedBox(width: 3),
                     Text(
-                      location,
+                      data["location"],
                       style: TextStyle(
                         fontSize: 12,
-                        color: palette[1]!.withOpacity(0.7),
+                        color: palette[1].withOpacity(0.7),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
