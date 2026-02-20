@@ -856,7 +856,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
             // Background image
             Positioned.fill(
               child: Image.asset(
-                data["image"],
+                image,
                 fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => Container(
                   decoration: BoxDecoration(
@@ -951,7 +951,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      data["title"],
+                      title,
                       style: const TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.w900,
@@ -1045,6 +1045,13 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _vocalCard(Map<String, dynamic> data, int index) {
+    final String title = data["title"] ?? "Unknown Place";
+    final String location = data["location"] ?? "Unknown Location";
+    final String image = data["image"] ?? "assets/default.jpg";
+
+    final List<Color> gradients =
+        (data["gradient"] as List<Color>?) ??
+        [const Color(0xFF1A1A1A), const Color(0xFF333333)];
     final colors = [
       [const Color(0xFFFFF3E0), const Color(0xFFE65100)],
       [const Color(0xFFE8F5E9), const Color(0xFF2E7D32)],
@@ -1067,7 +1074,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 Image.asset(
-                  data["image"],
+                  image,
                   height: 110,
                   width: 190,
                   fit: BoxFit.cover,
@@ -1107,7 +1114,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  data["title"],
+                  title,
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w800,
