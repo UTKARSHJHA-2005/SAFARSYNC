@@ -482,17 +482,21 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   @override
+  @override
   void initState() {
     super.initState();
+
     _fadeController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 600),
     );
+
     _fadeAnimation = CurvedAnimation(
-      parent: _fadeController,
+      parent: _fadeController!,
       curve: Curves.easeOut,
     );
-    _fadeController.forward();
+
+    _fadeController!.forward();
   }
 
   @override
