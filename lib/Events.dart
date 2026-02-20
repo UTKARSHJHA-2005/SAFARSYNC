@@ -830,7 +830,11 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _nearbyCard(Map<String, dynamic> data, int index) {
-    final gradients =
+    final String title = data["title"] ?? "Unknown Place";
+    final String location = data["location"] ?? "Unknown Location";
+    final String image = data["image"] ?? "assets/default.jpg";
+
+    final List<Color> gradients =
         (data["gradient"] as List<Color>?) ??
         [const Color(0xFF1A1A1A), const Color(0xFF333333)];
     return Container(
