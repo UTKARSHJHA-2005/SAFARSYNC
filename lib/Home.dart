@@ -217,9 +217,7 @@ class _HomeState extends State<Home> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (_) => const ProfilePage(),
-                            ),
+                            MaterialPageRoute(builder: (_) => ProfilePage()),
                           );
                         },
                       ),
@@ -551,72 +549,75 @@ class _HomeState extends State<Home> {
           }
         });
 
-        return Container(
-          height: 150,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.12),
-                blurRadius: 12,
-                offset: const Offset(0, 6),
-              ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Stack(
-              children: [
-                PageView.builder(
-                  controller: controller,
-                  itemCount: images.length,
-                  onPageChanged: (index) {
-                    currentPage.value = index;
-                  },
-                  itemBuilder: (context, index) {
-                    return Image.asset(images[index], fit: BoxFit.cover);
-                  },
-                ),
-
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.black.withOpacity(0.6),
-                        Colors.transparent,
-                      ],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                    ),
-                  ),
-                ),
-
-                Positioned(
-                  left: 12,
-                  bottom: 12,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        label,
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        place,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ],
-                  ),
+        return GestureDetector(
+          onTap: onPressed,
+          child: Container(
+            height: 150,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.12),
+                  blurRadius: 12,
+                  offset: const Offset(0, 6),
                 ),
               ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Stack(
+                children: [
+                  PageView.builder(
+                    controller: controller,
+                    itemCount: images.length,
+                    onPageChanged: (index) {
+                      currentPage.value = index;
+                    },
+                    itemBuilder: (context, index) {
+                      return Image.asset(images[index], fit: BoxFit.cover);
+                    },
+                  ),
+
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.black.withOpacity(0.6),
+                          Colors.transparent,
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                    ),
+                  ),
+
+                  Positioned(
+                    left: 12,
+                    bottom: 12,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          label,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          place,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
