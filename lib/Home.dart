@@ -199,27 +199,6 @@ class _HomeState extends State<Home> {
                           size: 20,
                         ),
                       ),
-                      const SizedBox(width: 10),
-                      const Text(
-                        "10",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      const Text(
-                        "Badges Collected",
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
-                      const Spacer(),
-                      const Icon(
-                        Icons.my_location_outlined,
-                        color: Colors.white,
-                      ),
-                      const SizedBox(width: 12),
-                      const Icon(Icons.person_outline, color: Colors.white),
                     ],
                   ),
                 ),
