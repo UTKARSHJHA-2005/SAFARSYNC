@@ -608,7 +608,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               width: 44,
               height: 44,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: const Color(0xFF9893FF),
                 borderRadius: BorderRadius.circular(14),
               ),
               child: const Icon(
@@ -765,7 +765,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                         vertical: 3,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF9893FF),
+                        color: const Color.fromRGBO(237, 245, 126, 1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
