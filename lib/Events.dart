@@ -708,14 +708,6 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                 color: const Color(0xFF1A1A1A),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Text(
-                'Search',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
             ),
           ],
         ),
