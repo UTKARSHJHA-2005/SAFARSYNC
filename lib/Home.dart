@@ -205,7 +205,6 @@ class _HomeState extends State<Home> {
                     ),
                     const SizedBox(width: 12),
                     Expanded(
-                      // ✅ ADD THIS
                       child: _squareImageCard(
                         label: "",
                         place: "Assam",
