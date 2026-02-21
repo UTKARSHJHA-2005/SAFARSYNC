@@ -477,7 +477,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       title: 'Meghalaya\nTrek',
       location: 'Meghalaya, India',
       image: 'assets/kaziranga.webp',
-      category: '👀  See More',
+      category: '👀 See More',
       tag1: 'Adventure',
       tag2: 'Scenic',
       rating: '4.7',
