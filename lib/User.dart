@@ -12,12 +12,27 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController blockchainController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-  final TextEditingController emergencyController = TextEditingController();
+  List<TextEditingController> emergencyControllers = [];
   final TextEditingController bloodController = TextEditingController();
   final TextEditingController medicationController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
 
   bool isOrganDonor = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    nameController.text = "Rahul Sharma";
+    blockchainController.text = "0xA67B98F23C";
+    phoneController.text = "+91 9876543210";
+    emergencyController.text = "+91 9123456789";
+    bloodController.text = "O+";
+    medicationController.text = "None";
+    addressController.text = "Guwahati, Assam, India";
+
+    isOrganDonor = true;
+  }
 
   @override
   Widget build(BuildContext context) {
