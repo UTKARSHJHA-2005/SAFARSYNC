@@ -69,7 +69,8 @@ class _HomeState extends State<Home> {
                   _settingsItem(Icons.person, "Profile"),
                   _settingsItem(Icons.notifications, "Notifications"),
                   _settingsItem(Icons.lock, "Privacy"),
-                  _settingsItem(Icons.help_outline, "Help & Support"),
+                  _settingsItem(Icons.help_outline, "Help"),
+                  _settingsItem(Icons.delete_outline, "Delete Account"),
                   _settingsItem(Icons.logout, "Logout"),
 
                   const Spacer(),
