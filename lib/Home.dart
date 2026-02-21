@@ -67,7 +67,11 @@ class _HomeState extends State<Home> {
                   const SizedBox(height: 30),
 
                   _settingsItem(Icons.person, "Profile", Colors.blue),
-                  _settingsItem(Icons.location_on, "Location", Colors.orange),
+                  _settingsItem(
+                    Icons.location_on,
+                    "Change Location",
+                    Colors.orange,
+                  ),
                   _settingsItem(Icons.help_outline, "Help", Colors.purple),
                   _settingsItem(
                     Icons.delete_outline,
