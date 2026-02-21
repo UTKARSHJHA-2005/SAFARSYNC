@@ -702,13 +702,6 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1A1A1A),
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
           ],
         ),
       ),
