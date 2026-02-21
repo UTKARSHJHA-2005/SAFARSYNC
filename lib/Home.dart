@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:safarsync/Events.dart';
 import 'dart:async';
+import 'package:safarsync/User.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -213,6 +214,14 @@ class _HomeState extends State<Home> {
                           "assets/kaziranga.webp",
                           "assets/handicraft.jpg",
                         ],
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const ProfilePage(),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],
@@ -517,6 +526,7 @@ class _HomeState extends State<Home> {
     required String label,
     required String place,
     required List<String> images,
+    VoidCallback? onPressed,
   }) {
     final PageController controller = PageController();
     final ValueNotifier<int> currentPage = ValueNotifier(0);
