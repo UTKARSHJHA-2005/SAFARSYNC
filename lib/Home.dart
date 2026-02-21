@@ -179,7 +179,7 @@ class _HomeState extends State<Home> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 12,
-                    vertical: 10,
+                    vertical: 3,
                   ),
                   decoration: BoxDecoration(
                     color: Colors.blue.shade600,
