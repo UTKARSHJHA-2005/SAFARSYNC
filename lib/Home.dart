@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
                     "Delete Account",
                     Colors.red,
                   ),
-                  _settingsItem(Icons.logout, "Logout", Colors.grey),
+                  _settingsItem(Icons.logout, "Logout", Colors.red),
 
                   const Spacer(),
 
