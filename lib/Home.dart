@@ -66,12 +66,20 @@ class _HomeState extends State<Home> {
                   ),
                   const SizedBox(height: 30),
 
-                  _settingsItem(Icons.person, "Profile"),
-                  _settingsItem(Icons.notifications, "Notifications"),
-                  _settingsItem(Icons.lock, "Privacy"),
-                  _settingsItem(Icons.help_outline, "Help"),
-                  _settingsItem(Icons.delete_outline, "Delete Account"),
-                  _settingsItem(Icons.logout, "Logout"),
+                  _settingsItem(Icons.person, "Profile", Colors.blue),
+                  _settingsItem(
+                    Icons.notifications,
+                    "Notifications",
+                    Colors.green,
+                  ),
+                  _settingsItem(Icons.lock, "Privacy", Colors.orange),
+                  _settingsItem(Icons.help_outline, "Help", Colors.purple),
+                  _settingsItem(
+                    Icons.delete_outline,
+                    "Delete Account",
+                    Colors.red,
+                  ),
+                  _settingsItem(Icons.logout, "Logout", Colors.grey),
 
                   const Spacer(),
 
@@ -99,12 +107,12 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _settingsItem(IconData icon, String title) {
+  Widget _settingsItem(IconData icon, String title, Color colors) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 14),
       child: Row(
         children: [
-          Icon(icon, size: 22, color: Colors.black87),
+          Icon(icon, size: 22, color: colors),
           const SizedBox(width: 16),
           Text(
             title,
