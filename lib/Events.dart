@@ -525,7 +525,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     'Stays',
     'Shopping',
     'Food',
-    '👀  See More',
+    '👀 See More',
   ];
 
   List<NearbyPlace> get _filteredNearby {
