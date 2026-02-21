@@ -408,6 +408,46 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
+// ─── Typed Models ─────────────────────────────────────────────────────────────
+
+class NearbyPlace {
+  final String title;
+  final String location;
+  final String image;
+  final String category;
+  final String tag1;
+  final String tag2;
+  final String rating;
+
+  const NearbyPlace({
+    required this.title,
+    required this.location,
+    required this.image,
+    required this.category,
+    required this.tag1,
+    required this.tag2,
+    required this.rating,
+  });
+}
+
+class VocalItem {
+  final String title;
+  final String location;
+  final String image;
+  final String category;
+  final String emoji;
+
+  const VocalItem({
+    required this.title,
+    required this.location,
+    required this.image,
+    required this.category,
+    required this.emoji,
+  });
+}
+
+// ─── Widget ───────────────────────────────────────────────────────────────────
+
 class Events extends StatefulWidget {
   const Events({super.key});
 
@@ -416,31 +456,32 @@ class Events extends StatefulWidget {
 }
 
 class _EventsState extends State<Events> with TickerProviderStateMixin {
-  String selectedFilter = "For You";
+  String selectedFilter = 'For You';
   AnimationController? _fadeController;
+
   Animation<double> get _fadeAnimation => _fadeController != null
       ? CurvedAnimation(parent: _fadeController!, curve: Curves.easeOut)
       : const AlwaysStoppedAnimation(1.0);
 
-  final List<Map<String, dynamic>> nearbyData = [
-    {
-      "title": "Kaziranga\nNational Park",
-      "location": "Assam, India",
-      "image": "assets/kaziranga.webp",
-      "category": "For You",
-      "tag1": "Wildlife",
-      "tag2": "Nature",
-      "rating": "4.9",
-    },
-    {
-      "title": "Meghalaya\nTrek",
-      "location": "Meghalaya, India",
-      "image": "assets/kaziranga.webp",
-      "category": "👀  See More",
-      "tag1": "Adventure",
-      "tag2": "Scenic",
-      "rating": "4.7",
-    },
+  static const List<NearbyPlace> _nearbyData = [
+    NearbyPlace(
+      title: 'Kaziranga\nNational Park',
+      location: 'Assam, India',
+      image: 'assets/kaziranga.webp',
+      category: 'For You',
+      tag1: 'Wildlife',
+      tag2: 'Nature',
+      rating: '4.9',
+    ),
+    NearbyPlace(
+      title: 'Meghalaya\nTrek',
+      location: 'Meghalaya, India',
+      image: 'assets/kaziranga.webp',
+      category: '👀  See More',
+      tag1: 'Adventure',
+      tag2: 'Scenic',
+      rating: '4.7',
+    ),
   ];
 
   static const List<List<Color>> _nearbyGradients = [
@@ -448,52 +489,64 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     [Color(0xFF1A2A3A), Color(0xFF2D4A6A)],
   ];
 
-  final List<Map<String, dynamic>> vocalData = [
-    {
-      "title": "Majuli Island\nPottery Workshop",
-      "location": "Assam",
-      "image": "assets/handicraft.jpg",
-      "category": "Adventure",
-      "emoji": "🏺",
-    },
-    {
-      "title": "Assam Silk\nWeaving",
-      "location": "Assam",
-      "image": "assets/handicraft.jpg",
-      "category": "Shopping",
-      "emoji": "🧵",
-    },
-    {
-      "title": "Bamboo Craft\nFestival",
-      "location": "Tripura",
-      "image": "assets/handicraft.jpg",
-      "category": "Adventure",
-      "emoji": "🎋",
-    },
+  static const List<VocalItem> _vocalData = [
+    VocalItem(
+      title: 'Majuli Island\nPottery Workshop',
+      location: 'Assam',
+      image: 'assets/handicraft.jpg',
+      category: 'Adventure',
+      emoji: '🏺',
+    ),
+    VocalItem(
+      title: 'Assam Silk\nWeaving',
+      location: 'Assam',
+      image: 'assets/handicraft.jpg',
+      category: 'Shopping',
+      emoji: '🧵',
+    ),
+    VocalItem(
+      title: 'Bamboo Craft\nFestival',
+      location: 'Tripura',
+      image: 'assets/handicraft.jpg',
+      category: 'Adventure',
+      emoji: '🎋',
+    ),
   ];
 
-  List<Map<String, dynamic>> get filteredNearby {
-    if (selectedFilter == "For You") return nearbyData;
-    return nearbyData
-        .where((item) => item["category"] == selectedFilter)
-        .toList();
+  static const List<List<Color>> _vocalPalettes = [
+    [Color(0xFFFFF3E0), Color(0xFFE65100)],
+    [Color(0xFFE8F5E9), Color(0xFF2E7D32)],
+    [Color(0xFFE3F2FD), Color(0xFF1565C0)],
+  ];
+
+  static const List<String> _filterLabels = [
+    'For You',
+    'Adventure',
+    'Stays',
+    'Shopping',
+    'Food',
+    '👀  See More',
+  ];
+
+  List<NearbyPlace> get _filteredNearby {
+    if (selectedFilter == 'For You') return _nearbyData;
+    return _nearbyData.where((p) => p.category == selectedFilter).toList();
   }
 
-  List<Map<String, dynamic>> get filteredVocal {
-    if (selectedFilter == "For You") return vocalData;
-    return vocalData
-        .where((item) => item["category"] == selectedFilter)
-        .toList();
+  List<VocalItem> get _filteredVocal {
+    if (selectedFilter == 'For You') return _vocalData;
+    return _vocalData.where((v) => v.category == selectedFilter).toList();
   }
+
+  int get _totalCount => _filteredNearby.length + _filteredVocal.length;
 
   @override
   void initState() {
     super.initState();
     _fadeController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 600),
-    );
-    _fadeController!.forward();
+      duration: const Duration(milliseconds: 500),
+    )..forward();
   }
 
   @override
@@ -505,7 +558,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   void _selectFilter(String filter) {
     setState(() => selectedFilter = filter);
     _fadeController?.reset();
-    _fadeController!.forward();
+    _fadeController?.forward();
   }
 
   @override
@@ -522,8 +575,8 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
             SliverToBoxAdapter(child: const SizedBox(height: 32)),
             SliverToBoxAdapter(
               child: _buildSectionLabel(
-                "Nearby Places",
-                "Explore wild corners",
+                'Nearby Places',
+                'Explore wild corners',
               ),
             ),
             SliverToBoxAdapter(child: const SizedBox(height: 16)),
@@ -531,12 +584,12 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
             SliverToBoxAdapter(child: const SizedBox(height: 36)),
             SliverToBoxAdapter(
               child: _buildSectionLabel(
-                "Vocal for Local",
-                "Handmade with pride",
+                'Vocal for Local',
+                'Handmade with pride',
               ),
             ),
             SliverToBoxAdapter(child: const SizedBox(height: 16)),
-            SliverToBoxAdapter(child: _buildVocalGrid()),
+            SliverToBoxAdapter(child: _buildVocalList()),
             const SliverToBoxAdapter(child: SizedBox(height: 50)),
           ],
         ),
@@ -571,7 +624,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "DISCOVER",
+                  'DISCOVER',
                   style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w800,
@@ -580,7 +633,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                   ),
                 ),
                 Text(
-                  "Events Near You",
+                  'Events Near You',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w900,
@@ -644,7 +697,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               child: TextField(
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: "Cities, homestays, treks...",
+                  hintText: 'Cities, homestays, treks...',
                   hintStyle: TextStyle(color: Color(0xFFB0A898), fontSize: 15),
                 ),
               ),
@@ -656,7 +709,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Text(
-                "Search",
+                'Search',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 13,
@@ -671,27 +724,18 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _buildFilterChips() {
-    final filters = [
-      {"label": "For You", "icon": "✨"},
-      {"label": "Adventure", "icon": "🏔"},
-      {"label": "Stays", "icon": "🏡"},
-      {"label": "Shopping", "icon": "🛍"},
-      {"label": "Food", "icon": "🍜"},
-      {"label": "👀  See More", "icon": ""},
-    ];
-
     return SizedBox(
       height: 50,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: filters.length,
+        itemCount: _filterLabels.length,
         separatorBuilder: (_, __) => const SizedBox(width: 10),
         itemBuilder: (_, i) {
-          final f = filters[i];
-          final isSelected = selectedFilter == f["label"];
+          final label = _filterLabels[i];
+          final isSelected = selectedFilter == label;
           return GestureDetector(
-            onTap: () => _selectFilter(f["label"]!),
+            onTap: () => _selectFilter(label),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 250),
               curve: Curves.easeOut,
@@ -719,7 +763,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    f["label"]!,
+                    label,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
@@ -740,7 +784,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        "${filteredNearby.length + filteredVocal.length}",
+                        '$_totalCount',
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w900,
@@ -795,7 +839,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               minimumSize: Size.zero,
             ),
             child: const Text(
-              "See all →",
+              'See all →',
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
@@ -809,26 +853,26 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _buildNearbyList() {
+    final items = _filteredNearby;
     return FadeTransition(
       opacity: _fadeAnimation,
       child: SizedBox(
         height: 380,
-        child: filteredNearby.isEmpty
+        child: items.isEmpty
             ? _emptyState()
             : ListView.separated(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: filteredNearby.length,
+                itemCount: items.length,
                 separatorBuilder: (_, __) => const SizedBox(width: 16),
-                itemBuilder: (_, i) => _nearbyCard(filteredNearby[i], i),
+                itemBuilder: (_, i) => _nearbyCard(items[i], i),
               ),
       ),
     );
   }
 
-  Widget _nearbyCard(Map<String, dynamic> data, int index) {
+  Widget _nearbyCard(NearbyPlace place, int index) {
     final gradients = _nearbyGradients[index % _nearbyGradients.length];
-
     return Container(
       width: 290,
       decoration: BoxDecoration(
@@ -845,10 +889,9 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
         borderRadius: BorderRadius.circular(28),
         child: Stack(
           children: [
-            // Background image
             Positioned.fill(
               child: Image.asset(
-                data["image"],
+                place.image,
                 fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => Container(
                   decoration: BoxDecoration(
@@ -861,8 +904,6 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                 ),
               ),
             ),
-
-            // Gradient overlay
             Positioned.fill(
               child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -880,8 +921,6 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                 ),
               ),
             ),
-
-            // Top: Rating badge
             Positioned(
               top: 18,
               right: 18,
@@ -905,7 +944,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          data["rating"],
+                          place.rating,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -918,21 +957,17 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                 ),
               ),
             ),
-
-            // Top: Tags
             Positioned(
               top: 18,
               left: 18,
               child: Row(
                 children: [
-                  _floatingTag(data["tag1"]),
+                  _floatingTag(place.tag1),
                   const SizedBox(width: 8),
-                  _floatingTag(data["tag2"]),
+                  _floatingTag(place.tag2),
                 ],
               ),
             ),
-
-            // Bottom: Content
             Positioned(
               bottom: 0,
               left: 0,
@@ -943,7 +978,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      data["title"],
+                      place.title,
                       style: const TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.w900,
@@ -961,7 +996,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          data["location"],
+                          place.location,
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.white70,
@@ -1015,10 +1050,11 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildVocalGrid() {
+  Widget _buildVocalList() {
+    final items = _filteredVocal;
     return FadeTransition(
       opacity: _fadeAnimation,
-      child: filteredVocal.isEmpty
+      child: items.isEmpty
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: _emptyState(),
@@ -1028,47 +1064,42 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: filteredVocal.length,
+                itemCount: items.length,
                 separatorBuilder: (_, __) => const SizedBox(width: 14),
-                itemBuilder: (_, i) => _vocalCard(filteredVocal[i], i),
+                itemBuilder: (_, i) => _vocalCard(items[i], i),
               ),
             ),
     );
   }
 
-  Widget _vocalCard(Map<String, dynamic> data, int index) {
-    const colors = [
-      [const Color(0xFFFFF3E0), const Color(0xFFE65100)],
-      [const Color(0xFFE8F5E9), const Color(0xFF2E7D32)],
-      [const Color(0xFFE3F2FD), const Color(0xFF1565C0)],
-    ];
-    final palette = colors[index % colors.length];
-
+  Widget _vocalCard(VocalItem item, int index) {
+    final palette = _vocalPalettes[index % _vocalPalettes.length];
+    final bg = palette[0];
+    final accent = palette[1];
     return Container(
       width: 190,
       decoration: BoxDecoration(
-        color: palette[0],
+        color: bg,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
             child: Stack(
               children: [
                 Image.asset(
-                  data["image"],
+                  item.image,
                   height: 110,
                   width: 190,
                   fit: BoxFit.cover,
                   errorBuilder: (_, __, ___) => Container(
                     height: 110,
-                    color: palette[1].withOpacity(0.2),
+                    color: accent.withOpacity(0.15),
                     child: Center(
                       child: Text(
-                        data["emoji"],
+                        item.emoji,
                         style: const TextStyle(fontSize: 40),
                       ),
                     ),
@@ -1084,7 +1115,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      data["emoji"],
+                      item.emoji,
                       style: const TextStyle(fontSize: 16),
                     ),
                   ),
@@ -1092,18 +1123,17 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               ],
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.all(14),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  data["title"],
+                  item.title,
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w800,
-                    color: palette[1],
+                    color: accent,
                     height: 1.2,
                   ),
                 ),
@@ -1113,14 +1143,14 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                     Icon(
                       Icons.location_on_rounded,
                       size: 14,
-                      color: palette[1].withOpacity(0.6),
+                      color: accent.withOpacity(0.6),
                     ),
                     const SizedBox(width: 3),
                     Text(
-                      data["location"],
+                      item.location,
                       style: TextStyle(
                         fontSize: 12,
-                        color: palette[1].withOpacity(0.7),
+                        color: accent.withOpacity(0.7),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -1135,16 +1165,16 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _emptyState() {
-    return SizedBox(
+    return const SizedBox(
       height: 150,
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("🌿", style: TextStyle(fontSize: 36)),
-            const SizedBox(height: 10),
-            const Text(
-              "Nothing here yet",
+            Text('🌿', style: TextStyle(fontSize: 36)),
+            SizedBox(height: 10),
+            Text(
+              'Nothing here yet',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
