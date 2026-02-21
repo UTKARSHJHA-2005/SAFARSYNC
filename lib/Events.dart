@@ -726,7 +726,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               curve: Curves.easeOut,
               padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
               decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFF1A1A1A) : Colors.white,
+                color: isSelected ? const Color(0xFF9893FF) : Colors.white,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: isSelected
                     ? [
@@ -765,7 +765,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                         vertical: 3,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFE8FF6A),
+                        color: const Color(0xFF9893FF),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
