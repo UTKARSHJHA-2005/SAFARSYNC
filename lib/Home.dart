@@ -185,22 +185,6 @@ class _HomeState extends State<Home> {
                     color: Colors.blue.shade600,
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(6),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.star,
-                          color: Colors.blue,
-                          size: 20,
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
               const SizedBox(height: 20),
