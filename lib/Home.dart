@@ -33,12 +33,68 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _addSampleMarker() async {
-    // Example: add a marker at a fixed location
     await mapController.addMarker(
       GeoPoint(latitude: 37.7749, longitude: -122.4194),
       markerIcon: const MarkerIcon(
         icon: Icon(Icons.location_on, size: 48, color: Colors.red),
       ),
+    );
+  }
+
+  void _showSettingsPanel(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: "Settings",
+      barrierColor: Colors.black.withOpacity(0.4),
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return Align(
+          alignment: Alignment.centerRight,
+          child: Material(
+            color: Colors.white,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.75,
+              height: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Settings",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 30),
+
+                  _settingsItem(Icons.person, "Profile"),
+                  _settingsItem(Icons.notifications, "Notifications"),
+                  _settingsItem(Icons.lock, "Privacy"),
+                  _settingsItem(Icons.help_outline, "Help & Support"),
+                  _settingsItem(Icons.logout, "Logout"),
+
+                  const Spacer(),
+
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text("Close"),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        final offsetAnimation = Tween<Offset>(
+          begin: const Offset(1, 0),
+          end: Offset.zero,
+        ).animate(animation);
+
+        return SlideTransition(position: offsetAnimation, child: child);
+      },
     );
   }
 
@@ -85,7 +141,14 @@ class _HomeState extends State<Home> {
                     const Spacer(),
                     const Icon(Icons.notifications_none_rounded, size: 26),
                     const SizedBox(width: 16),
-                    const Icon(Icons.settings, size: 26, color: Colors.black54),
+                    GestureDetector(
+                      onTap: () => _showSettingsPanel(context),
+                      child: const Icon(
+                        Icons.settings,
+                        size: 26,
+                        color: Colors.black54,
+                      ),
+                    ),
                   ],
                 ),
               ),
