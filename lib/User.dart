@@ -90,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage>
                 physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
-                  vertical: 24,
+                  vertical: 10,
                 ),
                 child: Column(
                   children: [
