@@ -4,6 +4,7 @@ import 'package:safarsync/Events.dart';
 import 'dart:async';
 import 'package:safarsync/User.dart';
 import 'package:safarsync/notification.dart';
+import 'package:safarsync/Eventpage.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -251,7 +252,7 @@ class _HomeState extends State<Home> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const UserProfile(),
+                              builder: (_) => const EventsPage(),
                             ),
                           );
                         },
