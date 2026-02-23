@@ -791,63 +791,50 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   Widget _buildSectionLabel(String title, String subtitle, Widget? page) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12),
-        onTap: page != null
-            ? () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => page),
-              )
-            : null,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w900,
-                    color: Color(0xFF1A1A1A),
-                    height: 1,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: Color(0xFF8A7E6E),
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-            const Spacer(),
-            TextButton(
-              onPressed: page != null
-                  ? () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => page),
-                    )
-                  : null,
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
-                minimumSize: Size.zero,
-              ),
-              child: const Text(
-                'See all →',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w900,
                   color: Color(0xFF1A1A1A),
+                  height: 1,
                 ),
               ),
+              const SizedBox(height: 4),
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Color(0xFF8A7E6E),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
+          TextButton(
+            onPressed: page != null
+                ? () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => page),
+                  )
+                : null,
+            child: const Text(
+              'See all →',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF1A1A1A),
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
