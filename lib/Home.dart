@@ -164,21 +164,7 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                    const Spacer(),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.notifications_none_rounded,
-                        size: 26,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const NotificationPage(),
-                          ),
-                        );
-                      },
-                    ),
+
                     const SizedBox(width: 16),
                     GestureDetector(
                       onTap: () => _showSettingsPanel(context),
