@@ -827,8 +827,11 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
             ),
             const Spacer(),
             TextButton(
-              onPressed: route != null
-                  ? () => Navigator.push(context, route)
+              onPressed: page != null
+                  ? () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => page),
+                    )
                   : null,
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
