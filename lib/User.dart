@@ -26,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
     nameController.text = "Rahul Sharma";
     blockchainController.text = "0xA67B98F23C";
     phoneController.text = "+91 9876543210";
-    emergencyController.text = "+91 9123456789";
+    emergencyControllers = [TextEditingController(text: "+91 9123456789")];
     bloodController.text = "O+";
     medicationController.text = "None";
     addressController.text = "Guwahati, Assam, India";
@@ -79,7 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       _buildTextField("Phone Number", phoneController),
                       _buildTextField(
                         "Emergency Contacts",
-                        emergencyController,
+                        emergencyControllers[0],
                       ),
                       _buildTextField("Blood Type", bloodController),
                       _buildTextField("Medications", medicationController),
