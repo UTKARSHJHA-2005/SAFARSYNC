@@ -102,15 +102,6 @@ class _ProfilePageState extends State<ProfilePage>
                           Icons.arrow_back_ios_new_rounded,
                           Colors.blueAccent,
                         ),
-                        const Text(
-                          "My Profile",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 80, 80, 247),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
                       ],
                     ),
 
