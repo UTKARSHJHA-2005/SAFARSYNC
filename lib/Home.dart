@@ -524,6 +524,7 @@ class _HomeState extends State<Home> {
     required String title,
     required String subtitle,
     required String image,
+    VoidCallback? onPressed,
   }) {
     return Container(
       height: 150,
