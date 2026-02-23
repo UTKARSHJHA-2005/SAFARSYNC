@@ -418,6 +418,13 @@ class NearbyPlace {
   final String tag2;
   final String rating;
 
+  // 🔥 Add these
+  final String date;
+  final String time;
+  final String organizer;
+  final String description;
+  final double price;
+
   const NearbyPlace({
     required this.title,
     required this.location,
@@ -426,6 +433,11 @@ class NearbyPlace {
     required this.tag1,
     required this.tag2,
     required this.rating,
+    required this.date,
+    required this.time,
+    required this.organizer,
+    required this.description,
+    required this.price,
   });
 }
 
@@ -576,7 +588,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               child: _buildSectionLabel(
                 'Nearby Places',
                 'Explore wild corners',
-                MaterialPageRoute(builder: (context) => Eventpage()),
+                const Eventpage(),
               ),
             ),
             SliverToBoxAdapter(child: const SizedBox(height: 16)),
@@ -586,7 +598,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               child: _buildSectionLabel(
                 'Vocal for Local',
                 'Handmade with pride',
-                MaterialPageRoute(builder: (context) => Eventpage()),
+                const Eventpage(),
               ),
             ),
             SliverToBoxAdapter(child: const SizedBox(height: 16)),
