@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
-import 'dart:ui';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -78,30 +77,6 @@ class _ProfilePageState extends State<ProfilePage>
     super.dispose();
   }
 
-  Widget _glassIconButton(IconData icon, Color iconColor) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-        child: Container(
-          height: 48,
-          width: 48,
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.white.withOpacity(0.2)),
-          ),
-          child: IconButton(
-            icon: Icon(icon, color: iconColor),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage>
                       children: [
                         _glassIconButton(
                           Icons.arrow_back_ios_new_rounded,
-                          const Color.fromARGB(179, 102, 92, 208),
+                          Colors.blueAccent,
                         ),
                         const Text(
                           "My Profile",
@@ -136,7 +111,10 @@ class _ProfilePageState extends State<ProfilePage>
                             letterSpacing: 0.5,
                           ),
                         ),
-                        _glassIconButton(Icons.more_horiz_rounded),
+                        _glassIconButton(
+                          Icons.more_horiz_rounded,
+                          Colors.blueAccent,
+                        ),
                       ],
                     ),
 
@@ -486,7 +464,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   // ── HELPERS ──────────────────────────────────────────────────────────────
 
-  Widget _glassIconButton(IconData icon) {
+  Widget _glassIconButton(IconData icon, Color color) {
     return Container(
       width: 42,
       height: 42,
@@ -495,7 +473,7 @@ class _ProfilePageState extends State<ProfilePage>
         color: Colors.white.withOpacity(0.18),
         border: Border.all(color: Colors.white.withOpacity(0.3)),
       ),
-      child: Icon(icon, color: Colors.white, size: 18),
+      child: Icon(icon, color: color, size: 18),
     );
   }
 
