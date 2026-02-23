@@ -26,7 +26,10 @@ class _ProfilePageState extends State<ProfilePage> {
     nameController.text = "Rahul Sharma";
     blockchainController.text = "0xA67B98F23C";
     phoneController.text = "+91 9876543210";
-    emergencyControllers = [TextEditingController(text: "+91 9123456789")];
+    emergencyControllers = [
+      TextEditingController(text: "+91 9123456789"),
+      TextEditingController(text: "+91 9988776655"),
+    ];
     bloodController.text = "O+";
     medicationController.text = "None";
     addressController.text = "Guwahati, Assam, India";
@@ -77,9 +80,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       _buildTextField("Full Name", nameController),
                       _buildTextField("Blockchain ID", blockchainController),
                       _buildTextField("Phone Number", phoneController),
-                      _buildTextField(
-                        "Emergency Contacts",
-                        emergencyControllers[0],
+                      Column(
+                        children: List.generate(
+                          emergencyControllers.length,
+                          (index) => _buildTextField(
+                            "Emergency Contact ${index + 1}",
+                            emergencyControllers[index],
+                          ),
+                        ),
                       ),
                       _buildTextField("Blood Type", bloodController),
                       _buildTextField("Medications", medicationController),
