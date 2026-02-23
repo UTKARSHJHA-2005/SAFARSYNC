@@ -636,7 +636,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => Eventspage(
+                      builder: (_) => EventsPage(
                         title: event.title,
                         image: event.image,
                         date: event.date,
@@ -664,7 +664,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => Eventspage(
+                      builder: (_) => EventsPage(
                         title: event.title,
                         image: event.image,
                         date: event.date,
@@ -949,157 +949,176 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
   Widget _nearbyCard(NearbyPlace place, int index) {
     final gradients = _nearbyGradients[index % _nearbyGradients.length];
-    return Container(
-      width: 290,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(28),
-        boxShadow: [
-          BoxShadow(
-            color: gradients[0].withOpacity(0.35),
-            blurRadius: 24,
-            offset: const Offset(0, 12),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => EventsPage(
+              title: place.title,
+              image: place.image,
+              date: place.date,
+              time: place.time,
+              location: place.location,
+              organizer: place.organizer,
+              description: place.description,
+              price: place.price,
+            ),
           ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(28),
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Image.asset(
-                place.image,
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: gradients,
-                    ),
-                  ),
-                ),
-              ),
+        );
+      },
+      child: Container(
+        width: 290,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(28),
+          boxShadow: [
+            BoxShadow(
+              color: gradients[0].withOpacity(0.35),
+              blurRadius: 24,
+              offset: const Offset(0, 12),
             ),
-            Positioned.fill(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.transparent,
-                      gradients[0].withOpacity(0.7),
-                      gradients[0].withOpacity(0.95),
-                    ],
-                    stops: const [0.0, 0.3, 0.65, 1.0],
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: 18,
-              right: 18,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
-                    color: Colors.white.withOpacity(0.2),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.star_rounded,
-                          color: Color(0xFFFFD700),
-                          size: 16,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          place.rating,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: 18,
-              left: 18,
-              child: Row(
-                children: [
-                  _floatingTag(place.tag1),
-                  const SizedBox(width: 8),
-                  _floatingTag(place.tag2),
-                ],
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Padding(
-                padding: const EdgeInsets.all(22),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      place.title,
-                      style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white,
-                        height: 1.1,
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(28),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: Image.asset(
+                  place.image,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: gradients,
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.location_on_rounded,
-                          size: 16,
-                          color: Color(0xFFE8FF6A),
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          place.location,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.white70,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const Spacer(),
-                        Container(
-                          width: 44,
-                          height: 44,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFFE8FF6A),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.arrow_forward_rounded,
-                            color: Color(0xFF1A1A1A),
-                            size: 20,
-                          ),
-                        ),
+                  ),
+                ),
+              ),
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.transparent,
+                        gradients[0].withOpacity(0.7),
+                        gradients[0].withOpacity(0.95),
                       ],
+                      stops: const [0.0, 0.3, 0.65, 1.0],
                     ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 18,
+                right: 18,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      color: Colors.white.withOpacity(0.2),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.star_rounded,
+                            color: Color(0xFFFFD700),
+                            size: 16,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            place.rating,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 18,
+                left: 18,
+                child: Row(
+                  children: [
+                    _floatingTag(place.tag1),
+                    const SizedBox(width: 8),
+                    _floatingTag(place.tag2),
                   ],
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(22),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        place.title,
+                        style: const TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                          height: 1.1,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on_rounded,
+                            size: 16,
+                            color: Color(0xFFE8FF6A),
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            place.location,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.white70,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const Spacer(),
+                          Container(
+                            width: 44,
+                            height: 44,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFE8FF6A),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.arrow_forward_rounded,
+                              color: Color(0xFF1A1A1A),
+                              size: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -1152,90 +1171,111 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     final palette = _vocalPalettes[index % _vocalPalettes.length];
     final bg = palette[0];
     final accent = palette[1];
-    return Container(
-      width: 190,
-      decoration: BoxDecoration(
-        color: bg,
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-            child: Stack(
-              children: [
-                Image.asset(
-                  item.image,
-                  height: 110,
-                  width: 190,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => EventsPage(
+              title: item.title,
+              image: item.image,
+              date: item.date,
+              time: item.time,
+              location: item.location,
+              organizer: item.organizer,
+              description: item.description,
+              price: item.price,
+            ),
+          ),
+        );
+      },
+      child: Container(
+        width: 190,
+        decoration: BoxDecoration(
+          color: bg,
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(24),
+              ),
+              child: Stack(
+                children: [
+                  Image.asset(
+                    item.image,
                     height: 110,
-                    color: accent.withOpacity(0.15),
-                    child: Center(
+                    width: 190,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => Container(
+                      height: 110,
+                      color: accent.withOpacity(0.15),
+                      child: Center(
+                        child: Text(
+                          item.emoji,
+                          style: const TextStyle(fontSize: 40),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 10,
+                    right: 10,
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Text(
                         item.emoji,
-                        style: const TextStyle(fontSize: 40),
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 10,
-                  right: 10,
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      item.emoji,
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(14),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item.title,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
-                    color: accent,
-                    height: 1.2,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.location_on_rounded,
-                      size: 14,
-                      color: accent.withOpacity(0.6),
+            Padding(
+              padding: const EdgeInsets.all(14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.title,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                      color: accent,
+                      height: 1.2,
                     ),
-                    const SizedBox(width: 3),
-                    Text(
-                      item.location,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: accent.withOpacity(0.7),
-                        fontWeight: FontWeight.w600,
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.location_on_rounded,
+                        size: 14,
+                        color: accent.withOpacity(0.6),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      const SizedBox(width: 3),
+                      Text(
+                        item.location,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: accent.withOpacity(0.7),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
