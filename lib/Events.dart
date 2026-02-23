@@ -842,7 +842,11 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildSectionLabel(String title, String subtitle, Widget? page) {
+  Widget _buildSectionLabel(
+    String title,
+    String subtitle,
+    VoidCallback? onTap,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -873,12 +877,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
           ),
           const Spacer(),
           TextButton(
-            onPressed: page != null
-                ? () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => page),
-                  )
-                : null,
+            onPressed: onTap,
             child: const Text(
               'See all →',
               style: TextStyle(
