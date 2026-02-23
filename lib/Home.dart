@@ -254,7 +254,7 @@ class _HomeState extends State<Home> {
                             MaterialPageRoute(
                               builder: (_) => const EventsPage(
                                 title: "Music Concert 2026",
-                                image: "assets/concert.jpg",
+                                image: "assets/p1.jpg",
                                 date: "March 15, 2026",
                                 time: "7:00 PM",
                                 location: "New York City",
