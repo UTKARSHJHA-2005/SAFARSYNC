@@ -788,16 +788,17 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildSectionLabel(
-    String title,
-    String subtitle,
-    MaterialPageRoute? route,
-  ) {
+  Widget _buildSectionLabel(String title, String subtitle, Widget? page) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap: route != null ? () => Navigator.push(context, route) : null,
+        onTap: page != null
+            ? () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => page),
+              )
+            : null,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
