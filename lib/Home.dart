@@ -247,6 +247,14 @@ class _HomeState extends State<Home> {
                         title: "Wingman",
                         subtitle: "Travel with AI",
                         image: "assets/wing.png",
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const UserProfile(),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(width: 12),
