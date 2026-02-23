@@ -636,7 +636,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => Eventpage(
+                      builder: (_) => Eventspage(
                         title: event.title,
                         image: event.image,
                         date: event.date,
@@ -658,7 +658,25 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               child: _buildSectionLabel(
                 'Vocal for Local',
                 'Handmade with pride',
-                const Eventpage(),
+                () {
+                  final event = _vocalData.first;
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Eventspage(
+                        title: event.title,
+                        image: event.image,
+                        date: event.date,
+                        time: event.time,
+                        location: event.location,
+                        organizer: event.organizer,
+                        description: event.description,
+                        price: event.price,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
             SliverToBoxAdapter(child: const SizedBox(height: 16)),
