@@ -143,7 +143,6 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   children: [
-                    /// Left side (Greeting + Date)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -165,11 +164,7 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-
-                    /// Push everything after this to right side
                     const Spacer(),
-
-                    /// 🔔 Notification Icon with Badge
                     Stack(
                       clipBehavior: Clip.none,
                       children: [
@@ -187,7 +182,6 @@ class _HomeState extends State<Home> {
                             );
                           },
                         ),
-
                         Positioned(
                           right: 4,
                           top: 4,
@@ -217,8 +211,6 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-
-                    /// ⚙ Settings Icon
                     GestureDetector(
                       onTap: () => _showSettingsPanel(context),
                       child: const Icon(
