@@ -407,8 +407,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'dart:ui';
-
-// ─── Typed Models ─────────────────────────────────────────────────────────────
+import 'package:safarsync/Eventpage.dart';
 
 class NearbyPlace {
   final String title;
