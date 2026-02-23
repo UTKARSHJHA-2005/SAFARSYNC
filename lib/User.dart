@@ -111,10 +111,6 @@ class _ProfilePageState extends State<ProfilePage>
                             letterSpacing: 0.5,
                           ),
                         ),
-                        _glassIconButton(
-                          Icons.more_horiz_rounded,
-                          Colors.blueAccent,
-                        ),
                       ],
                     ),
 
