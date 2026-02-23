@@ -448,12 +448,24 @@ class VocalItem {
   final String category;
   final String emoji;
 
+  // 🔥 Add these
+  final String date;
+  final String time;
+  final String organizer;
+  final String description;
+  final double price;
+
   const VocalItem({
     required this.title,
     required this.location,
     required this.image,
     required this.category,
     required this.emoji,
+    required this.date,
+    required this.time,
+    required this.organizer,
+    required this.description,
+    required this.price,
   });
 }
 
