@@ -531,6 +531,12 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       image: 'assets/handicraft.jpg',
       category: 'Adventure',
       emoji: '🏺',
+      date: '5 May 2026',
+      time: '11:00 AM',
+      organizer: 'Local Artisans',
+      description:
+          'Learn traditional pottery techniques from local craftsmen of Majuli.',
+      price: 19.99,
     ),
     VocalItem(
       title: 'Assam Silk\nWeaving',
@@ -538,6 +544,12 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       image: 'assets/handicraft.jpg',
       category: 'Shopping',
       emoji: '🧵',
+      date: '5 May 2026',
+      time: '11:00 AM',
+      organizer: 'Local Artisans',
+      description:
+          'Learn traditional pottery techniques from local craftsmen of Majuli.',
+      price: 19.99,
     ),
     VocalItem(
       title: 'Bamboo Craft\nFestival',
@@ -545,6 +557,12 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       image: 'assets/handicraft.jpg',
       category: 'Adventure',
       emoji: '🎋',
+      date: '5 May 2026',
+      time: '11:00 AM',
+      organizer: 'Local Artisans',
+      description:
+          'Learn traditional pottery techniques from local craftsmen of Majuli.',
+      price: 19.99,
     ),
   ];
 
