@@ -630,7 +630,25 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               child: _buildSectionLabel(
                 'Nearby Places',
                 'Explore wild corners',
-                const Eventpage(),
+                () {
+                  final event = _nearbyData.first;
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Eventpage(
+                        title: event.title,
+                        image: event.image,
+                        date: event.date,
+                        time: event.time,
+                        location: event.location,
+                        organizer: event.organizer,
+                        description: event.description,
+                        price: event.price,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
             SliverToBoxAdapter(child: const SizedBox(height: 16)),
