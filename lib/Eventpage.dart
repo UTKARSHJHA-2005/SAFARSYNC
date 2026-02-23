@@ -1,120 +1,184 @@
 import 'package:flutter/material.dart';
 
 class EventsPage extends StatelessWidget {
-  const EventsPage({Key? key}) : super(key: key);
+  final String title;
+  final String image;
+  final String date;
+  final String time;
+  final String location;
+  final String organizer;
+  final String description;
+  final double price;
+
+  const EventsPage({
+    super.key,
+    required this.title,
+    required this.image,
+    required this.date,
+    required this.time,
+    required this.location,
+    required this.organizer,
+    required this.description,
+    required this.price,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> events = [
-      {
-        "title": "Music Concert 2026",
-        "date": "March 15, 2026",
-        "location": "New York City",
-        "description":
-            "Join us for an unforgettable night filled with live performances and entertainment.",
-        "image": "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2",
-      },
-      {
-        "title": "Tech Conference",
-        "date": "April 10, 2026",
-        "location": "San Francisco",
-        "description":
-            "Explore the future of technology with industry leaders and innovators.",
-        "image": "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
-      },
-    ];
-
     return Scaffold(
-      appBar: AppBar(title: const Text("Upcoming Events"), centerTitle: true),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(12),
-        itemCount: events.length,
-        itemBuilder: (context, index) {
-          final event = events[index];
+      backgroundColor: Colors.grey.shade100,
+      body: Stack(
+        children: [
+          /// 🔹 Top Image
+          SizedBox(
+            height: 350,
+            width: double.infinity,
+            child: Image.asset(image, fit: BoxFit.cover),
+          ),
 
-          return Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
+          /// 🔹 Gradient Overlay
+          Container(
+            height: 350,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.black.withOpacity(0.6), Colors.transparent],
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+              ),
             ),
-            elevation: 5,
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            child: Column(
+          ),
+
+          /// 🔹 Back Button
+          SafeArea(
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
+
+          /// 🔹 Details Section
+          DraggableScrollableSheet(
+            initialChildSize: 0.55,
+            minChildSize: 0.55,
+            maxChildSize: 0.9,
+            builder: (context, controller) {
+              return Container(
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                ),
+                child: ListView(
+                  controller: controller,
+                  children: [
+                    /// Title
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    const SizedBox(height: 15),
+
+                    /// Info Row
+                    _infoTile(Icons.calendar_today, "$date • $time"),
+                    const SizedBox(height: 10),
+                    _infoTile(Icons.location_on, location),
+                    const SizedBox(height: 10),
+                    _infoTile(Icons.person, "Organized by $organizer"),
+
+                    const SizedBox(height: 25),
+
+                    /// Description Title
+                    const Text(
+                      "About Event",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    /// Description
+                    Text(
+                      description,
+                      style: TextStyle(
+                        color: Colors.grey.shade700,
+                        height: 1.5,
+                      ),
+                    ),
+
+                    const SizedBox(height: 80),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+
+      /// 🔹 Bottom Booking Bar
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10),
+          ],
+        ),
+        child: Row(
+          children: [
+            /// Price
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(15),
-                  ),
-                  child: Image.network(
-                    event["image"]!,
-                    height: 180,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        event["title"]!,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      Row(
-                        children: [
-                          const Icon(Icons.calendar_today, size: 16),
-                          const SizedBox(width: 5),
-                          Text(event["date"]!),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: [
-                          const Icon(Icons.location_on, size: 16),
-                          const SizedBox(width: 5),
-                          Text(event["location"]!),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        event["description"]!,
-                        style: const TextStyle(color: Colors.black54),
-                      ),
-                      const SizedBox(height: 12),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  "Booked ${event["title"]} successfully!",
-                                ),
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          child: const Text("Book Now"),
-                        ),
-                      ),
-                    ],
+                const Text("Price", style: TextStyle(color: Colors.grey)),
+                Text(
+                  "\$${price.toStringAsFixed(2)}",
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
-          );
-        },
+
+            const Spacer(),
+
+            /// Book Button
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 14,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                backgroundColor: Colors.deepPurple,
+              ),
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Booking Successful 🎉")),
+                );
+              },
+              child: const Text("Book Now", style: TextStyle(fontSize: 16)),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _infoTile(IconData icon, String text) {
+    return Row(
+      children: [
+        Icon(icon, color: Colors.deepPurple),
+        const SizedBox(width: 10),
+        Expanded(child: Text(text, style: const TextStyle(fontSize: 14))),
+      ],
     );
   }
 }

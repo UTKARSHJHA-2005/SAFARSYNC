@@ -252,7 +252,17 @@ class _HomeState extends State<Home> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const EventsPage(),
+                              builder: (_) => const EventsPage(
+                                title: "Music Concert 2026",
+                                image: "assets/concert.jpg",
+                                date: "March 15, 2026",
+                                time: "7:00 PM",
+                                location: "New York City",
+                                organizer: "ABC Entertainment",
+                                description:
+                                    "Experience an unforgettable night filled with live performances, lights, and music.",
+                                price: 49.99,
+                              ),
                             ),
                           );
                         },
