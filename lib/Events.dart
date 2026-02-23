@@ -576,6 +576,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               child: _buildSectionLabel(
                 'Nearby Places',
                 'Explore wild corners',
+                MaterialPageRoute(builder: (context) => Eventpage()),
               ),
             ),
             SliverToBoxAdapter(child: const SizedBox(height: 16)),
@@ -585,6 +586,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               child: _buildSectionLabel(
                 'Vocal for Local',
                 'Handmade with pride',
+                MaterialPageRoute(builder: (context) => Eventpage()),
               ),
             ),
             SliverToBoxAdapter(child: const SizedBox(height: 16)),
@@ -786,52 +788,62 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildSectionLabel(String title, String subtitle) {
+  Widget _buildSectionLabel(
+    String title,
+    String subtitle,
+    MaterialPageRoute? route,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w900,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: route != null ? () => Navigator.push(context, route) : null,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF1A1A1A),
+                    height: 1,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    color: Color(0xFF8A7E6E),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+            const Spacer(),
+            TextButton(
+              onPressed: route != null
+                  ? () => Navigator.push(context, route)
+                  : null,
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+                minimumSize: Size.zero,
+              ),
+              child: const Text(
+                'See all →',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
                   color: Color(0xFF1A1A1A),
-                  height: 1,
                 ),
               ),
-              const SizedBox(height: 4),
-              Text(
-                subtitle,
-                style: const TextStyle(
-                  fontSize: 13,
-                  color: Color(0xFF8A7E6E),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-          const Spacer(),
-          TextButton(
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
-              minimumSize: Size.zero,
             ),
-            child: const Text(
-              'See all →',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF1A1A1A),
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
