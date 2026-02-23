@@ -163,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage>
                         /// Avatar
                         const CircleAvatar(
                           radius: 60,
-                          backgroundImage: AssetImage("assets/profile.jpg"),
+                          backgroundImage: AssetImage("assets/p1.jpg"),
                         ),
 
                         /// Edit badge
