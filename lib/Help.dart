@@ -79,7 +79,7 @@ class HelpPage extends StatelessWidget {
                         ),
                         _faqCard(
                           "Is my data secure?",
-                          "Yes, your data is encrypted and never shared with third parties.",
+                          "Yes, your data is encrypted and the authentication data is stored on Blockchain and never shared with third parties.",
                         ),
                         _faqCard(
                           "Can I delete my chat history?",
