@@ -83,6 +83,12 @@ class _HomeState extends State<Home> {
                     Icons.location_on,
                     "Change Location",
                     Colors.orange,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const Events()),
+                      );
+                    },
                   ),
                   _settingsItem(Icons.help_outline, "Help", Colors.purple),
                   _settingsItem(
