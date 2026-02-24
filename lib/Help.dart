@@ -92,7 +92,7 @@ class HelpPage extends StatelessWidget {
 
                         const SizedBox(height: 16),
 
-                        _contactCard(),
+                        _buildQueryBox(),
                       ],
                     ),
                   ),
@@ -139,27 +139,62 @@ class HelpPage extends StatelessWidget {
     );
   }
 
-  /// 🔹 Contact Card
-  Widget _contactCard() {
+  Widget _buildQueryBox() {
+    final TextEditingController controller = TextEditingController();
+
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF9893FF), Color(0xFF6A5BFF)],
-        ),
+        color: const Color(0xFFF4F6FF),
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Row(
-        children: const [
-          CircleAvatar(
-            backgroundColor: Colors.white,
-            child: Icon(Icons.support_agent, color: Colors.blue),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Send us your question",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
           ),
-          SizedBox(width: 16),
-          Expanded(
-            child: Text(
-              "Contact our support team for further assistance.",
-              style: TextStyle(color: Colors.white),
+          const SizedBox(height: 12),
+
+          /// ✏️ Input Field
+          TextField(
+            controller: controller,
+            maxLines: 3,
+            decoration: InputDecoration(
+              hintText: "Write your query here...",
+              filled: true,
+              fillColor: Colors.white,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 14,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          /// 🚀 Send Button
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {
+                // TODO: Handle send logic
+                print(controller.text);
+                controller.clear();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF6A5BFF),
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+              child: const Text("Send Message", style: TextStyle(fontSize: 15)),
             ),
           ),
         ],
