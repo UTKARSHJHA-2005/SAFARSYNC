@@ -110,7 +110,12 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _settingsItem(IconData icon, String title, Color colors) {
+  Widget _settingsItem(
+    IconData icon,
+    String title,
+    Color colors, {
+    VoidCallback? onPressed,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 14),
       child: Row(
