@@ -194,7 +194,10 @@ class HelpPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14),
                 ),
               ),
-              child: const Text("Send Message", style: TextStyle(fontSize: 15)),
+              child: const Text(
+                "Send Message",
+                style: TextStyle(fontSize: 15, color: Colors.white),
+              ),
             ),
           ),
         ],
