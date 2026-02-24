@@ -29,29 +29,40 @@ class _FullMapPageState extends State<FullMapPage> {
 
   Future<void> calculateDistance() async {
     try {
-      GeoPoint? source = await controller
-          .addressSuggestion(sourceController.text)
-          .then((value) => value.first);
+      /// Get source suggestions
+      List<SearchInfo> sourceSuggestion = await addressSuggestion(
+        sourceController.text,
+      );
 
-      GeoPoint? destination = await controller
-          .addressSuggestion(destinationController.text)
-          .then((value) => value.first);
+      /// Get destination suggestions
+      List<SearchInfo> destSuggestion = await addressSuggestion(
+        destinationController.text,
+      );
 
-      if (source != null && destination != null) {
-        double distance = await controller.distance2point(source, destination);
-
-        setState(() {
-          distanceText = "${(distance / 1000).toStringAsFixed(2)} km away 🚗";
-        });
-
-        await controller.drawRoad(
-          source,
-          destination,
-          roadOption: const RoadOption(roadColor: Colors.blue, roadWidth: 8),
-        );
+      if (sourceSuggestion.isEmpty || destSuggestion.isEmpty) {
+        debugPrint("Location not found");
+        return;
       }
+
+      GeoPoint source = sourceSuggestion.first.point!;
+      GeoPoint destination = destSuggestion.first.point!;
+
+      /// Draw road
+      RoadInfo roadInfo = await controller.drawRoad(
+        source,
+        destination,
+        roadOption: const RoadOption(roadColor: Colors.blue, roadWidth: 8),
+      );
+
+      double distanceKm = (roadInfo.distance ?? 0) / 1000;
+      double durationMin = (roadInfo.duration ?? 0) / 60;
+
+      setState(() {
+        distanceText =
+            "${distanceKm.toStringAsFixed(1)} km • ${durationMin.toStringAsFixed(0)} mins 🚗";
+      });
     } catch (e) {
-      debugPrint("Error: $e");
+      debugPrint("Route error: $e");
     }
   }
 
