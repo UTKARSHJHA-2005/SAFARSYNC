@@ -29,9 +29,15 @@ class GradientBackground extends StatelessWidget {
             right: -50,
             child: Container(
               height: 350,
-              decoration: BoxDecoration(
-                color: Colors.blue.withOpacity(0.25),
-                shape: BoxShape.circle,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF9893FF), // 🔵 Blue now at TOP
+                    Color(0xFFEFF4FF), // Light at bottom
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
             ),
           ),
