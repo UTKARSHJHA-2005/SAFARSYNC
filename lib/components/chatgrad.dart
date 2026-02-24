@@ -15,7 +15,10 @@ class GradientBackground extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFFEFF4FF), Color(0xFF9893FF)],
+                colors: [
+                  Color(0xFF9893FF), // 🔵 Blue now at TOP
+                  Color(0xFFEFF4FF), // Light at bottom
+                ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
@@ -23,21 +26,24 @@ class GradientBackground extends StatelessWidget {
           ),
 
           // 🔵 Blue top shape
-          Positioned(
-            top: -180,
-            left: -50,
-            right: -50,
-            child: Container(
-              height: 350,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF9893FF), Color(0xFFEFF4FF)],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-            ),
-          ),
+          // Positioned(
+          //   top: -180,
+          //   left: -50,
+          //   right: -50,
+          //   child: Container(
+          //     height: 350,
+          //     decoration: const BoxDecoration(
+          //       gradient: LinearGradient(
+          //         colors: [
+          //           Color(0xFF9893FF), // 🔵 Blue now at TOP
+          //           Color(0xFFEFF4FF), // Light at bottom
+          //         ],
+          //         begin: Alignment.topCenter,
+          //         end: Alignment.bottomCenter,
+          //       ),
+          //     ),
+          //   ),
+          // ),
 
           // Optional blur
           ClipRect(
