@@ -7,6 +7,7 @@ import 'package:safarsync/User.dart';
 import 'package:safarsync/notification.dart';
 import 'package:safarsync/Eventpage.dart';
 import 'package:safarsync/Wingman.dart';
+import 'package:safarsync/Help.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -93,7 +94,17 @@ class _HomeState extends State<Home> {
                       );
                     },
                   ),
-                  _settingsItem(Icons.help_outline, "Help", Colors.purple),
+                  _settingsItem(
+                    Icons.help_outline,
+                    "Help",
+                    Colors.purple,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const HelpPage()),
+                      );
+                    },
+                  ),
                   _settingsItem(
                     Icons.delete_outline,
                     "Delete Account",
