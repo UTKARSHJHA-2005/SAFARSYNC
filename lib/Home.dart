@@ -126,15 +126,18 @@ class _HomeState extends State<Home> {
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 14),
-      child: Row(
-        children: [
-          Icon(icon, size: 22, color: colors),
-          const SizedBox(width: 16),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          ),
-        ],
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Row(
+          children: [
+            Icon(icon, size: 22, color: colors),
+            const SizedBox(width: 16),
+            Text(
+              title,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
       ),
     );
   }
