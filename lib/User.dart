@@ -101,6 +101,7 @@ class _ProfilePageState extends State<ProfilePage>
                         _glassIconButton(
                           Icons.arrow_back_ios_new_rounded,
                           Colors.blueAccent,
+                          onPressed: () => Navigator.pop(context),
                         ),
                       ],
                     ),
@@ -435,16 +436,23 @@ class _ProfilePageState extends State<ProfilePage>
 
   // ── HELPERS ──────────────────────────────────────────────────────────────
 
-  Widget _glassIconButton(IconData icon, Color color) {
-    return Container(
-      width: 42,
-      height: 42,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(13),
-        color: Colors.white.withOpacity(0.18),
-        border: Border.all(color: Colors.white.withOpacity(0.3)),
+  Widget _glassIconButton(
+    IconData icon,
+    Color color, {
+    VoidCallback? onPressed,
+  }) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: 42,
+        height: 42,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(13),
+          color: Colors.white.withOpacity(0.18),
+          border: Border.all(color: Colors.white.withOpacity(0.3)),
+        ),
+        child: Icon(icon, color: color, size: 18),
       ),
-      child: Icon(icon, color: color, size: 18),
     );
   }
 
