@@ -911,18 +911,6 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               ),
             ],
           ),
-          const Spacer(),
-          TextButton(
-            onPressed: onTap,
-            child: const Text(
-              'See all →',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF1A1A1A),
-              ),
-            ),
-          ),
         ],
       ),
     );
