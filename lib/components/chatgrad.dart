@@ -15,10 +15,7 @@ class GradientBackground extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Color(0xFF9893FF), // 🔵 Blue now at TOP
-                  Color(0xFFEFF4FF), // Light at bottom
-                ],
+                colors: [Color(0xFF9893FF), Color(0xFFEFF4FF)],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
