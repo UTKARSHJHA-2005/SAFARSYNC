@@ -70,16 +70,14 @@ class HelpPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 24),
                       children: [
                         _sectionTitle("Frequently Asked Questions"),
-
                         const SizedBox(height: 16),
-
                         _faqCard(
                           "How does the AI work?",
                           "Our AI analyzes your input and generates smart responses instantly.",
                         ),
                         _faqCard(
                           "Is my data secure?",
-                          "Yes, your data is encrypted and the authentication data is stored on Blockchain and never shared with third parties.",
+                          "Yes, your data is encrypted and the authentication one is stored on Blockchain and never shared with third parties.",
                         ),
                         _faqCard(
                           "Can I delete my chat history?",
