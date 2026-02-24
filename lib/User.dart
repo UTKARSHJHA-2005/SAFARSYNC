@@ -267,22 +267,6 @@ class _ProfilePageState extends State<ProfilePage>
 
                     const SizedBox(height: 16),
 
-                    /// ── SECTION: Blockchain Identity ──────────────────────
-                    _sectionCard(
-                      icon: Icons.link_rounded,
-                      title: "Blockchain Identity",
-                      color: const Color(0xFF4f46e5),
-                      children: [
-                        _styledField(
-                          label: "Blockchain ID",
-                          controller: blockchainController,
-                          icon: Icons.fingerprint_rounded,
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 16),
-
                     /// ── SECTION: Emergency Contacts ───────────────────────
                     _sectionCard(
                       icon: Icons.emergency_rounded,
