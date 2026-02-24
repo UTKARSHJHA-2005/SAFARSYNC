@@ -47,120 +47,120 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void _showSettingsPanel(BuildContext context) {
-    showGeneralDialog(
-      context: context,
-      barrierDismissible: true,
-      barrierLabel: "Settings",
-      barrierColor: Colors.black.withOpacity(0.4),
-      transitionDuration: const Duration(milliseconds: 300),
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return Align(
-          alignment: Alignment.centerRight,
-          child: Material(
-            color: Colors.white,
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.75,
-              height: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Settings",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 30),
+  // void _showSettingsPanel(BuildContext context) {
+  //   showGeneralDialog(
+  //     context: context,
+  //     barrierDismissible: true,
+  //     barrierLabel: "Settings",
+  //     barrierColor: Colors.black.withOpacity(0.4),
+  //     transitionDuration: const Duration(milliseconds: 300),
+  //     pageBuilder: (context, animation, secondaryAnimation) {
+  //       return Align(
+  //         alignment: Alignment.centerRight,
+  //         child: Material(
+  //           color: Colors.white,
+  //           child: Container(
+  //             width: MediaQuery.of(context).size.width * 0.75,
+  //             height: double.infinity,
+  //             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+  //             child: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: [
+  //                 const Text(
+  //                   "Settings",
+  //                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+  //                 ),
+  //                 const SizedBox(height: 30),
 
-                  _settingsItem(
-                    Icons.person,
-                    "Profile",
-                    Colors.blue,
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => ProfilePage()),
-                    ),
-                  ),
-                  _settingsItem(
-                    Icons.location_on,
-                    "Change Location",
-                    Colors.orange,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const SelectStatePage(),
-                        ),
-                      );
-                    },
-                  ),
-                  _settingsItem(
-                    Icons.help_outline,
-                    "Help",
-                    Colors.purple,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const HelpPage()),
-                      );
-                    },
-                  ),
-                  _settingsItem(
-                    Icons.delete_outline,
-                    "Delete Account",
-                    Colors.red,
-                  ),
-                  _settingsItem(Icons.logout, "Logout", Colors.red),
+  //                 _settingsItem(
+  //                   Icons.person,
+  //                   "Profile",
+  //                   Colors.blue,
+  //                   onPressed: () => Navigator.push(
+  //                     context,
+  //                     MaterialPageRoute(builder: (_) => ProfilePage()),
+  //                   ),
+  //                 ),
+  //                 _settingsItem(
+  //                   Icons.location_on,
+  //                   "Change Location",
+  //                   Colors.orange,
+  //                   onPressed: () {
+  //                     Navigator.push(
+  //                       context,
+  //                       MaterialPageRoute(
+  //                         builder: (_) => const SelectStatePage(),
+  //                       ),
+  //                     );
+  //                   },
+  //                 ),
+  //                 _settingsItem(
+  //                   Icons.help_outline,
+  //                   "Help",
+  //                   Colors.purple,
+  //                   onPressed: () {
+  //                     Navigator.push(
+  //                       context,
+  //                       MaterialPageRoute(builder: (_) => const HelpPage()),
+  //                     );
+  //                   },
+  //                 ),
+  //                 _settingsItem(
+  //                   Icons.delete_outline,
+  //                   "Delete Account",
+  //                   Colors.red,
+  //                 ),
+  //                 _settingsItem(Icons.logout, "Logout", Colors.red),
 
-                  const Spacer(),
+  //                 const Spacer(),
 
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text("Close"),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-      transitionBuilder: (context, animation, secondaryAnimation, child) {
-        final offsetAnimation = Tween<Offset>(
-          begin: const Offset(1, 0),
-          end: Offset.zero,
-        ).animate(animation);
+  //                 Align(
+  //                   alignment: Alignment.bottomCenter,
+  //                   child: TextButton(
+  //                     onPressed: () => Navigator.pop(context),
+  //                     child: const Text("Close"),
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //     transitionBuilder: (context, animation, secondaryAnimation, child) {
+  //       final offsetAnimation = Tween<Offset>(
+  //         begin: const Offset(1, 0),
+  //         end: Offset.zero,
+  //       ).animate(animation);
 
-        return SlideTransition(position: offsetAnimation, child: child);
-      },
-    );
-  }
+  //       return SlideTransition(position: offsetAnimation, child: child);
+  //     },
+  //   );
+  // }
 
-  Widget _settingsItem(
-    IconData icon,
-    String title,
-    Color colors, {
-    VoidCallback? onPressed,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      child: GestureDetector(
-        onTap: onPressed,
-        child: Row(
-          children: [
-            Icon(icon, size: 22, color: colors),
-            const SizedBox(width: 16),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _settingsItem(
+  //   IconData icon,
+  //   String title,
+  //   Color colors, {
+  //   VoidCallback? onPressed,
+  // }) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(vertical: 14),
+  //     child: GestureDetector(
+  //       onTap: onPressed,
+  //       child: Row(
+  //         children: [
+  //           Icon(icon, size: 22, color: colors),
+  //           const SizedBox(width: 16),
+  //           Text(
+  //             title,
+  //             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
