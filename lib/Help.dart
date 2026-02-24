@@ -153,7 +153,11 @@ class HelpPage extends StatelessWidget {
         children: [
           const Text(
             "Send us your question",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+              color: Colors.white12,
+            ),
           ),
           const SizedBox(height: 12),
 
