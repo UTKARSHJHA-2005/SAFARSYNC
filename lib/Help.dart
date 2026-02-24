@@ -157,7 +157,7 @@ class HelpPage extends StatelessWidget {
           ),
           const SizedBox(height: 12),
 
-          /// ✏️ Input Field
+          /// Input Field
           TextField(
             controller: controller,
             maxLines: 3,
