@@ -8,6 +8,7 @@ import 'package:safarsync/notification.dart';
 import 'package:safarsync/Eventpage.dart';
 import 'package:safarsync/Wingman.dart';
 import 'package:safarsync/Help.dart';
+import 'package:safarsync/Map.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -159,6 +160,25 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+    );
+  }
+
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const FullMapPage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.easeInOut;
+
+        var tween = Tween(
+          begin: begin,
+          end: end,
+        ).chain(CurveTween(curve: curve));
+
+        return SlideTransition(position: animation.drive(tween), child: child);
+      },
     );
   }
 
@@ -335,10 +355,15 @@ class _HomeState extends State<Home> {
                 ),
               ),
               const SizedBox(height: 20),
-              const Icon(
-                Icons.keyboard_arrow_up_rounded,
-                size: 30,
-                color: Colors.white,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(_createRoute());
+                },
+                child: const Icon(
+                  Icons.keyboard_arrow_up_rounded,
+                  size: 30,
+                  color: Colors.white,
+                ),
               ),
               const SizedBox(height: 10),
               Expanded(
