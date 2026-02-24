@@ -70,7 +70,15 @@ class _HomeState extends State<Home> {
                   ),
                   const SizedBox(height: 30),
 
-                  _settingsItem(Icons.person, "Profile", Colors.blue),
+                  _settingsItem(
+                    Icons.person,
+                    "Profile",
+                    Colors.blue,
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => ProfilePage()),
+                    ),
+                  ),
                   _settingsItem(
                     Icons.location_on,
                     "Change Location",
