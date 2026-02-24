@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:safarsync/Events.dart';
+import 'package:safarsync/State.dart';
 import 'dart:async';
 import 'package:safarsync/User.dart';
 import 'package:safarsync/notification.dart';
@@ -86,7 +87,9 @@ class _HomeState extends State<Home> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const Events()),
+                        MaterialPageRoute(
+                          builder: (_) => const SelectStatePage(),
+                        ),
                       );
                     },
                   ),
