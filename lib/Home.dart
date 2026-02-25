@@ -425,6 +425,9 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                             ),
+                            onMapMoved: (region) {
+                              _handleMapInteraction();
+                            },
                             onMapIsReady: (isReady) async {
                               if (isReady) {
                                 try {
