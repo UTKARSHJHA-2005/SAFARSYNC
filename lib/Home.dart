@@ -218,6 +218,95 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget _buildSosDialog({
+    required String title,
+    required String subtitle,
+    required bool showCallButton,
+  }) {
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 60),
+            padding: const EdgeInsets.fromLTRB(20, 80, 20, 30),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  subtitle,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.black54),
+                ),
+                const SizedBox(height: 30),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey.shade300,
+                          foregroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                        ),
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text("Cancel"),
+                      ),
+                    ),
+                    if (showCallButton) ...[
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                          ),
+                          onPressed: () {},
+                          child: const Text("Call in 10s"),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // Top Red SOS Circle
+          const CircleAvatar(
+            radius: 55,
+            backgroundColor: Colors.red,
+            child: Text(
+              "SOS",
+              style: TextStyle(
+                fontSize: 26,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     void _handleMapInteraction() {
