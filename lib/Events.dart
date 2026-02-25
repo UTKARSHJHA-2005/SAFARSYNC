@@ -261,6 +261,16 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     return _vocalData.where((v) => v.category == selectedFilter).toList();
   }
 
+  List<StayItem> get _filteredStays {
+    if (selectedFilter == 'For You') return _stayData;
+    return _stayData.where((s) => s.category == selectedFilter).toList();
+  }
+
+  List<VehicleItem> get _filteredVehicles {
+    if (selectedFilter == 'For You') return _vehicleData;
+    return _vehicleData.where((v) => v.category == selectedFilter).toList();
+  }
+
   int get _totalCount => _filteredNearby.length + _filteredVocal.length;
 
   @override
