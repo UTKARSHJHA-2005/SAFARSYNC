@@ -399,10 +399,10 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: _stayData.length,
+        itemCount: _filteredStays.length,
         separatorBuilder: (_, __) => const SizedBox(width: 16),
         itemBuilder: (_, i) {
-          final stay = _stayData[i];
+          final stay = _filteredStays[i];
           return GestureDetector(
             onTap: () {
               Navigator.push(
