@@ -396,47 +396,47 @@ class _HomeState extends State<Home> {
                     child: Stack(
                       children: [
                         Positioned.fill(
-                          child: GestureDetector(
-                            behavior: HitTestBehavior.translucent,
-                            onTap: _handleMapInteraction,
-                            onScaleStart: (_) => _handleMapInteraction(),
-                            child: OSMFlutter(
-                              controller: mapController,
-                              osmOption: OSMOption(
-                                zoomOption: const ZoomOption(
-                                  initZoom: 14,
-                                  minZoomLevel: 3,
-                                  maxZoomLevel: 19,
-                                ),
-                                userLocationMarker: UserLocationMaker(
-                                  personMarker: const MarkerIcon(
-                                    icon: Icon(
-                                      Icons.person_pin_circle,
-                                      color: Colors.blue,
-                                      size: 56,
-                                    ),
+                          // child: GestureDetector(
+                          //   behavior: HitTestBehavior.translucent,
+                          //   onTap: _handleMapInteraction,
+                          //   onScaleStart: (_) => _handleMapInteraction(),
+                          child: OSMFlutter(
+                            controller: mapController,
+                            osmOption: OSMOption(
+                              zoomOption: const ZoomOption(
+                                initZoom: 14,
+                                minZoomLevel: 3,
+                                maxZoomLevel: 19,
+                              ),
+                              userLocationMarker: UserLocationMaker(
+                                personMarker: const MarkerIcon(
+                                  icon: Icon(
+                                    Icons.person_pin_circle,
+                                    color: Colors.blue,
+                                    size: 56,
                                   ),
-                                  directionArrowMarker: const MarkerIcon(
-                                    icon: Icon(
-                                      Icons.navigation,
-                                      color: Colors.blue,
-                                      size: 44,
-                                    ),
+                                ),
+                                directionArrowMarker: const MarkerIcon(
+                                  icon: Icon(
+                                    Icons.navigation,
+                                    color: Colors.blue,
+                                    size: 44,
                                   ),
                                 ),
                               ),
-                              onMapIsReady: (isReady) async {
-                                if (isReady) {
-                                  try {
-                                    await mapController.currentLocation();
-                                  } catch (e) {
-                                    debugPrint('currentLocation error: $e');
-                                  }
-                                  await _addSampleMarker();
-                                }
-                              },
                             ),
+                            onMapIsReady: (isReady) async {
+                              if (isReady) {
+                                try {
+                                  await mapController.currentLocation();
+                                } catch (e) {
+                                  debugPrint('currentLocation error: $e');
+                                }
+                                await _addSampleMarker();
+                              }
+                            },
                           ),
+                          // ),
                         ),
                         AnimatedPositioned(
                           duration: const Duration(milliseconds: 300),
