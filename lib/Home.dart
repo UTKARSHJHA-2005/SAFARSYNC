@@ -180,6 +180,30 @@ class _HomeState extends State<Home> {
     }
   }
 
+  void _showSosDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        bool alertSent = false;
+
+        // After 3 seconds change to "Alert Sent"
+        Future.delayed(const Duration(seconds: 3), () {
+          if (mounted) {
+            Navigator.of(context).pop(); // close first dialog
+            _showAlertSentDialog(); // open second
+          }
+        });
+
+        return _buildSosDialog(
+          title: "Sending Alert",
+          subtitle: "The Authorities and Friends will be notified",
+          showCallButton: true,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     void _handleMapInteraction() {
