@@ -399,7 +399,6 @@ class _HomeState extends State<Home> {
                           child: GestureDetector(
                             behavior: HitTestBehavior.translucent,
                             onTap: _handleMapInteraction,
-                            onPanStart: (_) => _handleMapInteraction(),
                             onScaleStart: (_) => _handleMapInteraction(),
                             child: OSMFlutter(
                               controller: mapController,
