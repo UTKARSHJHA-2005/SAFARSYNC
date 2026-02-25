@@ -344,8 +344,6 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
             SliverToBoxAdapter(child: const SizedBox(height: 16)),
             SliverToBoxAdapter(child: _buildVocalList()),
             const SliverToBoxAdapter(child: SizedBox(height: 50)),
-
-            // SliverToBoxAdapter(child: const SizedBox(height: 36)),
             SliverToBoxAdapter(
               child: _buildSectionLabel(
                 'Homestays & Hotels',
