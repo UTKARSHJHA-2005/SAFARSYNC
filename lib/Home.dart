@@ -167,6 +167,18 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Future<void> _openGoogleMaps() async {
+    final Uri googleMapsApp = Uri.parse("geo:0,0?q=");
+
+    if (await canLaunchUrl(googleMapsApp)) {
+      await launchUrl(googleMapsApp, mode: LaunchMode.externalApplication);
+    } else {
+      // fallback to browser
+      final Uri webUrl = Uri.parse("https://www.google.com/maps");
+      await launchUrl(webUrl, mode: LaunchMode.externalApplication);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     void _handleMapInteraction() {
