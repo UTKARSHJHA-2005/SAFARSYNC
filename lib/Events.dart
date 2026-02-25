@@ -62,6 +62,46 @@ class VocalItem {
   });
 }
 
+class StayItem {
+  final String title;
+  final String location;
+  final String image;
+  final String rating;
+  final String date;
+  final String time;
+  final String organizer;
+  final String description;
+  final double price;
+
+  const StayItem({
+    required this.title,
+    required this.location,
+    required this.image,
+    required this.rating,
+    required this.date,
+    required this.time,
+    required this.organizer,
+    required this.description,
+    required this.price,
+  });
+}
+
+class VehicleItem {
+  final String title;
+  final String location;
+  final String image;
+  final String type;
+  final double price;
+
+  const VehicleItem({
+    required this.title,
+    required this.location,
+    required this.image,
+    required this.type,
+    required this.price,
+  });
+}
+
 class Events extends StatefulWidget {
   const Events({super.key});
 
@@ -154,6 +194,37 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       description:
           'Learn traditional pottery techniques from local craftsmen of Majuli.',
       price: 19.99,
+    ),
+  ];
+
+  static const List<StayItem> _stayData = [
+    StayItem(
+      title: "Ziro Valley\nHomestay",
+      location: "Arunachal Pradesh",
+      image: "assets/assam.jpg",
+      rating: "4.8",
+      date: "Available Now",
+      time: "Check-in 12 PM",
+      organizer: "Local Host",
+      description: "Experience traditional Apatani hospitality.",
+      price: 59.99,
+    ),
+  ];
+
+  static const List<VehicleItem> _vehicleData = [
+    VehicleItem(
+      title: "Royal Enfield",
+      location: "Assam",
+      image: "assets/assam.jpg",
+      type: "Bike Rental",
+      price: 14.99,
+    ),
+    VehicleItem(
+      title: "SUV Self Drive",
+      location: "Meghalaya",
+      image: "assets/assam.jpg",
+      type: "Car Rental",
+      price: 39.99,
     ),
   ];
 
