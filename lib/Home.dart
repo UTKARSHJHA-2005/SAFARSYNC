@@ -806,7 +806,7 @@ class _HomeState extends State<Home> {
 
     return StatefulBuilder(
       builder: (context, setState) {
-        timer ??= Timer.periodic(const Duration(seconds: 3), (Timer t) {
+        timer ??= Timer.periodic(const Duration(seconds: 10), (Timer t) {
           if (controller.hasClients) {
             int nextPage = currentPage.value + 1;
             if (nextPage >= images.length) {
