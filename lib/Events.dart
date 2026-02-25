@@ -62,8 +62,6 @@ class VocalItem {
   });
 }
 
-// ─── Widget ───────────────────────────────────────────────────────────────────
-
 class Events extends StatefulWidget {
   const Events({super.key});
 
