@@ -394,6 +394,14 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _buildStayList() {
+    final items = _filteredStays;
+
+    if (items.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: _emptyState(),
+      );
+    }
     return SizedBox(
       height: 300,
       child: ListView.separated(
