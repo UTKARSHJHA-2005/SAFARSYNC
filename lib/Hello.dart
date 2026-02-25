@@ -29,7 +29,7 @@ class Hello extends StatelessWidget {
                   child: Opacity(
                     opacity: 0.4,
                     child: Image(
-                      image: AssetImage("assets/logo.png"),
+                      image: AssetImage("assets/logo2.png"),
                       width: 48,
                     ),
                   ),
