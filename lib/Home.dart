@@ -625,15 +625,18 @@ class _HomeState extends State<Home> {
   }
 
   Widget _sosMainButton() {
-    return CircleAvatar(
-      radius: 40,
-      backgroundColor: Colors.redAccent,
-      child: const Text(
-        "SOS",
-        style: TextStyle(
-          fontSize: 24,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () => _showSosDialog(),
+      child: const CircleAvatar(
+        radius: 40,
+        backgroundColor: Colors.redAccent,
+        child: Text(
+          "SOS",
+          style: TextStyle(
+            fontSize: 24,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
