@@ -94,11 +94,13 @@ class VehicleItem {
   final String image;
   final String type;
   final double price;
+  final String category;
 
   const VehicleItem({
     required this.title,
     required this.location,
     required this.image,
+    required this.category,
     required this.type,
     required this.price,
   });
