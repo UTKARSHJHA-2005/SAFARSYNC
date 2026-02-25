@@ -69,6 +69,7 @@ class StayItem {
   final String rating;
   final String date;
   final String time;
+  final String category;
   final String organizer;
   final String description;
   final double price;
@@ -80,6 +81,7 @@ class StayItem {
     required this.rating,
     required this.date,
     required this.time,
+    required this.category,
     required this.organizer,
     required this.description,
     required this.price,
@@ -203,6 +205,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       location: "Arunachal Pradesh",
       image: "assets/assam.jpg",
       rating: "4.8",
+      category: "Stays",
       date: "Available Now",
       time: "Check-in 12 PM",
       organizer: "Local Host",
