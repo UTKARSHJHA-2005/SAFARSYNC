@@ -33,6 +33,9 @@ class _HomeState extends State<Home> {
     );
   }
 
+  bool _showBottomButtons = false;
+  Timer? _hideTimer;
+
   @override
   void dispose() {
     mapController.dispose();
@@ -418,7 +421,13 @@ class _HomeState extends State<Home> {
                             },
                           ),
                         ),
-                        bottomActionButtons(),
+                        AnimatedPositioned(
+                          duration: const Duration(milliseconds: 300),
+                          bottom: _showBottomButtons ? 20 : -120,
+                          left: 0,
+                          right: 0,
+                          child: bottomActionButtons(),
+                        ),
                       ],
                     ),
                   ),
