@@ -370,9 +370,7 @@ class _HomeState extends State<Home> {
               ),
               const SizedBox(height: 20),
               GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(_createRoute());
-                },
+                onTap: _openGoogleMaps,
                 child: const Icon(
                   Icons.keyboard_arrow_up_rounded,
                   size: 30,
