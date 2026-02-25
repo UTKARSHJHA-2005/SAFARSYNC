@@ -38,6 +38,7 @@ class _HomeState extends State<Home> {
 
   @override
   void dispose() {
+    _hideTimer?.cancel();
     mapController.dispose();
     super.dispose();
   }
@@ -187,6 +188,22 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    void _handleMapInteraction() {
+      setState(() {
+        _showBottomButtons = true;
+      });
+
+      _hideTimer?.cancel();
+
+      _hideTimer = Timer(const Duration(seconds: 2), () {
+        if (mounted) {
+          setState(() {
+            _showBottomButtons = false;
+          });
+        }
+      });
+    }
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -379,46 +396,47 @@ class _HomeState extends State<Home> {
                     child: Stack(
                       children: [
                         Positioned.fill(
-                          child: OSMFlutter(
-                            controller: mapController,
-                            osmOption: OSMOption(
-                              zoomOption: const ZoomOption(
-                                initZoom: 14,
-                                minZoomLevel: 3,
-                                maxZoomLevel: 19,
-                              ),
-                              userLocationMarker: UserLocationMaker(
-                                personMarker: const MarkerIcon(
-                                  icon: Icon(
-                                    Icons.person_pin_circle,
-                                    color: Colors.blue,
-                                    size: 56,
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.translucent,
+                            onTap: _handleMapInteraction,
+                            onPanStart: (_) => _handleMapInteraction(),
+                            onScaleStart: (_) => _handleMapInteraction(),
+                            child: OSMFlutter(
+                              controller: mapController,
+                              osmOption: OSMOption(
+                                zoomOption: const ZoomOption(
+                                  initZoom: 14,
+                                  minZoomLevel: 3,
+                                  maxZoomLevel: 19,
+                                ),
+                                userLocationMarker: UserLocationMaker(
+                                  personMarker: const MarkerIcon(
+                                    icon: Icon(
+                                      Icons.person_pin_circle,
+                                      color: Colors.blue,
+                                      size: 56,
+                                    ),
+                                  ),
+                                  directionArrowMarker: const MarkerIcon(
+                                    icon: Icon(
+                                      Icons.navigation,
+                                      color: Colors.blue,
+                                      size: 44,
+                                    ),
                                   ),
                                 ),
-                                directionArrowMarker: const MarkerIcon(
-                                  icon: Icon(
-                                    Icons.navigation,
-                                    color: Colors.blue,
-                                    size: 44,
-                                  ),
-                                ),
                               ),
-                            ),
-                            onMapIsReady: (isReady) async {
-                              if (isReady) {
-                                try {
-                                  await mapController.currentLocation();
-                                } catch (e) {
-                                  debugPrint('currentLocation error: $e');
+                              onMapIsReady: (isReady) async {
+                                if (isReady) {
+                                  try {
+                                    await mapController.currentLocation();
+                                  } catch (e) {
+                                    debugPrint('currentLocation error: $e');
+                                  }
+                                  await _addSampleMarker();
                                 }
-                                await _addSampleMarker();
-                              }
-                            },
-                            onGeoPointClicked: (geoPoint) {
-                              debugPrint(
-                                'Clicked marker at: ${geoPoint.toMap()}',
-                              );
-                            },
+                              },
+                            ),
                           ),
                         ),
                         AnimatedPositioned(
