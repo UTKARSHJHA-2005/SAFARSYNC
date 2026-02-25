@@ -496,6 +496,14 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _buildVehicleList() {
+    final items = _filteredVehicles;
+
+    if (items.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: _emptyState(),
+      );
+    }
     return SizedBox(
       height: 200,
       child: ListView.separated(
