@@ -204,6 +204,20 @@ class _HomeState extends State<Home> {
     );
   }
 
+  void _showAlertSentDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return _buildSosDialog(
+          title: "Alert Sent",
+          subtitle:
+              "The Authorities and Friends are being notified.\nStay Strong!",
+          showCallButton: false,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     void _handleMapInteraction() {
