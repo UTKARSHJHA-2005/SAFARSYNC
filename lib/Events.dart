@@ -493,10 +493,10 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: _vehicleData.length,
+        itemCount: _filteredVehicles.length,
         separatorBuilder: (_, __) => const SizedBox(width: 14),
         itemBuilder: (_, i) {
-          final vehicle = _vehicleData[i];
+          final vehicle = _filteredVehicles[i];
           return Container(
             width: 180,
             decoration: BoxDecoration(
