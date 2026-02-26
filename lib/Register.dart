@@ -70,32 +70,6 @@
 //                           decoration: customFieldDecoration(
 //                             "Enter your Full Name",
 //                           ),
-//                           validator: (value) {
-//                             if (value == null || value.trim().isEmpty) {
-//                               return "Full name is required";
-//                             }
-//                             return null;
-//                           },
-//                         ),
-
-//                         const SizedBox(height: 16),
-
-//                         /// AGE
-//                         const Text("Age"),
-//                         const SizedBox(height: 6),
-//                         TextFormField(
-//                           controller: ageController,
-//                           keyboardType: TextInputType.number,
-//                           decoration: customFieldDecoration("Enter your Age"),
-//                           validator: (value) {
-//                             if (value == null || value.trim().isEmpty) {
-//                               return "Age is required";
-//                             }
-//                             return null;
-//                           },
-//                         ),
-
-//                         const SizedBox(height: 16),
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
