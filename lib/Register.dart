@@ -11,14 +11,6 @@
 //   State<RegisterStep1> createState() => _RegisterStep1State();
 // }
 
-// class _RegisterStep1State extends State<RegisterStep1> {
-//   final _formKey = GlobalKey<FormState>();
-
-//   final TextEditingController nameController = TextEditingController();
-//   final TextEditingController ageController = TextEditingController();
-//   final TextEditingController phoneController = TextEditingController();
-//   final TextEditingController otpController = TextEditingController();
-
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
