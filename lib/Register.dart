@@ -1,6 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:safarsync/components/gradient.dart';
-
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
