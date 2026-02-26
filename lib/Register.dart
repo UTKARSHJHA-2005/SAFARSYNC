@@ -4,6 +4,7 @@ import 'package:safarsync/components/most.dart';
 import 'package:safarsync/Profile.dart';
 import 'package:safarsync/components/input.dart';
 import 'package:country_list_pick/country_list_pick.dart';
+import 'package:safarsync/model/user_register.dart';
 
 class RegisterStep1 extends StatefulWidget {
   const RegisterStep1({super.key});
