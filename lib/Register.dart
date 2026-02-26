@@ -879,6 +879,7 @@ class _RegisterStep1State extends State<RegisterStep1>
                               onChanged: (CountryCode? code) {
                                 setState(() {
                                   selectedCountry = code?.name;
+                                  selectedDialCode = code?.dialCode ?? "+91";
                                 });
                               },
                             ),
