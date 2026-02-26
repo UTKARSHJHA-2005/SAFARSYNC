@@ -160,41 +160,6 @@
 //                                   return null;
 //                                 },
 //                               ),
-//                             ),
-//                             const SizedBox(width: 6),
-//                             ElevatedButton(
-//                               onPressed: () {
-//                                 if (phoneController.text.length >= 10) {
-//                                   setState(() {
-//                                     generatedOtp =
-//                                         (1000 +
-//                                                 (DateTime.now().millisecond %
-//                                                     9000))
-//                                             .toString();
-//                                     otpSent = true;
-//                                   });
-
-//                                   ScaffoldMessenger.of(context).showSnackBar(
-//                                     SnackBar(
-//                                       content: Text("OTP Sent: $generatedOtp"),
-//                                     ),
-//                                   );
-//                                 }
-//                               },
-//                               child: const Text("Send OTP"),
-//                             ),
-//                           ],
-//                         ),
-
-//                         if (otpSent) ...[
-//                           const SizedBox(height: 16),
-//                           const Text("Enter OTP"),
-//                           const SizedBox(height: 6),
-//                           TextFormField(
-//                             controller: otpController,
-//                             keyboardType: TextInputType.number,
-//                             decoration: customFieldDecoration("Enter OTP"),
-//                           ),
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
