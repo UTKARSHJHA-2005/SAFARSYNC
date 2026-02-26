@@ -1,8 +1,23 @@
-const express = require("express");
-const { Pool } = require("pg");
-const cors = require("cors");
+import pinataSDK from '@pinata/sdk';
+import express from 'express';
+import multer from 'multer';
+import fs from 'fs';
 
 const app = express();
+const upload = multer({ dest: 'uploads/' });
+
+const pinata = new pinataSDK('PINATA_API_KEY', 'PINATA_SECRET');
+
+app.post('/upload', upload.single('file'), async (req, res) => {
+    const readableStreamForFile = fs.createReadStream(req.file.path);
+
+    const result = await pinata.pinFileToIPFS(readableStreamForFile);
+
+    fs.unlinkSync(req.file.path);
+
+    res.json({ cid: result.IpfsHash });
+});
+
 app.use(cors());
 app.use(express.json());
 
