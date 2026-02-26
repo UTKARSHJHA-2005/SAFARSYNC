@@ -950,10 +950,21 @@ class _RegisterStep1State extends State<RegisterStep1>
                                       color: _ink,
                                       fontWeight: FontWeight.w500,
                                     ),
-                                    decoration: _fieldDec(
-                                      "+91 00000 00000",
-                                      icon: Icons.phone_outlined,
-                                    ),
+                                    decoration: _fieldDec("00000 00000")
+                                        .copyWith(
+                                          prefixIcon: Container(
+                                            width: 70,
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              selectedDialCode,
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
+                                                color: _ink,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                     validator: (value) {
                                       if (value == null ||
                                           value.trim().isEmpty) {
