@@ -96,33 +96,6 @@
 //                         ),
 
 //                         const SizedBox(height: 16),
-
-//                         /// SEX DROPDOWN
-//                         const Text("Sex"),
-//                         const SizedBox(height: 6),
-//                         DropdownButtonFormField<String>(
-//                           decoration: customDropDownDecoration(),
-//                           value: selectedSex,
-//                           hint: const Text("Select Sex"),
-//                           items: const [
-//                             DropdownMenuItem(
-//                               value: "Male",
-//                               child: Text("Male"),
-//                             ),
-//                             DropdownMenuItem(
-//                               value: "Female",
-//                               child: Text("Female"),
-//                             ),
-//                             DropdownMenuItem(
-//                               value: "Lesbian",
-//                               child: Text("Lesbian"),
-//                             ),
-//                             DropdownMenuItem(value: "Gay", child: Text("Gay")),
-//                             DropdownMenuItem(
-//                               value: "Other",
-//                               child: Text("Other"),
-//                             ),
-//                           ],
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
