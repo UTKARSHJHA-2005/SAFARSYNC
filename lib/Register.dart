@@ -123,43 +123,6 @@
 //                               child: Text("Other"),
 //                             ),
 //                           ],
-//                           onChanged: (value) {
-//                             setState(() {
-//                               selectedSex = value;
-//                             });
-//                           },
-//                           validator: (value) {
-//                             if (value == null) {
-//                               return "Please select an option";
-//                             }
-//                             return null;
-//                           },
-//                         ),
-
-//                         const SizedBox(height: 16),
-
-//                         /// PHONE NUMBER
-//                         const Text("Phone Number"),
-//                         const SizedBox(height: 8),
-//                         Row(
-//                           children: [
-//                             Expanded(
-//                               child: TextFormField(
-//                                 controller: phoneController,
-//                                 keyboardType: TextInputType.phone,
-//                                 decoration: customFieldDecoration(
-//                                   "Enter Phone Number",
-//                                 ),
-//                                 validator: (value) {
-//                                   if (value == null || value.trim().isEmpty) {
-//                                     return "Phone number is required";
-//                                   }
-//                                   if (value.length < 10) {
-//                                     return "Enter valid phone number";
-//                                   }
-//                                   return null;
-//                                 },
-//                               ),
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
