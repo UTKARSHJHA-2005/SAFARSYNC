@@ -609,6 +609,7 @@ class _RegisterStep1State extends State<RegisterStep1>
   }
 
   String? selectedCountry;
+  String selectedDialCode = "+91";
 
   // ── Build ────────────────────────────────────────────────────────────────
   @override
