@@ -18,6 +18,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     res.json({ cid: result.IpfsHash });
 });
 
+// app.listen(3000, () => console.log("Server running on port 3000"));
 // app.use(cors());
 // app.use(express.json());
 
