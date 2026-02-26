@@ -33,18 +33,6 @@
 //     super.dispose();
 //   }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       resizeToAvoidBottomInset: true,
-//       body: GradientBackground(
-//         child: SafeArea(
-//           child: SingleChildScrollView(
-//             padding: const EdgeInsets.symmetric(horizontal: 20),
-//             child: Form(
-//               key: _formKey,
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
