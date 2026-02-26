@@ -33,6 +33,7 @@ class _RegisterStep1State extends State<RegisterStep1>
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _otpSlideAnimation;
   late Animation<double> _otpFadeAnimation;
+  UserRegistration user = UserRegistration();
 
   @override
   void initState() {
