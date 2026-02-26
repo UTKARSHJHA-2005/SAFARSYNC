@@ -6,7 +6,7 @@ import fs from 'fs';
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
-const pinata = new pinataSDK('PINATA_API_KEY', 'PINATA_SECRET');
+const pinata = new pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_SECRET_API_KEY);
 
 app.post('/upload', upload.single('file'), async (req, res) => {
     const readableStreamForFile = fs.createReadStream(req.file.path);
