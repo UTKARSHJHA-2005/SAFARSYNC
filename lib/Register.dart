@@ -19,20 +19,6 @@
 //   final TextEditingController phoneController = TextEditingController();
 //   final TextEditingController otpController = TextEditingController();
 
-//   bool otpSent = false;
-//   bool otpVerified = false;
-
-//   String generatedOtp = "";
-//   String? selectedSex;
-//   @override
-//   void dispose() {
-//     nameController.dispose();
-//     ageController.dispose();
-//     phoneController.dispose();
-//     otpController.dispose();
-//     super.dispose();
-//   }
-
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
