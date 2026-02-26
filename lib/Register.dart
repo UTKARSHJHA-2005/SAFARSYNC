@@ -1,15 +1,5 @@
 // import 'package:flutter/material.dart';
 // import 'package:safarsync/components/gradient.dart';
-// import 'package:safarsync/components/most.dart';
-// import 'package:safarsync/Profile.dart';
-// import 'package:safarsync/components/input.dart';
-
-// class RegisterStep1 extends StatefulWidget {
-//   const RegisterStep1({super.key});
-
-//   @override
-//   State<RegisterStep1> createState() => _RegisterStep1State();
-// }
 
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
