@@ -45,31 +45,6 @@
 //               key: _formKey,
 //               child: Column(
 //                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   const SizedBox(height: 60),
-//                   const Text(
-//                     "Register",
-//                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-//                   ),
-//                   const SizedBox(height: 20),
-//                   // MAIN CONTAINER
-//                   Container(
-//                     padding: const EdgeInsets.all(20),
-//                     decoration: BoxDecoration(
-//                       color: Colors.white,
-//                       borderRadius: BorderRadius.circular(16),
-//                     ),
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         /// FULL NAME
-//                         const Text("Full Name"),
-//                         const SizedBox(height: 6),
-//                         TextFormField(
-//                           controller: nameController,
-//                           decoration: customFieldDecoration(
-//                             "Enter your Full Name",
-//                           ),
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
