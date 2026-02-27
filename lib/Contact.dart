@@ -90,6 +90,26 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
     );
   }
 
+  Future<String?> uploadFullProfile(UserRegistration user) async {
+    try {
+      final response = await http.post(
+        Uri.parse("http://192.168.1.6:3000/upload-json"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(user.toJson()),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data["cid"];
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print("JSON upload error: $e");
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -283,7 +303,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
 
                 const SizedBox(height: 28),
 
-                _nextButton(() {
+                _nextButton(() async {
                   if (contacts.length < 2) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -295,10 +315,37 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                     return;
                   }
 
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => const SelectStatePage()),
-                  );
+                  // ✅ Save contacts into user model
+                  widget.user.emergencyContacts = contacts.map((c) {
+                    return {
+                      "name": c.displayName,
+                      "phone": c.phones.first.number,
+                    };
+                  }).toList();
+
+                  try {
+                    // 🚀 Upload full profile JSON to backend
+                    final profileCid = await uploadFullProfile(widget.user);
+
+                    if (profileCid == null) {
+                      throw Exception("Profile upload failed");
+                    }
+
+                    // 🔐 Call smart contract
+                    await registerOnBlockchain(widget.user.phone!, profileCid);
+
+                    // 🎉 Success
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SelectStatePage(),
+                      ),
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text("Error: $e")));
+                  }
                 }),
 
                 const SizedBox(height: 40),
