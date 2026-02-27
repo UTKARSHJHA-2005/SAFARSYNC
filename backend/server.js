@@ -203,4 +203,11 @@ app.post("/register-user", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+app.get("/get-profile/:phone", async (req, res) => {
+    const phoneHash = hashPhone(req.params.phone);
+
+    const cid = await contract.getProfileCID(phoneHash);
+
+    res.json({ cid });
+});
 app.listen(3000, () => console.log("Server running on port 3000"));
