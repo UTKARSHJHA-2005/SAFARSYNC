@@ -217,8 +217,6 @@ class _RegisterStep3State extends State<RegisterStep3>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 52),
-
-                          // ── Header ───────────────────────────────────────
                           Row(
                             children: [
                               Container(
