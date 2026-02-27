@@ -6,8 +6,9 @@ import 'package:safarsync/Home.dart';
 import 'package:safarsync/State.dart';
 
 class EmergencyContactsPage extends StatefulWidget {
-  const EmergencyContactsPage({super.key});
+  final UserRegistration user;
 
+  const EmergencyContactsPage({super.key, required this.user});
   @override
   State<EmergencyContactsPage> createState() => _EmergencyContactsPageState();
 }
