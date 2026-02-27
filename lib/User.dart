@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
