@@ -208,36 +208,6 @@ class _ProfilePageState extends State<ProfilePage>
                     ),
                     const SizedBox(height: 6),
                     _blockchainBadge(blockchainController.text),
-
-                    const SizedBox(height: 28),
-
-                    /// ── STAT CHIPS ────────────────────────────────────────
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        _statChip(
-                          Icons.bloodtype_rounded,
-                          "Blood",
-                          bloodController.text,
-                          const Color(0xFFef4444),
-                        ),
-                        const SizedBox(width: 12),
-                        _statChip(
-                          Icons.favorite_rounded,
-                          "Organ\nDonor",
-                          isOrganDonor ? "Yes ✓" : "No",
-                          const Color(0xFF10b981),
-                        ),
-                        const SizedBox(width: 12),
-                        _statChip(
-                          Icons.location_on_rounded,
-                          "City",
-                          "Guwahati",
-                          const Color(0xFF3b82f6),
-                        ),
-                      ],
-                    ),
-
                     const SizedBox(height: 28),
 
                     /// ── SECTION: Personal Info ────────────────────────────
