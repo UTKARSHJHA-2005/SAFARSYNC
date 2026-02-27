@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'package:safarsync/components/most.dart';
 import 'package:safarsync/Contact.dart';
+import 'package:safarsync/model/user_register.dart';
 
 class RegisterStep3 extends StatefulWidget {
   final UserRegistration user;
