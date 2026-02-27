@@ -636,7 +636,8 @@ class _RegisterStep3State extends State<RegisterStep3>
                                 }
 
                                 // ✅ SAVE DATA INTO USER OBJECT
-                                widget.user.about = aboutController.text.trim();
+                                widget.user.summary = aboutController.text
+                                    .trim();
                                 widget.user.interests = _selectedTags.toList();
 
                                 // 🚀 Move to Step 4 WITH USER OBJECT
