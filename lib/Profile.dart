@@ -17,8 +17,6 @@ class RegisterStep2 extends StatefulWidget {
   State<RegisterStep2> createState() => _RegisterStep2State();
 }
 
-// const ABI = "0xd9145CCE52D386f254917e481eB44e9943F39138";
-
 class _RegisterStep2State extends State<RegisterStep2>
     with TickerProviderStateMixin {
   File? _imageFile;

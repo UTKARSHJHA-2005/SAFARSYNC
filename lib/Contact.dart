@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:web3dart/web3dart.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +27,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
   @override
   void initState() {
     super.initState();
-    web3client = Web3Client(rpcUrl, http.Client());
   }
 
   Future<void> pickContact() async {
@@ -95,35 +93,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
           ],
         ),
       ),
-    );
-  }
-
-  String hashPhone(String phone) {
-    final bytes = utf8.encode(phone);
-    final digest = sha256.convert(bytes);
-    return digest.toString();
-  }
-
-  Future<void> registerOnBlockchain(String phone, String cid) async {
-    final phoneHash = hashPhone(phone);
-
-    final contract = DeployedContract(
-      ContractAbi.fromJson(abiJson, "UserRegistry"),
-      EthereumAddress.fromHex(contractAddress),
-    );
-
-    final function = contract.function("registerUser");
-
-    final credentials = EthPrivateKey.fromHex("YOUR_PRIVATE_KEY");
-
-    await web3client.sendTransaction(
-      credentials,
-      Transaction.callContract(
-        contract: contract,
-        function: function,
-        parameters: [phoneHash, cid],
-      ),
-      chainId: 11155111, // Sepolia
     );
   }
 
@@ -352,7 +321,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                     return;
                   }
 
-                  // ✅ Save contacts into user model
                   widget.user.emergencyContacts = contacts.map((c) {
                     return {
                       "name": c.displayName,
@@ -361,17 +329,28 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                   }).toList();
 
                   try {
-                    // 🚀 Upload full profile JSON to backend
+                    // 1️⃣ Upload full profile JSON
                     final profileCid = await uploadFullProfile(widget.user);
 
                     if (profileCid == null) {
                       throw Exception("Profile upload failed");
                     }
 
-                    // 🔐 Call smart contract
-                    await registerOnBlockchain(widget.user.phone!, profileCid);
+                    // 2️⃣ Call backend to register on blockchain
+                    final response = await http.post(
+                      Uri.parse("http://192.168.1.6:3000/register-user"),
+                      headers: {"Content-Type": "application/json"},
+                      body: jsonEncode({
+                        "phone": widget.user.phone,
+                        "profileCID": profileCid,
+                      }),
+                    );
 
-                    // 🎉 Success
+                    if (response.statusCode != 200) {
+                      throw Exception("Blockchain registration failed");
+                    }
+
+                    // 3️⃣ Success
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
