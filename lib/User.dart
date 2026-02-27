@@ -25,6 +25,56 @@ class _ProfilePageState extends State<ProfilePage>
   late AnimationController _slideController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
+  Future<void> fetchProfile() async {
+    try {
+      const userPhone = "+919876543210"; // get this from login/session
+
+      // 1️⃣ Get CID from backend
+      final response = await http.get(
+        Uri.parse("http://192.168.1.6:3000/get-profile/$userPhone"),
+      );
+
+      if (response.statusCode != 200) {
+        print("Failed to fetch CID");
+        return;
+      }
+
+      final cid = jsonDecode(response.body)["cid"];
+
+      // 2️⃣ Fetch JSON from IPFS
+      final ipfsResponse = await http.get(
+        Uri.parse("https://gateway.pinata.cloud/ipfs/$cid"),
+      );
+
+      if (ipfsResponse.statusCode != 200) {
+        print("Failed to fetch IPFS data");
+        return;
+      }
+
+      final data = jsonDecode(ipfsResponse.body);
+
+      // 3️⃣ Populate UI
+      setState(() {
+        nameController.text = data["name"] ?? "";
+        phoneController.text = data["phone"] ?? "";
+        bloodController.text = data["bloodType"] ?? "";
+        medicationController.text = data["medications"] ?? "";
+        addressController.text = data["country"] ?? "";
+        blockchainController.text = cid; // show CID instead of fake address
+
+        emergencyControllers =
+            (data["emergencyContacts"] as List<dynamic>? ?? [])
+                .map<TextEditingController>(
+                  (e) => TextEditingController(text: e["phone"]),
+                )
+                .toList();
+
+        isOrganDonor = data["organDonor"] ?? false;
+      });
+    } catch (e) {
+      print("Profile fetch error: $e");
+    }
+  }
 
   @override
   void initState() {
