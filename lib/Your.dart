@@ -622,11 +622,30 @@ class _RegisterStep3State extends State<RegisterStep3>
                             height: 56,
                             child: ElevatedButton(
                               onPressed: () {
+                                // 🔐 Validation
+                                if (aboutController.text.trim().isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        "Please write something about yourself",
+                                      ),
+                                      backgroundColor: Colors.orange,
+                                    ),
+                                  );
+                                  return;
+                                }
+
+                                // ✅ SAVE DATA INTO USER OBJECT
+                                widget.user.about = aboutController.text.trim();
+                                widget.user.interests = _selectedTags.toList();
+
+                                // 🚀 Move to Step 4 WITH USER OBJECT
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) =>
-                                        const EmergencyContactsPage(),
+                                    builder: (_) => EmergencyContactsPage(
+                                      user: widget.user,
+                                    ),
                                   ),
                                 );
                               },
