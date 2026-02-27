@@ -4,10 +4,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
-  final String userAddress;
-
-  const ProfilePage({Key? key, required this.userAddress}) : super(key: key);
-
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
@@ -29,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage>
   late Animation<Offset> _slideAnimation;
   Future<void> fetchProfile() async {
     try {
-      const userPhone = "";
+      final userPhone = widget.phone;
 
       // 1️⃣ Get CID from backend
       final response = await http.get(
@@ -43,6 +39,11 @@ class _ProfilePageState extends State<ProfilePage>
 
       final cid = jsonDecode(response.body)["cid"];
 
+      if (cid == null || cid.isEmpty) {
+        print("No CID found");
+        return;
+      }
+
       // 2️⃣ Fetch JSON from IPFS
       final ipfsResponse = await http.get(
         Uri.parse("https://gateway.pinata.cloud/ipfs/$cid"),
@@ -55,19 +56,25 @@ class _ProfilePageState extends State<ProfilePage>
 
       final data = jsonDecode(ipfsResponse.body);
 
-      // 3️⃣ Populate UI
+      // 3️⃣ Populate UI safely
       setState(() {
         nameController.text = data["name"] ?? "";
         phoneController.text = data["phone"] ?? "";
         bloodController.text = data["bloodType"] ?? "";
         medicationController.text = data["medications"] ?? "";
         addressController.text = data["country"] ?? "";
-        blockchainController.text = cid; // show CID instead of fake address
+
+        blockchainController.text = cid;
+
+        // Clear old controllers first
+        for (var c in emergencyControllers) {
+          c.dispose();
+        }
 
         emergencyControllers =
             (data["emergencyContacts"] as List<dynamic>? ?? [])
                 .map<TextEditingController>(
-                  (e) => TextEditingController(text: e["phone"]),
+                  (e) => TextEditingController(text: e["phone"] ?? ""),
                 )
                 .toList();
 
