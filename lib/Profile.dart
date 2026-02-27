@@ -394,7 +394,7 @@ class _RegisterStep2State extends State<RegisterStep2>
     Future<String?> uploadImageToBackend(File imageFile) async {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('https://localhost:3000/upload'),
+        Uri.parse('https://192.168.1.6:3000/upload'),
       );
 
       request.files.add(
