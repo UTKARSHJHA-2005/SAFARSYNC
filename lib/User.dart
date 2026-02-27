@@ -283,28 +283,6 @@ class _ProfilePageState extends State<ProfilePage>
                         ),
                       ),
                     ),
-
-                    const SizedBox(height: 16),
-
-                    /// ── SECTION: Medical Info ─────────────────────────────
-                    _sectionCard(
-                      icon: Icons.medical_information_rounded,
-                      title: "Medical Info",
-                      color: const Color(0xFF10b981),
-                      children: [
-                        _styledField(
-                          label: "Blood Type",
-                          controller: bloodController,
-                          icon: Icons.bloodtype_rounded,
-                        ),
-                        _styledField(
-                          label: "Medications",
-                          controller: medicationController,
-                          icon: Icons.medication_rounded,
-                        ),
-                      ],
-                    ),
-
                     const SizedBox(height: 28),
 
                     /// ── SAVE BUTTON ───────────────────────────────────────
