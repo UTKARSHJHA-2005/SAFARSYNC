@@ -177,6 +177,24 @@ const contract = new ethers.Contract(
     contractABI,
     wallet
 );
+app.post("/register-user", async (req, res) => {
+    try {
+        const { phoneHash, profileCID } = req.body;
+
+        const tx = await contract.registerUser(phoneHash, profileCID);
+
+        await tx.wait(); // wait for confirmation
+
+        res.json({
+            success: true,
+            txHash: tx.hash,
+        });
+
+    } catch (error) {
+        console.error("Blockchain error:", error);
+        res.status(500).json({ error: error.message });
+    }
+});
 app.listen(3000, () => console.log("Server running on port 3000"));
 // app.use(cors());
 // app.use(express.json());
