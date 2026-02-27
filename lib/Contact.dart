@@ -4,6 +4,7 @@ import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:safarsync/Home.dart';
 import 'package:safarsync/State.dart';
+import 'package:safarsync/model/user_register.dart';
 
 class EmergencyContactsPage extends StatefulWidget {
   final UserRegistration user;
