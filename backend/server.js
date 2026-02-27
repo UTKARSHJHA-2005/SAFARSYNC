@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
-const pinata = new pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_SECRET_API_KEY);
+// const pinata = new pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_SECRET_API_KEY);
 
 app.post('/upload', upload.single('file'), async (req, res) => {
     try {
