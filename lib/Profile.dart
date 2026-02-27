@@ -6,9 +6,12 @@ import 'package:safarsync/components/most.dart';
 import 'package:safarsync/Your.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:safarsync/model/user_register.dart';
 
 class RegisterStep2 extends StatefulWidget {
-  const RegisterStep2({super.key});
+  final UserRegistration user;
+
+  const RegisterStep2({super.key, required this.user});
 
   @override
   State<RegisterStep2> createState() => _RegisterStep2State();

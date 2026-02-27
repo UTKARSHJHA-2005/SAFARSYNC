@@ -33,7 +33,6 @@ class _RegisterStep1State extends State<RegisterStep1>
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _otpSlideAnimation;
   late Animation<double> _otpFadeAnimation;
-  UserRegistration user = UserRegistration();
 
   @override
   void initState() {
@@ -350,6 +349,8 @@ class _RegisterStep1State extends State<RegisterStep1>
   // ── Build ────────────────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
+    UserRegistration user = UserRegistration();
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: GradientBackground(
@@ -876,12 +877,21 @@ class _RegisterStep1State extends State<RegisterStep1>
                             return;
                           }
 
+                          // ✅ SAVE DATA INTO MODEL
+                          user.name = nameController.text.trim();
+                          user.age = int.parse(ageController.text.trim());
+                          user.gender = selectedSex;
+                          user.country = selectedCountry;
+                          user.phone =
+                              "$selectedDialCode${phoneController.text.trim()}";
+
+                          // 🚀 Move to Step 2 WITH DATA
                           Navigator.push(
                             context,
                             PageRouteBuilder(
                               pageBuilder:
                                   (context, animation, secondaryAnimation) =>
-                                      const RegisterStep2(),
+                                      RegisterStep2(user: user),
                               transitionsBuilder:
                                   (
                                     context,
