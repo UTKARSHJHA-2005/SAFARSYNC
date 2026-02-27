@@ -24,6 +24,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
   static const Color _accent = Color(0xFF4F6EF7);
   static const Color _border = Color(0xFFE8EAF2);
   static const Color _surface = Colors.white;
+  late Web3Client web3client;
   final String contractAddress = "0xd9145CCE52D386f254917e481eB44e9943F39138";
   final String abiJson = '''[
     {
@@ -142,10 +143,11 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
 ]''';
 
   List<Contact> contacts = [];
+  final String rpcUrl = "https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID";
   @override
   void initState() {
     super.initState();
-    web3client = Web3Client(rpcUrl, Client());
+    web3client = Web3Client(rpcUrl, http.Client());
   }
 
   Future<void> pickContact() async {
