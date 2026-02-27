@@ -69,10 +69,10 @@ const contractABI = [
         "anonymous": false,
         "inputs": [
             {
-                "indexed": true,
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
+                "indexed": false,
+                "internalType": "string",
+                "name": "phoneHash",
+                "type": "string"
             },
             {
                 "indexed": false,
@@ -87,12 +87,6 @@ const contractABI = [
     {
         "anonymous": false,
         "inputs": [
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            },
             {
                 "indexed": false,
                 "internalType": "string",
@@ -112,9 +106,9 @@ const contractABI = [
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "_user",
-                "type": "address"
+                "internalType": "string",
+                "name": "_phoneHash",
+                "type": "string"
             }
         ],
         "name": "getProfileCID",
@@ -148,6 +142,11 @@ const contractABI = [
     },
     {
         "inputs": [
+            {
+                "internalType": "string",
+                "name": "_phoneHash",
+                "type": "string"
+            },
             {
                 "internalType": "string",
                 "name": "_newCID",
