@@ -42,6 +42,17 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     }
 });
 
+app.post('/upload-json', async (req, res) => {
+    try {
+        const result = await pinata.pinJSONToIPFS(req.body);
+
+        res.json({ cid: result.IpfsHash });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "JSON upload failed" });
+    }
+});
+
 app.listen(3000, () => console.log("Server running on port 3000"));
 // app.use(cors());
 // app.use(express.json());
