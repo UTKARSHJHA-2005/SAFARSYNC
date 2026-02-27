@@ -4,7 +4,9 @@ import 'package:safarsync/components/most.dart';
 import 'package:safarsync/Contact.dart';
 
 class RegisterStep3 extends StatefulWidget {
-  const RegisterStep3({super.key});
+  final UserRegistration user;
+
+  const RegisterStep3({super.key, required this.user});
 
   @override
   State<RegisterStep3> createState() => _RegisterStep3State();
