@@ -15,6 +15,12 @@ const pinata = new pinataSDK({
     pinataJWTKey: process.env.PINATA_JWT_KEY,
 });
 
+function hashPhone(phone) {
+    return ethers.keccak256(
+        ethers.toUtf8Bytes(phone)
+    );
+}
+
 app.post('/upload', upload.single('file'), async (req, res) => {
     try {
         console.log("Upload route hit");
@@ -180,11 +186,12 @@ const contract = new ethers.Contract(
 );
 app.post("/register-user", async (req, res) => {
     try {
-        const { phoneHash, profileCID } = req.body;
+        const { phone, profileCID } = req.body;
+
+        const phoneHash = hashPhone(phone);
 
         const tx = await contract.registerUser(phoneHash, profileCID);
-
-        await tx.wait(); // wait for confirmation
+        await tx.wait();
 
         res.json({
             success: true,
