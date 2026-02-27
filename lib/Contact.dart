@@ -25,7 +25,121 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
   static const Color _border = Color(0xFFE8EAF2);
   static const Color _surface = Colors.white;
   final String contractAddress= "0xd9145CCE52D386f254917e481eB44e9943F39138";
-  static const abiJson = ""
+  final String abiJson = '''[
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "newCID",
+                "type": "string"
+            }
+        ],
+        "name": "ProfileUpdated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "phoneHash",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "profileCID",
+                "type": "string"
+            }
+        ],
+        "name": "UserRegistered",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_user",
+                "type": "address"
+            }
+        ],
+        "name": "getProfileCID",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_phoneHash",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_profileCID",
+                "type": "string"
+            }
+        ],
+        "name": "registerUser",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_newCID",
+                "type": "string"
+            }
+        ],
+        "name": "updateProfile",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_phoneHash",
+                "type": "string"
+            }
+        ],
+        "name": "verifyPhone",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]''';
 
   List<Contact> contacts = [];
   web3client = Web3Client(rpcUrl, Client());
