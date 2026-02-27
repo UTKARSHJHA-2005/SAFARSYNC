@@ -2,6 +2,8 @@ import pinataSDK from '@pinata/sdk';
 import express from 'express';
 import multer from 'multer';
 import fs from 'fs';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
@@ -9,13 +11,32 @@ const upload = multer({ dest: 'uploads/' });
 const pinata = new pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_SECRET_API_KEY);
 
 app.post('/upload', upload.single('file'), async (req, res) => {
-    const readableStreamForFile = fs.createReadStream(req.file.path);
+    try {
+        console.log("Upload route hit");
 
-    const result = await pinata.pinFileToIPFS(readableStreamForFile);
+        const readableStreamForFile = fs.createReadStream(req.file.path);
 
-    fs.unlinkSync(req.file.path);
+        const options = {
+            pinataMetadata: {
+                name: req.file.originalname || "profile-image",
+            },
+        };
 
-    res.json({ cid: result.IpfsHash });
+        const result = await pinata.pinFileToIPFS(
+            readableStreamForFile,
+            options
+        );
+
+        fs.unlinkSync(req.file.path);
+
+        console.log("Uploaded to Pinata:", result.IpfsHash);
+
+        res.json({ cid: result.IpfsHash });
+
+    } catch (error) {
+        console.error("Backend error:", error);
+        res.status(500).json({ error: error.message });
+    }
 });
 
 app.listen(3000, () => console.log("Server running on port 3000"));
