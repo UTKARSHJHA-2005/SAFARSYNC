@@ -162,7 +162,7 @@ class _RegisterStep3State extends State<RegisterStep3>
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const EmergencyContactsPage(),
+                      builder: (_) => EmergencyContactsPage(user: widget.user),
                     ),
                   );
                 },
