@@ -53,7 +53,130 @@ app.post('/upload-json', async (req, res) => {
         res.status(500).json({ error: "JSON upload failed" });
     }
 });
+const provider = new ethers.JsonRpcProvider(process.env.INFURA_URL);
 
+// Wallet (backend signer)
+const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
+const contractABI = [
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "newCID",
+                "type": "string"
+            }
+        ],
+        "name": "ProfileUpdated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "phoneHash",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "profileCID",
+                "type": "string"
+            }
+        ],
+        "name": "UserRegistered",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_user",
+                "type": "address"
+            }
+        ],
+        "name": "getProfileCID",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_phoneHash",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_profileCID",
+                "type": "string"
+            }
+        ],
+        "name": "registerUser",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_newCID",
+                "type": "string"
+            }
+        ],
+        "name": "updateProfile",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_phoneHash",
+                "type": "string"
+            }
+        ],
+        "name": "verifyPhone",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
+const contract = new ethers.Contract(
+    process.env.CONTRACT_ADDRESS,
+    contractABI,
+    wallet
+);
 app.listen(3000, () => console.log("Server running on port 3000"));
 // app.use(cors());
 // app.use(express.json());
