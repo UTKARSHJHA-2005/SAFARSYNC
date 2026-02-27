@@ -10,7 +10,7 @@ const upload = multer({ dest: 'uploads/' });
 
 // const pinata = new pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_SECRET_API_KEY);
 const pinata = new pinataSDK({
-    pinataJWTKey: process.env.PINATA_JWT
+    pinataJWTKey: process.env.PINATA_JWT_KEY,
 });
 
 app.post('/upload', upload.single('file'), async (req, res) => {
