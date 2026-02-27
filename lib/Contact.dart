@@ -25,7 +25,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
   static const Color _border = Color(0xFFE8EAF2);
   static const Color _surface = Colors.white;
   List<Contact> contacts = [];
-  final String rpcUrl = "https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID";
   @override
   void initState() {
     super.initState();
