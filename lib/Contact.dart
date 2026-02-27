@@ -24,7 +24,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
   static const Color _accent = Color(0xFF4F6EF7);
   static const Color _border = Color(0xFFE8EAF2);
   static const Color _surface = Colors.white;
-  final String contractAddress= "0xd9145CCE52D386f254917e481eB44e9943F39138";
+  final String contractAddress = "0xd9145CCE52D386f254917e481eB44e9943F39138";
   final String abiJson = '''[
     {
         "anonymous": false,
@@ -142,8 +142,11 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
 ]''';
 
   List<Contact> contacts = [];
-  web3client = Web3Client(rpcUrl, Client());
-
+  @override
+  void initState() {
+    super.initState();
+    web3client = Web3Client(rpcUrl, Client());
+  }
 
   Future<void> pickContact() async {
     final permission = await FlutterContacts.requestPermission();
@@ -218,7 +221,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
     final contract = DeployedContract(
       ContractAbi.fromJson(abiJson, "UserRegistry"),
       EthereumAddress.fromHex(contractAddress),
-    );        
+    );
 
     final function = contract.function("registerUser");
 
