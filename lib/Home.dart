@@ -84,7 +84,9 @@ class _HomeState extends State<Home> {
                     Colors.blue,
                     onPressed: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => ProfilePage()),
+                      MaterialPageRoute(
+                        builder: (_) => ProfilePage(userAddress: address.hex),
+                      ),
                     ),
                   ),
                   _settingsItem(
@@ -467,7 +469,10 @@ class _HomeState extends State<Home> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (_) => ProfilePage()),
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  ProfilePage(userAddress: address.hex),
+                            ),
                           );
                         },
                       ),

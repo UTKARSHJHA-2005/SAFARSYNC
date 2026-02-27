@@ -4,7 +4,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  final String userAddress;
+
+  const ProfilePage({Key? key, required this.userAddress}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -27,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage>
   late Animation<Offset> _slideAnimation;
   Future<void> fetchProfile() async {
     try {
-      const userPhone = "+919876543210"; // get this from login/session
+      const userPhone = "";
 
       // 1️⃣ Get CID from backend
       final response = await http.get(
