@@ -22,6 +22,8 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
   static const Color _accent = Color(0xFF4F6EF7);
   static const Color _border = Color(0xFFE8EAF2);
   static const Color _surface = Colors.white;
+  static const contractAddress= "0xd9145CCE52D386f254917e481eB44e9943F39138";
+  static const abiJson = ""
 
   List<Contact> contacts = [];
 
@@ -98,7 +100,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
     final contract = DeployedContract(
       ContractAbi.fromJson(abiJson, "UserRegistry"),
       EthereumAddress.fromHex(contractAddress),
-    );
+    );        
 
     final function = contract.function("registerUser");
 
