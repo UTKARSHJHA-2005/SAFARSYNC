@@ -390,22 +390,31 @@ class _RegisterStep2State extends State<RegisterStep2>
   }
 
   Future<String?> uploadImageToBackend(File imageFile) async {
-    var request = http.MultipartRequest(
-      'POST',
-      Uri.parse('http://192.168.1.6:3000/uploads'),
-    );
+    try {
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse('http://192.168.1.6:3000/upload'),
+      );
 
-    request.files.add(
-      await http.MultipartFile.fromPath('file', imageFile.path),
-    );
+      request.files.add(
+        await http.MultipartFile.fromPath('file', imageFile.path),
+      );
 
-    var response = await request.send();
+      var response = await request.send();
 
-    if (response.statusCode == 200) {
+      print("STATUS CODE: ${response.statusCode}");
+
       var responseData = await response.stream.bytesToString();
-      var jsonData = jsonDecode(responseData);
-      return jsonData['cid']; // backend returns CID
-    } else {
+      print("RESPONSE BODY: $responseData");
+
+      if (response.statusCode == 200) {
+        var jsonData = jsonDecode(responseData);
+        return jsonData['cid'];
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print("UPLOAD ERROR: $e");
       return null;
     }
   }
