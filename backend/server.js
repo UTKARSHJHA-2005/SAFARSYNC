@@ -3,6 +3,7 @@ import express from 'express';
 import multer from 'multer';
 import fs from 'fs';
 import dotenv from 'dotenv';
+import { ethers } from 'ethers';
 dotenv.config();
 
 const app = express();
