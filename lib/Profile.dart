@@ -640,7 +640,7 @@ class _RegisterStep2State extends State<RegisterStep2>
                       width: double.infinity,
                       height: 56,
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_imageFile == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -655,22 +655,47 @@ class _RegisterStep2State extends State<RegisterStep2>
                                     Text("Please upload a profile picture"),
                                   ],
                                 ),
-                                backgroundColor: const Color(0xFFF59E0B),
+                                backgroundColor: Color(0xFFF59E0B),
                                 behavior: SnackBarBehavior.floating,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
                               ),
                             );
                             return;
                           }
 
+                          // 🔄 Show loading
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+
+                          // 🔥 Upload image to backend
+                          String? cid = await uploadImageToBackend(_imageFile!);
+
+                          Navigator.pop(context); // remove loading
+
+                          if (cid == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Image upload failed"),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                            return;
+                          }
+
+                          // ✅ SAVE CID INTO USER MODEL
+                          widget.user.photoCID = cid;
+
+                          // 🚀 Go to Step 3 WITH USER OBJECT
                           Navigator.push(
                             context,
                             PageRouteBuilder(
                               pageBuilder:
                                   (context, animation, secondaryAnimation) =>
-                                      const RegisterStep3(),
+                                      RegisterStep3(user: widget.user),
                               transitionsBuilder:
                                   (
                                     context,
