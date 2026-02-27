@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:safarsync/components/gradient.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -87,6 +89,27 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> registerOnBlockchain(String phone, String cid) async {
+    final phoneHash = keccak256(utf8.encode(phone));
+
+    final contract = DeployedContract(
+      ContractAbi.fromJson(abiJson, "UserRegistry"),
+      EthereumAddress.fromHex(contractAddress),
+    );
+
+    final function = contract.function("registerUser");
+
+    await web3client.sendTransaction(
+      credentials,
+      Transaction.callContract(
+        contract: contract,
+        function: function,
+        parameters: [bytesToHex(phoneHash), cid],
+      ),
+      chainId: 11155111, // Sepolia
     );
   }
 
