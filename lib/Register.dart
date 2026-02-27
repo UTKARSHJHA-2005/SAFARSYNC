@@ -884,6 +884,8 @@ class _RegisterStep1State extends State<RegisterStep1>
                           user.country = selectedCountry;
                           user.phone =
                               "$selectedDialCode${phoneController.text.trim()}";
+                          SharedPreferences prefs = await SharedPreferences.getInstance();
+await prefs.setString("userPhone", user.phone);
 
                           // 🚀 Move to Step 2 WITH DATA
                           Navigator.push(

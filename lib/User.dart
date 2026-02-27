@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   final String phone;
@@ -28,7 +29,13 @@ class _ProfilePageState extends State<ProfilePage>
   late Animation<Offset> _slideAnimation;
   Future<void> fetchProfile() async {
     try {
-      final userPhone = widget.phone;
+      final prefs = await SharedPreferences.getInstance();
+      final userPhone = prefs.getString("userPhone");
+
+      if (userPhone == null) {
+        print("User not logged in");
+        return;
+      }
 
       // 1️⃣ Get CID from backend
       final response = await http.get(
