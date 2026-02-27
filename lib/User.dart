@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
+  final String phone;
+
+  const ProfilePage({Key? key, required this.phone}) : super(key: key);
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
