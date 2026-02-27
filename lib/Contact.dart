@@ -215,8 +215,14 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
     );
   }
 
+  String hashPhone(String phone) {
+    final bytes = utf8.encode(phone);
+    final digest = sha256.convert(bytes);
+    return digest.toString();
+  }
+
   Future<void> registerOnBlockchain(String phone, String cid) async {
-    final phoneHash = keccak256(utf8.encode(phone));
+    final phoneHash = hashPhone(phone);
 
     final contract = DeployedContract(
       ContractAbi.fromJson(abiJson, "UserRegistry"),
@@ -225,12 +231,14 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
 
     final function = contract.function("registerUser");
 
+    final credentials = EthPrivateKey.fromHex("YOUR_PRIVATE_KEY");
+
     await web3client.sendTransaction(
       credentials,
       Transaction.callContract(
         contract: contract,
         function: function,
-        parameters: [bytesToHex(phoneHash), cid],
+        parameters: [phoneHash, cid],
       ),
       chainId: 11155111, // Sepolia
     );
