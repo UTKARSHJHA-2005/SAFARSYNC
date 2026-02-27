@@ -30,30 +30,23 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     super.initState();
 
-    nameController.text = "Rahul Sharma";
-    blockchainController.text = "0xA67B98F23C";
-    phoneController.text = "+91 9876543210";
-    emergencyControllers = [
-      TextEditingController(text: "+91 9123456789"),
-      TextEditingController(text: "+91 9988776655"),
-    ];
-    bloodController.text = "O+";
-    medicationController.text = "None";
-    addressController.text = "Guwahati, Assam, India";
-    isOrganDonor = true;
+    fetchProfile();
 
     _fadeController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 900),
     );
+
     _slideController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 800),
     );
+
     _fadeAnimation = CurvedAnimation(
       parent: _fadeController,
       curve: Curves.easeOut,
     );
+
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.12),
       end: Offset.zero,
