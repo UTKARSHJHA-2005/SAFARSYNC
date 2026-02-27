@@ -394,7 +394,7 @@ class _RegisterStep2State extends State<RegisterStep2>
     Future<String?> uploadImageToBackend(File imageFile) async {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('https://192.168.1.6:3000/upload'),
+        Uri.parse('http://192.168.1.6:3000/upload'),
       );
 
       request.files.add(
@@ -663,18 +663,18 @@ class _RegisterStep2State extends State<RegisterStep2>
                           }
 
                           // 🔄 Show loading
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (_) => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
+                          // showDialog(
+                          //   context: context,
+                          //   barrierDismissible: false,
+                          //   builder: (_) => const Center(
+                          //     child: CircularProgressIndicator(),
+                          //   ),
+                          // );
 
                           // 🔥 Upload image to backend
                           String? cid = await uploadImageToBackend(_imageFile!);
 
-                          Navigator.pop(context); // remove loading
+                          //  Navigator.pop(context); // remove loading
 
                           if (cid == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
