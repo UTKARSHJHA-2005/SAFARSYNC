@@ -5,6 +5,7 @@ import 'package:safarsync/Profile.dart';
 import 'package:safarsync/components/input.dart';
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:safarsync/model/user_register.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterStep1 extends StatefulWidget {
   const RegisterStep1({super.key});
@@ -849,7 +850,7 @@ class _RegisterStep1State extends State<RegisterStep1>
                       const SizedBox(height: 28),
 
                       // ── Next Button ─────────────────────────────────────
-                      _nextButton(() {
+                      _nextButton(() async {
                         if (_formKey.currentState!.validate()) {
                           if (!otpVerified) {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -884,8 +885,9 @@ class _RegisterStep1State extends State<RegisterStep1>
                           user.country = selectedCountry;
                           user.phone =
                               "$selectedDialCode${phoneController.text.trim()}";
-                          SharedPreferences prefs = await SharedPreferences.getInstance();
-await prefs.setString("userPhone", user.phone);
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          await prefs.setString("userPhone", user.phone!);
 
                           // 🚀 Move to Step 2 WITH DATA
                           Navigator.push(

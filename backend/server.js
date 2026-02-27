@@ -204,10 +204,11 @@ app.post("/register-user", async (req, res) => {
     }
 });
 app.get("/get-profile/:phone", async (req, res) => {
-    const phoneHash = hashPhone(req.params.phone);
+    const phone = req.params.phone;
+    const user = await User.findOne({ phone });
 
-    const cid = await contract.getProfileCID(phoneHash);
+    if (!user) return res.status(404).json({ error: "User not found" });
 
-    res.json({ cid });
+    res.json({ cid: user.cid });
 });
 app.listen(3000, () => console.log("Server running on port 3000"));
