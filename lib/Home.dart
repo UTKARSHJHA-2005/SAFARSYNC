@@ -85,7 +85,7 @@ class _HomeState extends State<Home> {
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => ProfilePage(userAddress: address.hex),
+                        builder: (_) => ProfilePage(phone: loggedInPhone),
                       ),
                     ),
                   ),
@@ -466,15 +466,12 @@ class _HomeState extends State<Home> {
                           "assets/kaziranga.webp",
                           "assets/handicraft.jpg",
                         ],
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  ProfilePage(userAddress: address.hex),
-                            ),
-                          );
-                        },
+                        // onPressed: () {
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (_) => ProfilePage()),
+                        //   );
+                        // },
                       ),
                     ),
                   ],
