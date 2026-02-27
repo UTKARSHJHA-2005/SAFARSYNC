@@ -28,6 +28,8 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
   static const abiJson = ""
 
   List<Contact> contacts = [];
+  web3client = Web3Client(rpcUrl, Client());
+
 
   Future<void> pickContact() async {
     final permission = await FlutterContacts.requestPermission();
