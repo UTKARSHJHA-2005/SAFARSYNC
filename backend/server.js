@@ -196,6 +196,7 @@ app.post("/register-user", async (req, res) => {
             success: true,
             txHash: tx.hash,
         });
+        console.log("User registered on blockchain:", tx.hash);
 
     } catch (error) {
         console.error("Blockchain error:", error);
