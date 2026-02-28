@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/gradient.dart';
 import 'dart:convert';
+import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,6 +27,11 @@ class _ProfilePageState extends State<ProfilePage>
   late AnimationController _slideController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
+
+  String hashPhone(String phone) {
+    return sha256.convert(utf8.encode(phone)).toString();
+  }
+
   Future<void> fetchProfile() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -38,7 +44,7 @@ class _ProfilePageState extends State<ProfilePage>
 
       // 1️⃣ Get CID from backend
       final response = await http.get(
-        Uri.parse("http://192.168.1.6:3000/get-profile/$userPhone"),
+        Uri.parse("http://192.168.1.5:3000/get-profile/$userPhone"),
       );
 
       if (response.statusCode != 200) {
