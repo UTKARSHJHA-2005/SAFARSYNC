@@ -349,55 +349,6 @@ class _ProfilePageState extends State<ProfilePage>
                         ),
                       ),
                     ),
-                    const SizedBox(height: 28),
-
-                    /// ── SAVE BUTTON ───────────────────────────────────────
-                    GestureDetector(
-                      onTap: () {
-                        // save logic
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 56,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(18),
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF7c3aed), Color(0xFF4f46e5)],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFF7c3aed).withOpacity(0.45),
-                              blurRadius: 22,
-                              offset: const Offset(0, 8),
-                            ),
-                          ],
-                        ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.cloud_upload_rounded,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              "Save Profile",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: 0.4,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 30),
                   ],
                 ),
               ),
