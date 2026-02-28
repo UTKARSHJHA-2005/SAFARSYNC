@@ -88,8 +88,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      final phone = phoneController.text.trim();
-
+                      final phone = completePhoneNumber.trim();
                       final response = await http.get(
                         Uri.parse(
                           "http://192.168.1.5:3000/verify-user/${Uri.encodeComponent(phone)}",
