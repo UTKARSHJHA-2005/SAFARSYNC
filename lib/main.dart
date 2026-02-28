@@ -10,10 +10,34 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: AuthWrapper(),
+    );
+  }
+}
+
+class AuthWrapper extends StatefulWidget {
+  const AuthWrapper({super.key});
+
+  @override
+  State<AuthWrapper> createState() => _AuthWrapperState();
+}
+
+class _AuthWrapperState extends State<AuthWrapper> {
+  @override
+  void initState() {
+    super.initState();
+    checkLogin();
+  }
+
   Future<void> checkLogin() async {
     final prefs = await SharedPreferences.getInstance();
     final isLoggedIn = prefs.getBool("isLoggedIn") ?? false;
+
+    if (!mounted) return;
 
     if (isLoggedIn) {
       Navigator.pushReplacement(
@@ -30,6 +54,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Flutter Demo', home: const PhoneInputScreen());
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }
