@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:safarsync/Home.dart';
 import 'package:safarsync/phone.dart';
 import 'package:safarsync/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,6 +28,8 @@ class AuthWrapper extends StatefulWidget {
 }
 
 class _AuthWrapperState extends State<AuthWrapper> {
+  bool? isLoggedIn;
+
   @override
   void initState() {
     super.initState();
@@ -35,25 +38,19 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
   Future<void> checkLogin() async {
     final prefs = await SharedPreferences.getInstance();
-    final isLoggedIn = prefs.getBool("isLoggedIn") ?? false;
+    final logged = prefs.getBool("isLoggedIn") ?? false;
 
-    if (!mounted) return;
-
-    if (isLoggedIn) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const ProfilePage()),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const PhoneInputScreen()),
-      );
-    }
+    setState(() {
+      isLoggedIn = logged;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    if (isLoggedIn == null) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
+    return isLoggedIn! ? const Home() : const PhoneInputScreen();
   }
 }
