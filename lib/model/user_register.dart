@@ -13,15 +13,15 @@ class UserRegistration {
 
   Map<String, dynamic> toJson() {
     return {
-      "name": name,
-      "gender": gender,
-      "age": age,
-      "country": country,
-      "phone": phone,
-      "photo": photoCID,
-      "summary": summary,
-      "interests": interests,
-      "emergencyContacts": emergencyContacts,
+      if (name != null) "name": name,
+      if (gender != null) "gender": gender,
+      if (age != null) "age": age,
+      if (country != null) "country": country,
+      if (phone != null) "phone": phone,
+      if (photoCID != null) "photo": photoCID,
+      if (summary != null) "summary": summary,
+      if (interests != null) "interests": interests,
+      if (emergencyContacts != null) "emergencyContacts": emergencyContacts,
     };
   }
 }
