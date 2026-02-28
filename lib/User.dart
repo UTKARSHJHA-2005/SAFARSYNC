@@ -27,10 +27,6 @@ class _ProfilePageState extends State<ProfilePage>
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
 
-  String hashPhone(String phone) {
-    return sha256.convert(utf8.encode(phone)).toString();
-  }
-
   Future<void> fetchProfile() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -40,12 +36,9 @@ class _ProfilePageState extends State<ProfilePage>
         print("User not logged in");
         return;
       }
-
-      final phoneHash = hashPhone(userPhone);
-
       final response = await http.get(
         Uri.parse(
-          "http://192.168.1.5:3000/get-profile/${Uri.encodeComponent(phoneHash)}",
+          "http://192.168.1.5:3000/get-profile/${Uri.encodeComponent(userPhone)}",
         ),
       );
 
