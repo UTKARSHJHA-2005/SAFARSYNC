@@ -73,7 +73,10 @@ class _ProfilePageState extends State<ProfilePage>
         bloodController.text = data["bloodType"] ?? "";
         medicationController.text = data["medications"] ?? "";
         addressController.text = data["country"] ?? "";
-        profilePhotoUrl = data["photo"];
+        final photoCid = data["photo"];
+        profilePhotoUrl = photoCid != null && photoCid.isNotEmpty
+            ? "https://gateway.pinata.cloud/ipfs/$photoCid"
+            : null;
         blockchainController.text = cid;
 
         // Clear old controllers first
