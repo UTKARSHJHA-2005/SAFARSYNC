@@ -77,6 +77,7 @@ flutter:
     - assets/kaziranga.webp
     - assets/handicraft.jpg
     - assets/p1.jpg
+    - assets/logo2.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
