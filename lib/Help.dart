@@ -79,10 +79,6 @@ class HelpPage extends StatelessWidget {
                           "Is my data secure?",
                           "Yes, your data is encrypted and the authentication one is stored on Blockchain and never shared with third parties.",
                         ),
-                        _faqCard(
-                          "Can I delete my chat history?",
-                          "Yes, you can clear chat history anytime from settings.",
-                        ),
 
                         const SizedBox(height: 30),
 
