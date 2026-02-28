@@ -210,9 +210,9 @@ function normalizePhone(phone) {
     return phone.replace(/\s+/g, '').trim();
 }
 
-app.get("/get-profile/:phone", async (req, res) => {
+app.get("/get-profile/:phoneHash", async (req, res) => {
     try {
-        const phone = req.params.phone;
+        const phone = req.params.phoneHash;
 
         const phoneHash = phone;
         console.log("FETCH HASH:", phoneHash);
