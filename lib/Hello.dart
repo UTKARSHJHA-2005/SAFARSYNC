@@ -42,7 +42,7 @@ class Hello extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "hello",
+                      "HELLO",
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.w300,
