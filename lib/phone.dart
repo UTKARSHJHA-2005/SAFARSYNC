@@ -68,13 +68,12 @@ class _PhoneInputScreenState extends State<PhoneInputScreen> {
                     if (phone == null || phone.number.isEmpty) {
                       return "Phone number is required";
                     }
-                    if (phone.number.length < 6) {
-                      return "Enter a valid phone number";
-                    }
+                    // if (phone.number.length < 6) {
+                    //   return "Enter a valid phone number";
+                    // }
                     return null;
                   },
                   onChanged: (phone) {
-                    // This gives full number including country code
                     print(phone.completeNumber);
                   },
                 ),
