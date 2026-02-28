@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:safarsync/Hello.dart';
 
 class PhoneInputScreen extends StatefulWidget {
   const PhoneInputScreen({super.key});
@@ -111,9 +112,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen> {
 
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(
-                            builder: (_) => const OtpVerificationScreen(),
-                          ),
+                          MaterialPageRoute(builder: (_) => const Hello()),
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
