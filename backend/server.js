@@ -214,7 +214,7 @@ app.get("/get-profile/:phoneHash", async (req, res) => {
     try {
         const phone = req.params.phoneHash;
 
-        const phoneHash = phone;
+        const phoneHash = hashPhone(normalizePhone(phone));
         console.log("FETCH HASH:", phoneHash);
         console.log("REGISTER PHONE RAW:", phone);
         console.log("REGISTER HASH:", phoneHash);
