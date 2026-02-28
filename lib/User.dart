@@ -94,6 +94,8 @@ class _ProfilePageState extends State<ProfilePage>
     }
   }
 
+  String? profilePhotoUrl;
+
   @override
   void initState() {
     super.initState();
