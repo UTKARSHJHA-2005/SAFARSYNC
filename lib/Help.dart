@@ -158,7 +158,7 @@ class HelpPage extends StatelessWidget {
           /// Input Field
           TextField(
             controller: controller,
-            maxLines: 3,
+            maxLines: 5,
             decoration: InputDecoration(
               hintText: "Write your query here...",
               filled: true,
