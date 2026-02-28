@@ -54,26 +54,28 @@ class _PhoneInputScreenState extends State<PhoneInputScreen> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: TextFormField(
+                child: IntlPhoneField(
                   controller: phoneController,
-                  textAlign: TextAlign.center, // << center text & hint
-                  keyboardType: TextInputType.phone,
+                  initialCountryCode: 'IN', // change default if needed
+                  textAlign: TextAlign.center,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: "Enter your phone number",
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
-                    prefixIcon: Icon(Icons.phone), // you can remove if you want
                   ),
-
-                  // REQUIRED VALIDATION
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
+                  dropdownIconPosition: IconPosition.trailing,
+                  flagsButtonPadding: const EdgeInsets.all(8),
+                  validator: (phone) {
+                    if (phone == null || phone.number.isEmpty) {
                       return "Phone number is required";
                     }
-                    if (value.length < 10) {
+                    if (phone.number.length < 6) {
                       return "Enter a valid phone number";
                     }
                     return null;
+                  },
+                  onChanged: (phone) {
+                    // This gives full number including country code
+                    print(phone.completeNumber);
                   },
                 ),
               ),
