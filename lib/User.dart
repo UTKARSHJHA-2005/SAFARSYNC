@@ -72,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage>
         bloodController.text = data["bloodType"] ?? "";
         medicationController.text = data["medications"] ?? "";
         addressController.text = data["country"] ?? "";
-
+        profilePhotoUrl = data["photo"];
         blockchainController.text = cid;
 
         // Clear old controllers first
@@ -86,8 +86,6 @@ class _ProfilePageState extends State<ProfilePage>
                   (e) => TextEditingController(text: e["phone"] ?? ""),
                 )
                 .toList();
-
-        isOrganDonor = data["organDonor"] ?? false;
       });
     } catch (e) {
       print("Profile fetch error: $e");
@@ -213,10 +211,14 @@ class _ProfilePageState extends State<ProfilePage>
                           ),
                         ),
 
-                        /// Avatar
-                        const CircleAvatar(
+                        CircleAvatar(
                           radius: 60,
-                          backgroundImage: AssetImage("assets/p1.jpg"),
+                          backgroundImage:
+                              profilePhotoUrl != null &&
+                                  profilePhotoUrl!.isNotEmpty
+                              ? NetworkImage(profilePhotoUrl!)
+                              : const AssetImage("assets/p1.jpg")
+                                    as ImageProvider,
                         ),
 
                         /// Edit badge
