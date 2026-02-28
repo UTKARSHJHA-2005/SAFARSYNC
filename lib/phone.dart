@@ -80,15 +80,45 @@ class _PhoneInputScreenState extends State<PhoneInputScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Validate field
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const OtpVerificationScreen(),
+                      final phone = phoneController.text.trim();
+
+                      final response = await http.get(
+                        Uri.parse(
+                          "http://192.168.1.5:3000/verify-user/${Uri.encodeComponent(phone)}",
                         ),
                       );
+
+                      if (response.statusCode != 200) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Server error")),
+                        );
+                        return;
+                      }
+
+                      final exists = jsonDecode(response.body)["exists"];
+
+                      if (exists == true) {
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setBool("isLoggedIn", true);
+                        await prefs.setString("userPhone", phone);
+
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const OtpVerificationScreen(),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              "User not registered. Please signup.",
+                            ),
+                          ),
+                        );
+                      }
                     }
                   },
                   style: ElevatedButton.styleFrom(
