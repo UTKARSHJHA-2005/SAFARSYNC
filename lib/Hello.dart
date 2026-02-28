@@ -21,20 +21,6 @@ class Hello extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              const SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Opacity(
-                    opacity: 0.4,
-                    child: Image(
-                      image: AssetImage("assets/logo2.png"),
-                      width: 48,
-                    ),
-                  ),
-                ),
-              ),
               const SizedBox(height: 70),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
