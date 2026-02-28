@@ -45,7 +45,9 @@ class _ProfilePageState extends State<ProfilePage>
       final phoneHash = hashPhone(userPhone);
 
       final response = await http.get(
-        Uri.parse("http://192.168.1.5:3000/get-profile/$phoneHash"),
+        Uri.parse(
+          "http://192.168.1.5:3000/get-profile/${Uri.encodeComponent(phoneHash)}",
+        ),
       );
 
       if (response.statusCode != 200) {
