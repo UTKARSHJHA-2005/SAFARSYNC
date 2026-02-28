@@ -38,6 +38,7 @@ class _RegisterStep1State extends State<RegisterStep1>
   @override
   void initState() {
     super.initState();
+    user = UserRegistration();
 
     _slideController = AnimationController(
       vsync: this,
