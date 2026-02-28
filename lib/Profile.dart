@@ -399,16 +399,13 @@ class _RegisterStep2State extends State<RegisterStep2>
       );
 
       var response = await request.send();
-
-      print("STATUS CODE: ${response.statusCode}");
-
-      var responseData = await response.stream.bytesToString();
-      print("RESPONSE BODY: $responseData");
+      var responseBody = await response.stream.bytesToString();
 
       if (response.statusCode == 200) {
-        var jsonData = jsonDecode(responseData);
-        return jsonData['cid'];
+        final data = jsonDecode(responseBody);
+        return data['cid'];
       } else {
+        print("Upload failed: $responseBody");
         return null;
       }
     } catch (e) {
