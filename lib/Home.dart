@@ -10,6 +10,7 @@ import 'package:safarsync/Wingman.dart';
 import 'package:safarsync/Help.dart';
 import 'package:safarsync/Map.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -111,7 +112,23 @@ class _HomeState extends State<Home> {
                       );
                     },
                   ),
-                  _settingsItem(Icons.logout, "Logout", Colors.red),
+                  _settingsItem(
+                    Icons.logout,
+                    "Logout",
+                    Colors.red,
+                    onPressed: () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      await prefs.clear();
+
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const PhoneInputScreen(),
+                        ),
+                        (route) => false,
+                      );
+                    },
+                  ),
 
                   const Spacer(),
 
