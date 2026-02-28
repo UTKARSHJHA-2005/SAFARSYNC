@@ -204,11 +204,17 @@ app.post("/register-user", async (req, res) => {
     }
 });
 app.get("/get-profile/:phone", async (req, res) => {
-    const phone = req.params.phone;
-    const user = await User.findOne({ phone });
+    try {
+        const phone = req.params.phone;
+        const phoneHash = hashPhone(phone);
 
-    if (!user) return res.status(404).json({ error: "User not found" });
+        const cid = await contract.getProfileCID(phoneHash);
 
-    res.json({ cid: user.cid });
+        res.json({ cid });
+
+    } catch (error) {
+        console.error("Fetch error:", error);
+        res.status(500).json({ error: error.message });
+    }
 });
 app.listen(3000, () => console.log("Server running on port 3000"));
