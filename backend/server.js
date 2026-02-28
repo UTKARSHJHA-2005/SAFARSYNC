@@ -206,6 +206,20 @@ app.post("/register-user", async (req, res) => {
     }
 });
 
+app.get("/verify-user/:phone", async (req, res) => {
+    try {
+        const phone = req.params.phone;
+        const phoneHash = hashPhone(phone);
+
+        const exists = await contract.verifyPhone(phoneHash);
+
+        res.json({ exists });
+
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 function normalizePhone(phone) {
     return phone.replace(/\s+/g, '').trim();
 }
