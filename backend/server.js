@@ -186,33 +186,60 @@ const contract = new ethers.Contract(
 app.post("/register-user", async (req, res) => {
     try {
         const { phone, profileCID } = req.body;
-
         const phoneHash = hashPhone(phone);
-
         const tx = await contract.registerUser(phoneHash, profileCID);
         await tx.wait();
-
-        res.json({
-            success: true,
-            txHash: tx.hash,
-        });
         console.log("User registered on blockchain:", tx.hash);
-
+        res.json({ success: true, txHash: tx.hash });
     } catch (error) {
         console.error("Blockchain error:", error);
         res.status(500).json({ error: error.message });
     }
 });
-app.get("/get-profile/:phoneHash", async (req, res) => {
-    try {
-        const phoneHash = req.params.phoneHash;
 
+app.post("/get-profile-by-phone", async (req, res) => {
+    try {
+        const { phone } = req.body;
+        if (!phone) return res.status(400).json({ error: "phone is required" });
+
+        const phoneHash = hashPhone(phone);
         const cid = await contract.getProfileCID(phoneHash);
 
         res.json({ cid });
     } catch (error) {
+        console.error("get-profile-by-phone error:", error);
+        res.status(500).json({ error: "CID fetch failed" });
+    }
+});
+
+// ── Get profile CID by pre-hashed phone (legacy) ───────────────────────────
+app.get("/get-profile/:phoneHash", async (req, res) => {
+    try {
+        const phoneHash = req.params.phoneHash;
+        const cid = await contract.getProfileCID(phoneHash);
+        res.json({ cid });
+    } catch (error) {
         console.error(error);
         res.status(500).json({ error: "CID fetch failed" });
+    }
+});
+
+// ── Update profile CID on blockchain ─────────────────────────────────────
+app.post("/update-profile", async (req, res) => {
+    try {
+        const { phone, newCID } = req.body;
+        if (!phone || !newCID) {
+            return res.status(400).json({ error: "phone and newCID are required" });
+        }
+
+        const phoneHash = hashPhone(phone);
+        const tx = await contract.updateProfile(phoneHash, newCID);
+        await tx.wait();
+        console.log("Profile updated on blockchain:", tx.hash);
+        res.json({ success: true, txHash: tx.hash });
+    } catch (error) {
+        console.error("update-profile error:", error);
+        res.status(500).json({ error: error.message });
     }
 });
 app.listen(3000, () => console.log("Server running on port 3000"));
