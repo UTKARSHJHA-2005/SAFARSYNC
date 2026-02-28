@@ -21,6 +21,7 @@ class Hello extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
+              const Spacer(),
               const SizedBox(height: 70),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
