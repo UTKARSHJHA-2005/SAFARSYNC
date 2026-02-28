@@ -344,14 +344,14 @@ class _RegisterStep1State extends State<RegisterStep1>
     );
   }
 
+  late UserRegistration user;
+
   String? selectedCountry;
   String selectedDialCode = "+91";
 
   // ── Build ────────────────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
-    UserRegistration user = UserRegistration();
-
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: GradientBackground(
