@@ -42,9 +42,10 @@ class _ProfilePageState extends State<ProfilePage>
         return;
       }
 
-      // 1️⃣ Get CID from backend
+      final phoneHash = hashPhone(userPhone);
+
       final response = await http.get(
-        Uri.parse("http://192.168.1.5:3000/get-profile/$userPhone"),
+        Uri.parse("http://192.168.1.5:3000/get-profile/$phoneHash"),
       );
 
       if (response.statusCode != 200) {
