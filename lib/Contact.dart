@@ -98,7 +98,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
   Future<String?> uploadFullProfile(UserRegistration user) async {
     try {
       final response = await http.post(
-        Uri.parse("http://192.168.1.6:3000/upload-json"),
+        Uri.parse("http://192.168.1.5:3000/upload-json"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(user.toJson()),
       );
@@ -337,7 +337,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
 
                     // 2️⃣ Call backend to register on blockchain
                     final response = await http.post(
-                      Uri.parse("http://192.168.1.6:3000/register-user"),
+                      Uri.parse("http://192.168.1.5:3000/register-user"),
                       headers: {"Content-Type": "application/json"},
                       body: jsonEncode({
                         "phone": widget.user.phone,

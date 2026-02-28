@@ -84,9 +84,7 @@ class _HomeState extends State<Home> {
                     Colors.blue,
                     onPressed: () => Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => ProfilePage(phone: loggedInPhone),
-                      ),
+                      MaterialPageRoute(builder: (_) => ProfilePage()),
                     ),
                   ),
                   _settingsItem(

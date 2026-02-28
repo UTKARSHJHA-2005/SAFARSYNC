@@ -259,15 +259,40 @@ class _ProfilePageState extends State<ProfilePage>
 
                     const SizedBox(height: 14),
 
-                    /// Name & blockchain badge
-                    Text(
-                      nameController.text,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: 0.3,
-                      ),
+                    Column(
+                      children: [
+                        Text(
+                          nameController.text.isEmpty
+                              ? "Loading..."
+                              : nameController.text,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 0.3,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.verified_rounded,
+                              color: Colors.greenAccent,
+                              size: 16,
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              phoneController.text,
+                              style: const TextStyle(
+                                color: Colors.white70,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 6),
                     _blockchainBadge(blockchainController.text),
@@ -411,7 +436,9 @@ class _ProfilePageState extends State<ProfilePage>
           const Icon(Icons.link_rounded, color: Colors.white70, size: 14),
           const SizedBox(width: 6),
           Text(
-            text,
+            text.length > 16
+                ? "${text.substring(0, 10)}...${text.substring(text.length - 4)}"
+                : text,
             style: const TextStyle(
               color: Colors.white70,
               fontSize: 12,
