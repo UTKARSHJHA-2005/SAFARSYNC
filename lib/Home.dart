@@ -111,11 +111,6 @@ class _HomeState extends State<Home> {
                       );
                     },
                   ),
-                  _settingsItem(
-                    Icons.delete_outline,
-                    "Delete Account",
-                    Colors.red,
-                  ),
                   _settingsItem(Icons.logout, "Logout", Colors.red),
 
                   const Spacer(),
