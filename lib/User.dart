@@ -65,6 +65,7 @@ class _ProfilePageState extends State<ProfilePage>
       }
 
       final data = jsonDecode(ipfsResponse.body);
+      print("FULL JSON: $data");
 
       // 3️⃣ Populate UI safely
       setState(() {
