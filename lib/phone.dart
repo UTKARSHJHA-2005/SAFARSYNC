@@ -75,7 +75,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen> {
                     return null;
                   },
                   onChanged: (phone) {
-                    print(phone.completeNumber);
+                    completePhoneNumber = phone.completeNumber;
                   },
                 ),
               ),
