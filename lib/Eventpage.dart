@@ -415,53 +415,6 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget _attendeesBubbles() {
-    return Row(
-      children: [
-        SizedBox(
-          width: 80,
-          height: 30,
-          child: Stack(
-            children: List.generate(3, (i) {
-              final colors = [
-                const Color(0xFF6C5CE7),
-                const Color(0xFF00B894),
-                const Color(0xFFE8505B),
-              ];
-              return Positioned(
-                left: i * 20.0,
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: colors[i],
-                    border: Border.all(color: Colors.white, width: 2),
-                  ),
-                  child: Center(
-                    child: Text(
-                      String.fromCharCode(0x1F464),
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ),
-                ),
-              );
-            }),
-          ),
-        ),
-        const SizedBox(width: 4),
-        const Text(
-          "+240 Going",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _infoCard({
     required IconData icon,
     required Color color,
