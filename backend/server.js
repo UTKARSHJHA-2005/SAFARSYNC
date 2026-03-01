@@ -15,6 +15,31 @@ const pinata = new pinataSDK({
     pinataJWTKey: process.env.PINATA_JWT_KEY,
 });
 
+const pool = new Pool({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'safarsync',
+    password: 'YOUR_PASSWORD',
+    port: 5432,
+});
+
+// Test route
+app.get('/', (req, res) => {
+    res.send('API Running');
+});
+
+// Get all events
+app.get('/events', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM events');
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
+
 function hashPhone(phone) {
     return ethers.keccak256(
         ethers.toUtf8Bytes(phone)
