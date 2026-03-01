@@ -1072,26 +1072,29 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _buildVocalList() {
-    final items = _filteredVocal;
-    return FadeTransition(
-      opacity: _fadeAnimation,
-      child: items.isEmpty
-          ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: _emptyState(),
-            )
-          : SizedBox(
-              height: 220,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: items.length,
-                separatorBuilder: (_, __) => const SizedBox(width: 14),
-                itemBuilder: (_, i) => _vocalCard(items[i], i),
-              ),
-            ),
+  final items = _filteredVocal;
+
+  if (items.isEmpty) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: _emptyState(),
     );
   }
+
+  return FadeTransition(
+    opacity: _fadeAnimation,
+    child: SizedBox(
+      height: 220,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        itemCount: items.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 14),
+        itemBuilder: (_, i) => _vocalCard(items[i], i),
+      ),
+    ),
+  );
+}
 
   Widget _vocalCard(VocalItem item, int index) {
     final palette = _vocalPalettes[index % _vocalPalettes.length];
