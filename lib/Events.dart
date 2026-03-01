@@ -156,6 +156,9 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   //   ),
   // ];
 
+  List<NearbyPlace> _nearbyData = [];
+  bool _isLoading = true;
+
   static const List<List<Color>> _nearbyGradients = [
     [Color(0xFF1A3A2A), Color(0xFF2D6A4F)],
     [Color(0xFF1A2A3A), Color(0xFF2D4A6A)],
