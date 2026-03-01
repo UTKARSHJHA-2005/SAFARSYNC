@@ -849,20 +849,28 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _buildNearbyList() {
-    final items = _filteredNearby;
+    if (_isLoading) {
+      return const SizedBox(
+        height: 380,
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    if (_nearbyData.isEmpty) {
+      return _emptyState();
+    }
+
     return FadeTransition(
       opacity: _fadeAnimation,
       child: SizedBox(
         height: 380,
-        child: items.isEmpty
-            ? _emptyState()
-            : ListView.separated(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount: items.length,
-                separatorBuilder: (_, __) => const SizedBox(width: 16),
-                itemBuilder: (_, i) => _nearbyCard(items[i], i),
-              ),
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          itemCount: _nearbyData.length,
+          separatorBuilder: (_, __) => const SizedBox(width: 16),
+          itemBuilder: (_, i) => _nearbyCard(_nearbyData[i], i),
+        ),
       ),
     );
   }
