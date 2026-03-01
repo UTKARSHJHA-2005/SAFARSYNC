@@ -919,11 +919,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                   fit: BoxFit.cover,
                   errorBuilder: (_, __, ___) => Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: gradients,
-                      ),
+                      gradient: LinearGradient(colors: gradients),
                     ),
                   ),
                 ),
