@@ -4,6 +4,7 @@ import multer from 'multer';
 import fs from 'fs';
 import dotenv from 'dotenv';
 import { ethers } from 'ethers';
+import { Pool } from 'pg';
 dotenv.config();
 
 const app = express();
