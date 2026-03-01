@@ -92,7 +92,7 @@ class _PhoneInputScreenState extends State<PhoneInputScreen> {
                       final phone = completePhoneNumber.trim();
                       final response = await http.get(
                         Uri.parse(
-                          "http://192.168.1.5:3000/verify-user/${Uri.encodeComponent(phone)}",
+                          "http://192.168.1.4:3000/verify-user/${Uri.encodeComponent(phone)}",
                         ),
                       );
 
