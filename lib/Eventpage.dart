@@ -139,28 +139,6 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    actions: [
-                      SafeArea(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 16, top: 8),
-                          child: AnimatedBuilder(
-                            animation: _heartScale,
-                            builder: (_, __) => Transform.scale(
-                              scale: _heartScale.value,
-                              child: _circleIconButton(
-                                icon: _isSaved
-                                    ? Icons.favorite_rounded
-                                    : Icons.favorite_border_rounded,
-                                iconColor: _isSaved
-                                    ? const Color(0xFFEF4444)
-                                    : Colors.white,
-                                onTap: _toggleSave,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
 
                   /// ── CONTENT ──────────────────────────────────────────
