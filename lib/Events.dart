@@ -316,10 +316,13 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
     _fadeController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
     )..forward();
+
+    loadEvents(); // 👈 ADD THIS
   }
 
   @override
