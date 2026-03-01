@@ -267,18 +267,18 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       return data
           .map(
             (e) => NearbyPlace(
-              title: e['title'],
-              location: e['location'],
-              image: e['image'],
-              category: e['category'],
-              tag1: e['tag1'],
-              tag2: e['tag2'],
-              rating: e['rating'],
-              date: e['date'],
-              time: e['time'],
-              organizer: e['organizer'],
-              description: e['description'],
-              price: (e['price'] as num).toDouble(),
+              title: e['title'] ?? '',
+              location: e['location'] ?? '',
+              image: e['image'] ?? '',
+              category: e['category'] ?? '',
+              tag1: e['tag1'] ?? '',
+              tag2: e['tag2'] ?? '',
+              rating: e['rating'] ?? '',
+              date: e['date'] ?? '',
+              time: e['time'] ?? '',
+              organizer: e['organizer'] ?? '',
+              description: e['description'] ?? '',
+              price: (e['price'] ?? 0).toDouble(),
             ),
           )
           .toList();
