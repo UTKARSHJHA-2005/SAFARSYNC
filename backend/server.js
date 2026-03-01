@@ -23,7 +23,6 @@ const pool = new Pool({
     port: 5432,
 });
 
-
 // Get all events
 app.get('/events', async (req, res) => {
     try {
