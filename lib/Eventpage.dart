@@ -361,31 +361,6 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
     );
   }
 
-  Widget _ratingBadge() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFBBF24),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: const Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.star_rounded, color: Colors.white, size: 14),
-          SizedBox(width: 4),
-          Text(
-            "4.8",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 13,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _infoCard({
     required IconData icon,
     required Color color,
