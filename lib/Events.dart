@@ -499,7 +499,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                 borderRadius: BorderRadius.circular(24),
                 child: Stack(
                   children: [
-                    Image.asset(stay.image, fit: BoxFit.cover),
+                    Image.network(stay.image, fit: BoxFit.cover),
                     Positioned(
                       bottom: 0,
                       left: 0,
