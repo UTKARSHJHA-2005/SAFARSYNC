@@ -123,38 +123,38 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       ? CurvedAnimation(parent: _fadeController!, curve: Curves.easeOut)
       : const AlwaysStoppedAnimation(1.0);
 
-  static const List<NearbyPlace> _nearbyData = [
-    NearbyPlace(
-      title: 'Kaziranga\nNational Park',
-      location: 'Assam, India',
-      image: 'assets/kaziranga.webp',
-      category: 'For You',
-      tag1: 'Wildlife',
-      tag2: 'Nature',
-      rating: '4.9',
-      date: '12 March 2026',
-      time: '7:00 PM',
-      organizer: 'SafarSync',
-      description:
-          'Explore the breathtaking wildlife of Kaziranga National Park with guided safari and cultural events.',
-      price: 49.99,
-    ),
-    NearbyPlace(
-      title: 'Meghalaya\nTrek',
-      location: 'Meghalaya, India',
-      image: 'assets/kaziranga.webp',
-      category: '👀 See More',
-      tag1: 'Adventure',
-      tag2: 'Scenic',
-      rating: '4.7',
-      date: '20 April 2026',
-      time: '6:30 AM',
-      organizer: 'Adventure Club',
-      description:
-          'A thrilling trekking experience through waterfalls and living root bridges.',
-      price: 29.99,
-    ),
-  ];
+  // static const List<NearbyPlace> _nearbyData = [
+  //   NearbyPlace(
+  //     title: 'Kaziranga\nNational Park',
+  //     location: 'Assam, India',
+  //     image: 'assets/kaziranga.webp',
+  //     category: 'For You',
+  //     tag1: 'Wildlife',
+  //     tag2: 'Nature',
+  //     rating: '4.9',
+  //     date: '12 March 2026',
+  //     time: '7:00 PM',
+  //     organizer: 'SafarSync',
+  //     description:
+  //         'Explore the breathtaking wildlife of Kaziranga National Park with guided safari and cultural events.',
+  //     price: 49.99,
+  //   ),
+  //   NearbyPlace(
+  //     title: 'Meghalaya\nTrek',
+  //     location: 'Meghalaya, India',
+  //     image: 'assets/kaziranga.webp',
+  //     category: '👀 See More',
+  //     tag1: 'Adventure',
+  //     tag2: 'Scenic',
+  //     rating: '4.7',
+  //     date: '20 April 2026',
+  //     time: '6:30 AM',
+  //     organizer: 'Adventure Club',
+  //     description:
+  //         'A thrilling trekking experience through waterfalls and living root bridges.',
+  //     price: 29.99,
+  //   ),
+  // ];
 
   static const List<List<Color>> _nearbyGradients = [
     [Color(0xFF1A3A2A), Color(0xFF2D6A4F)],
