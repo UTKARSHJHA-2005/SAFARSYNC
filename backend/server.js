@@ -23,10 +23,6 @@ const pool = new Pool({
     port: 5432,
 });
 
-// Test route
-app.get('/', (req, res) => {
-    res.send('API Running');
-});
 
 // Get all events
 app.get('/events', async (req, res) => {
