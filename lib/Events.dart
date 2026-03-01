@@ -914,7 +914,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
           child: Stack(
             children: [
               Positioned.fill(
-                child: Image.asset(
+                child: Image.network(
                   place.image,
                   fit: BoxFit.cover,
                   errorBuilder: (_, __, ___) => Container(
