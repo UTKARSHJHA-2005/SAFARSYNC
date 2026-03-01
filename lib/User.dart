@@ -38,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage>
       }
       final response = await http.get(
         Uri.parse(
-          "http://192.168.1.5:3000/get-profile/${Uri.encodeComponent(userPhone)}",
+          "http://192.168.1.4:3000/get-profile/${Uri.encodeComponent(userPhone)}",
         ),
       );
 
