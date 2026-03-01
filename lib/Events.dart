@@ -254,7 +254,9 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   ];
 
   Future<List<NearbyPlace>> fetchEvents() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:3000/events'));
+    final response = await http.get(
+      Uri.parse('http://192.168.1.4:3000/events'),
+    );
 
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body);
