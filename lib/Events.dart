@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:safarsync/Eventpage.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class NearbyPlace {
   final String title;
