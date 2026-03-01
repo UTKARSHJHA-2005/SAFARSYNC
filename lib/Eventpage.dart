@@ -502,24 +502,6 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
               ],
             ),
           ),
-          OutlinedButton(
-            onPressed: () {},
-            style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              side: const BorderSide(color: Color(0xFF6C5CE7)),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: const Text(
-              "Follow",
-              style: TextStyle(
-                color: Color(0xFF6C5CE7),
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
         ],
       ),
     );
