@@ -325,6 +325,21 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     loadEvents(); // 👈 ADD THIS
   }
 
+  Future<void> loadEvents() async {
+    try {
+      final data = await fetchEvents();
+      setState(() {
+        _nearbyData = data;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print("Error loading events: $e");
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   void dispose() {
     _fadeController?.dispose();
