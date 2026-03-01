@@ -127,13 +127,6 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
                             left: 24,
                             child: _ratingBadge(),
                           ),
-
-                          /// Attendees bubble strip
-                          Positioned(
-                            bottom: 30,
-                            left: 24,
-                            child: _attendeesBubbles(),
-                          ),
                         ],
                       ),
                     ),
