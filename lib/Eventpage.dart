@@ -121,13 +121,6 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
                             ),
                           ),
 
-                          /// Category chip (top-right)
-                          Positioned(
-                            top: 56,
-                            right: 20,
-                            child: _categoryBadge("🎉 Festival"),
-                          ),
-
                           /// Rating chip (bottom-left of image)
                           Positioned(
                             bottom: 80,
