@@ -251,6 +251,35 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     '👀 See More',
   ];
 
+  Future<List<NearbyPlace>> fetchEvents() async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:3000/events'));
+
+    if (response.statusCode == 200) {
+      List data = jsonDecode(response.body);
+
+      return data
+          .map(
+            (e) => NearbyPlace(
+              title: e['title'],
+              location: e['location'],
+              image: e['image'],
+              category: e['category'],
+              tag1: e['tag1'],
+              tag2: e['tag2'],
+              rating: e['rating'],
+              date: e['date'],
+              time: e['time'],
+              organizer: e['organizer'],
+              description: e['description'],
+              price: (e['price'] as num).toDouble(),
+            ),
+          )
+          .toList();
+    } else {
+      throw Exception('Failed to load events');
+    }
+  }
+
   List<NearbyPlace> get _filteredNearby {
     if (selectedFilter == 'For You') return _nearbyData;
     return _nearbyData.where((p) => p.category == selectedFilter).toList();
