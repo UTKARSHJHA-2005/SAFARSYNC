@@ -848,6 +848,35 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     );
   }
 
+  Widget _buildNearbyList() {
+    if (_isLoading) {
+      return const SizedBox(
+        height: 380,
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    final items = _filteredNearby; // ✅ USE FILTERED LIST
+
+    if (items.isEmpty) {
+      return _emptyState();
+    }
+
+    return FadeTransition(
+      opacity: _fadeAnimation,
+      child: SizedBox(
+        height: 380,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          itemCount: items.length, // ✅ FIXED
+          separatorBuilder: (_, __) => const SizedBox(width: 16),
+          itemBuilder: (_, i) => _nearbyCard(items[i], i), // ✅ FIXED
+        ),
+      ),
+    );
+  }
+
   Widget _nearbyCard(NearbyPlace place, int index) {
     final gradients = _nearbyGradients[index % _nearbyGradients.length];
     return GestureDetector(
