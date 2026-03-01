@@ -586,7 +586,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(20),
                   ),
-                  child: Image.asset(
+                  child: Image.network(
                     vehicle.image,
                     height: 110,
                     width: 180,
