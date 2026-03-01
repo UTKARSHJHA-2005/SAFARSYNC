@@ -34,6 +34,15 @@ app.get('/events', async (req, res) => {
     }
 });
 
+app.get('/stays', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM stays');
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
 
 function hashPhone(phone) {
     return ethers.keccak256(
