@@ -120,13 +120,6 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
                               ),
                             ),
                           ),
-
-                          /// Rating chip (bottom-left of image)
-                          Positioned(
-                            bottom: 80,
-                            left: 24,
-                            child: _ratingBadge(),
-                          ),
                         ],
                       ),
                     ),
