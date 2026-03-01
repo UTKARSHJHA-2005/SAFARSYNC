@@ -19,7 +19,7 @@ const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'safarsync',
-    password: 'YOUR_PASSWORD',
+    password: 'Utkarsh@12',
     port: 5432,
 });
 
