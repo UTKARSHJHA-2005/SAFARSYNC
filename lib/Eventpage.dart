@@ -103,7 +103,7 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
                         fit: StackFit.expand,
                         children: [
                           /// Hero image
-                          Image.asset(widget.image, fit: BoxFit.cover),
+                          Image.network(widget.image, fit: BoxFit.cover),
 
                           /// Layered gradient for text legibility
                           DecoratedBox(
