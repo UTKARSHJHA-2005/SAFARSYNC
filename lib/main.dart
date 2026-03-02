@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:safarsync/Hello.dart';
 import 'package:safarsync/Home.dart';
 import 'package:safarsync/phone.dart';
 import 'package:safarsync/user.dart';
@@ -51,6 +52,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
-    return isLoggedIn! ? const Home() : const PhoneInputScreen();
+    return isLoggedIn! ? const Hello() : const PhoneInputScreen();
   }
 }
