@@ -102,6 +102,33 @@ app.post("/generate", async (req, res) => {
     }
 });
 
+app.get("/state-images/:state", async (req, res) => {
+    try {
+        const { state } = req.params;
+
+        const response = await fetch(
+            `https://api.unsplash.com/search/photos?query=${state} india tourism&per_page=5`,
+            {
+                headers: {
+                    Authorization: `Client-ID ${process.env.UNSPLASH_API_KEY}`,
+                },
+            }
+        );
+
+        const data = await response.json();
+
+        const imageUrls = data.results.map((img) => img.urls.regular);
+
+        res.json({
+            success: true,
+            images: imageUrls,
+        });
+    } catch (err) {
+        console.error("Unsplash error:", err);
+        res.status(500).json({ success: false });
+    }
+});
+
 app.get('/vehicles', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM vehicles');
