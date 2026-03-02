@@ -81,8 +81,8 @@ class StayItem {
     required this.category,
   });
 
-  factory Stay.fromJson(Map<String, dynamic> json) {
-    return Stay(
+  factory StayItem.fromJson(Map<String, dynamic> json) {
+    return StayItem(
       name: json['name'] ?? '',
       location: json['location'] ?? '',
       image: json['image'] ?? '',
