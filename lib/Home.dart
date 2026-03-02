@@ -38,6 +38,7 @@ class _HomeState extends State<Home> {
         unFollowUser: false,
       ),
     );
+    fetchStateImages();
   }
 
   bool _showBottomButtons = false;
@@ -493,11 +494,7 @@ class _HomeState extends State<Home> {
                       child: _squareImageCard(
                         label: "",
                         place: "${widget.selectedState}",
-                        images: [
-                          "assets/assam.jpg",
-                          "assets/kaziranga.webp",
-                          "assets/handicraft.jpg",
-                        ],
+                        images: stateImages,
                       ),
                     ),
                   ],
@@ -911,7 +908,7 @@ class _HomeState extends State<Home> {
                           label,
                           style: const TextStyle(
                             color: Colors.white70,
-                            fontSize: 13,
+                            fontSize: 6,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -919,8 +916,8 @@ class _HomeState extends State<Home> {
                           place,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w900,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],

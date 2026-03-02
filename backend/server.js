@@ -107,7 +107,7 @@ app.get("/state-images/:state", async (req, res) => {
         const { state } = req.params;
 
         const response = await fetch(
-            `https://api.unsplash.com/search/photos?query=${state} india tourism&per_page=5`,
+            `https://api.unsplash.com/search/photos?query=${state} famous places india tourism&per_page=5`,
             {
                 headers: {
                     Authorization: `Client-ID ${process.env.UNSPLASH_API_KEY}`,
