@@ -317,6 +317,25 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     return _vocalData.where((v) => v.category == selectedFilter).toList();
   }
 
+  List<Vehicle> _vehicles = [];
+  bool _isVehicleLoading = true;
+  Future<void> loadVehicles() async {
+    try {
+      final data = await fetchVehicles();
+
+      setState(() {
+        _vehicles = data;
+        _isVehicleLoading = false;
+      });
+    } catch (e) {
+      print("Error loading vehicles: $e");
+
+      setState(() {
+        _isVehicleLoading = false;
+      });
+    }
+  }
+
   // List<StayItem> get _filteredStays {
   //   if (selectedFilter == 'For You') return _stayData;
   //   return _stayData.where((s) => s.category == selectedFilter).toList();
@@ -342,7 +361,8 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 500),
     )..forward();
 
-    loadEvents(); // 👈 ADD THIS
+    loadEvents();
+    loadVehicles();
   }
 
   Future<void> loadEvents() async {
@@ -477,6 +497,13 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _buildStayList() {
+    if (_isStayLoading) {
+      return const SizedBox(
+        height: 300,
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     final items = _filteredStays;
 
     if (items.isEmpty) {
@@ -485,91 +512,81 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
         child: _emptyState(),
       );
     }
+
     return SizedBox(
       height: 300,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: _filteredStays.length,
+        itemCount: items.length,
         separatorBuilder: (_, __) => const SizedBox(width: 16),
         itemBuilder: (_, i) {
-          final stay = _filteredStays[i];
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => EventsPage(
-                    title: stay.title,
-                    image: stay.image,
-                    date: stay.date,
-                    time: stay.time,
-                    location: stay.location,
-                    organizer: stay.organizer,
-                    description: stay.description,
-                    price: stay.price,
-                  ),
+          final stay = items[i];
+
+          return Container(
+            width: 260,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 18,
+                  offset: const Offset(0, 10),
                 ),
-              );
-            },
-            child: Container(
-              width: 260,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
-                    blurRadius: 18,
-                    offset: const Offset(0, 10),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Image.network(
+                      stay.image,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) =>
+                          Container(color: Colors.grey),
+                    ),
                   ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(24),
-                child: Stack(
-                  children: [
-                    Image.network(stay.image, fit: BoxFit.cover),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(18),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Colors.transparent,
-                              Colors.black.withOpacity(0.85),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              stay.title,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              "₹${stay.price}/night",
-                              style: const TextStyle(
-                                color: Colors.yellow,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(18),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withOpacity(0.85),
                           ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
                         ),
                       ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            stay.name,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            "₹${stay.price}/night",
+                            style: const TextStyle(
+                              color: Colors.yellow,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );
@@ -579,68 +596,33 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   }
 
   Widget _buildVehicleList() {
-    final items = _filteredVehicles;
-
-    if (items.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: _emptyState(),
-      );
+    if (_isVehicleLoading) {
+      return const Center(child: CircularProgressIndicator());
     }
+
+    if (_vehicles.isEmpty) {
+      return const Text("No vehicles found");
+    }
+
     return SizedBox(
-      height: 200,
-      child: ListView.separated(
+      height: 220,
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: _filteredVehicles.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 14),
+        itemCount: _vehicles.length,
         itemBuilder: (_, i) {
-          final vehicle = _filteredVehicles[i];
-          return Container(
-            width: 180,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
-                  blurRadius: 12,
-                  offset: const Offset(0, 6),
-                ),
-              ],
-            ),
+          final vehicle = _vehicles[i];
+
+          return Card(
             child: Column(
               children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  ),
-                  child: Image.network(
-                    vehicle.image,
-                    height: 110,
-                    width: 180,
-                    fit: BoxFit.cover,
-                  ),
+                Image.network(
+                  vehicle.image,
+                  height: 100,
+                  width: 150,
+                  fit: BoxFit.cover,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    children: [
-                      Text(
-                        vehicle.title,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        "₹${vehicle.price}/day",
-                        style: const TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                Text(vehicle.name),
+                Text("₹ ${vehicle.price}"),
               ],
             ),
           );
