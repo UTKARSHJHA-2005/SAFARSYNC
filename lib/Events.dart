@@ -115,7 +115,7 @@ class Vehicle {
       name: json['name'] ?? '',
       type: json['type'] ?? '',
       image: json['image'] ?? '',
-      price: (json['price'] ?? 0).toDouble(),
+      price: double.parse(json['price'].toString()),
       rating: json['rating'] ?? '',
       category: json['category'] ?? '',
     );
