@@ -839,7 +839,7 @@ class _HomeState extends State<Home> {
             }
             controller.animateToPage(
               nextPage,
-              duration: const Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
             );
 
