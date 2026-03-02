@@ -86,7 +86,7 @@ class StayItem {
       name: json['name'] ?? '',
       location: json['location'] ?? '',
       image: json['image'] ?? '',
-      price: (json['price'] ?? 0).toDouble(),
+      price: double.parse(json['price'].toString()),
       rating: json['rating'] ?? '',
       category: json['category'] ?? '',
     );
