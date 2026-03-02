@@ -5,6 +5,7 @@ import fs from 'fs';
 import dotenv from 'dotenv';
 import { ethers } from 'ethers';
 import { Pool } from 'pg';
+import OpenAI from "openai";
 dotenv.config();
 
 const app = express();
