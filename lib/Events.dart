@@ -685,7 +685,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
     final items = _filteredVehicles;
 
-    if (_vehicles.isEmpty) {
+    if (items.isEmpty) {
       return _emptyState();
     }
 
@@ -694,10 +694,10 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: _vehicles.length,
+        itemCount: items.length,
         separatorBuilder: (_, __) => const SizedBox(width: 18),
         itemBuilder: (_, i) {
-          final vehicle = _vehicles[i];
+          final vehicle = items[i];
 
           return Container(
             width: 230,
