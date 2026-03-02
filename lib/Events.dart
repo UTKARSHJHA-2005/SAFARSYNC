@@ -619,34 +619,133 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
   Widget _buildVehicleList() {
     if (_isVehicleLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return const SizedBox(
+        height: 250,
+        child: Center(child: CircularProgressIndicator()),
+      );
     }
 
     if (_vehicles.isEmpty) {
-      return const Text("No vehicles found");
+      return const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Text("No vehicles found"),
+      );
     }
 
     return SizedBox(
-      height: 220,
-      child: ListView.builder(
+      height: 260,
+      child: ListView.separated(
         scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         itemCount: _vehicles.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 18),
         itemBuilder: (_, i) {
           final vehicle = _vehicles[i];
 
-          return Card(
-            child: Column(
-              children: [
-                Image.network(
-                  vehicle.image,
-                  height: 100,
-                  width: 150,
-                  fit: BoxFit.cover,
+          return Container(
+            width: 230,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.15),
+                  blurRadius: 18,
+                  offset: const Offset(0, 10),
                 ),
-                Text(vehicle.name),
-                Text("₹ ${vehicle.price}"),
-                Text("Location: ${vehicle.rating}"),
               ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Stack(
+                children: [
+                  /// 🔹 Vehicle Image
+                  Positioned.fill(
+                    child: Image.network(
+                      vehicle.image,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) =>
+                          Container(color: Colors.grey.shade300),
+                    ),
+                  ),
+
+                  /// 🔹 Dark Gradient Overlay
+                  Positioned.fill(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withOpacity(0.85),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  /// 🔹 Rating Badge
+                  Positioned(
+                    top: 14,
+                    right: 14,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.star,
+                            size: 16,
+                            color: Colors.orange,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            vehicle.rating,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  /// 🔹 Vehicle Info Bottom
+                  Positioned(
+                    bottom: 18,
+                    left: 18,
+                    right: 18,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          vehicle.name,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+
+                        /// Price
+                        Text(
+                          "₹${vehicle.price} / day",
+                          style: const TextStyle(
+                            color: Colors.yellow,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },
