@@ -473,7 +473,7 @@ class _HomeState extends State<Home> {
                     Expanded(
                       child: _squareImageCard(
                         label: "",
-                        place: "Assam",
+                        place: "${widget.selectedState}",
                         images: [
                           "assets/assam.jpg",
                           "assets/kaziranga.webp",
