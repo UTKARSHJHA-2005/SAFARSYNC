@@ -1,12 +1,12 @@
+import dotenv from "dotenv";
+dotenv.config();
 import pinataSDK from '@pinata/sdk';
 import express from 'express';
 import multer from 'multer';
 import fs from 'fs';
-import dotenv from 'dotenv';
 import { ethers } from 'ethers';
 import { Pool } from 'pg';
 import OpenAI from "openai";
-dotenv.config();
 
 const app = express();
 app.use(express.json());
@@ -117,7 +117,7 @@ app.get("/state-images/:state", async (req, res) => {
                 },
             }
         );
-
+        console.log("Unsplash Key:", process.env.UNSPLASH_API_KEY);
         const data = await response.json();
         console.log(data)
         const imageUrls = data.results.map((img) => img.urls.regular);

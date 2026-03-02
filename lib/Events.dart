@@ -417,10 +417,10 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     return _stays.where((s) => s.category == selectedFilter).toList();
   }
 
-  // List<Vehicle> get _filteredVehicles {
-  //   if (selectedFilter == 'For You') return _vehicleData;
-  //   return _vehicleData.where((v) => v.category == selectedFilter).toList();
-  // }
+  List<Vehicle> get _filteredVehicles {
+    if (selectedFilter == 'For You') return _vehicles;
+    return _vehicles.where((v) => v.category == selectedFilter).toList();
+  }
 
   // int get _totalCount =>
   //     _filteredNearby.length +
@@ -682,6 +682,8 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
         child: Center(child: CircularProgressIndicator()),
       );
     }
+
+    final items = _filteredVehicles;
 
     if (_vehicles.isEmpty) {
       return _emptyState();
