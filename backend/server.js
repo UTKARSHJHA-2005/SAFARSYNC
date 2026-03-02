@@ -25,7 +25,7 @@ const pool = new Pool({
 });
 
 const client = new OpenAI({
-    apiKey: "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",
+    apiKey: process.env.OPEN_ROUTER,
     baseURL: "https://openrouter.ai/api/v1"
 });
 
@@ -73,7 +73,7 @@ app.post("/generate", async (req, res) => {
         }
 
         const response = await client.chat.completions.create({
-            model: "tngtech/tng-r1t-chimera:free",
+            model: "openrouter/free",
             messages: [
                 {
                     role: "system",
