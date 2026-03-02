@@ -123,7 +123,9 @@ class Vehicle {
 }
 
 class Events extends StatefulWidget {
-  const Events({super.key});
+  final String selectedState;
+
+  const Events({super.key, required this.selectedState});
 
   @override
   State<Events> createState() => _EventsState();
@@ -458,7 +460,9 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
   Future<List<Vehicle>> fetchVehicles() async {
     final response = await http.get(
-      Uri.parse('http://192.168.1.3:3000/vehicles'),
+      Uri.parse(
+        'http://192.168.1.3:3000/vehicles?location=${widget.selectedState}',
+      ),
     );
 
     final List data = json.decode(response.body);
