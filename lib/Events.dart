@@ -336,6 +336,23 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     }
   }
 
+  Future<void> loadStays() async {
+    try {
+      final data = await fetchStays();
+
+      setState(() {
+        _stays = data;
+        _isStayLoading = false;
+      });
+    } catch (e) {
+      print("Error loading stays: $e");
+
+      setState(() {
+        _isStayLoading = false;
+      });
+    }
+  }
+
   List<StayItem> get _filteredStays {
     if (selectedFilter == 'For You') return _stays;
     return _stays.where((s) => s.category == selectedFilter).toList();
