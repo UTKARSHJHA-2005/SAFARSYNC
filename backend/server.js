@@ -85,7 +85,6 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 app.post('/upload-json', async (req, res) => {
     try {
         const result = await pinata.pinJSONToIPFS(req.body);
-
         res.json({ cid: result.IpfsHash });
     } catch (error) {
         console.error(error);
