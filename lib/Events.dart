@@ -224,7 +224,9 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   bool _isVocalLoading = true;
   Future<List<VocalItem>> fetchVocals() async {
     final response = await http.get(
-      Uri.parse('http://192.168.1.3:3000/vocals'),
+      Uri.parse(
+        'http://192.168.1.3:3000/vocals?location=${widget.selectedState}',
+      ),
     );
 
     if (response.statusCode == 200) {
