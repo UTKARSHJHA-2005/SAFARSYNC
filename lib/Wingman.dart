@@ -27,6 +27,42 @@ class _ChatPageState extends State<ChatPage> {
     _controller.clear();
   }
 
+    const [isGenerating, setIsGenerating] = useState(false);// Generation of AI State
+
+
+  const GenerateAI = async () => {
+    if (!formData.content.trim()) {
+      toast.info("Ask what you want");
+      return;
+    }
+    setIsGenerating(true);
+    try {
+      const res = await axios.post(
+        "https://192.168.1.3:3000/generate",
+        {
+          prompt: formData.content,
+          userId: user?.id || user?.email
+        },
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+
+      if (res.data.success) {
+        handleChange("content", res.data.content);
+      } else {
+        toast.error(res.data.error || "AI generation failed");
+      }
+    } catch (error) {
+      console.error("AI Generate Error:", error);
+      toast.error("Failed to generate content. Please try again later.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
