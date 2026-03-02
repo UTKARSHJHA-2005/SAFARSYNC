@@ -668,7 +668,6 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                     ),
                   ),
 
-                  /// 🔹 Dark Gradient Overlay
                   Positioned.fill(
                     child: Container(
                       decoration: BoxDecoration(
