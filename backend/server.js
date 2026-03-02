@@ -63,26 +63,19 @@ function hashPhone(phone) {
 app.post('/upload', upload.single('file'), async (req, res) => {
     try {
         console.log("Upload route hit");
-
         const readableStreamForFile = fs.createReadStream(req.file.path);
-
         const options = {
             pinataMetadata: {
                 name: req.file.originalname || "profile-image",
             },
         };
-
         const result = await pinata.pinFileToIPFS(
             readableStreamForFile,
             options
         );
-
         fs.unlinkSync(req.file.path);
-
         console.log("Uploaded to Pinata:", result.IpfsHash);
-
         res.json({ cid: result.IpfsHash });
-
     } catch (error) {
         console.error("Backend error:", error);
         res.status(500).json({ error: error.message });
