@@ -698,7 +698,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.star,
+                            Icons.location_city_outlined,
                             size: 16,
                             color: Colors.orange,
                           ),
