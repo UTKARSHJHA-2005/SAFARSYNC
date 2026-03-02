@@ -33,7 +33,8 @@ const client = new OpenAI({
 // Get all events
 app.get('/events', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM events');
+        const { location } = req.query;
+        const result = await pool.query('SELECT * FROM events WHERE location=$1');
         res.json(result.rows);
     } catch (err) {
         console.error(err);
