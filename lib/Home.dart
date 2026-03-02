@@ -479,12 +479,6 @@ class _HomeState extends State<Home> {
                           "assets/kaziranga.webp",
                           "assets/handicraft.jpg",
                         ],
-                        // onPressed: () {
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (_) => ProfilePage()),
-                        //   );
-                        // },
                       ),
                     ),
                   ],
