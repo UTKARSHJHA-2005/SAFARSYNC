@@ -178,47 +178,47 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     [Color(0xFF1A2A3A), Color(0xFF2D4A6A)],
   ];
 
-  static const List<VocalItem> _vocalData = [
-    VocalItem(
-      title: 'Majuli Island\nPottery Workshop',
-      location: 'Assam',
-      image: 'assets/handicraft.jpg',
-      category: 'Adventure',
-      emoji: '🏺',
-      date: '5 May 2026',
-      time: '11:00 AM',
-      organizer: 'Local Artisans',
-      description:
-          'Learn traditional pottery techniques from local craftsmen of Majuli.',
-      price: 19.99,
-    ),
-    VocalItem(
-      title: 'Assam Silk\nWeaving',
-      location: 'Assam',
-      image: 'assets/handicraft.jpg',
-      category: 'Shopping',
-      emoji: '🧵',
-      date: '5 May 2026',
-      time: '11:00 AM',
-      organizer: 'Local Artisans',
-      description:
-          'Learn traditional pottery techniques from local craftsmen of Majuli.',
-      price: 19.99,
-    ),
-    VocalItem(
-      title: 'Bamboo Craft\nFestival',
-      location: 'Tripura',
-      image: 'assets/handicraft.jpg',
-      category: 'Adventure',
-      emoji: '🎋',
-      date: '5 May 2026',
-      time: '11:00 AM',
-      organizer: 'Local Artisans',
-      description:
-          'Learn traditional pottery techniques from local craftsmen of Majuli.',
-      price: 19.99,
-    ),
-  ];
+  // static const List<VocalItem> _vocalData = [
+  //   VocalItem(
+  //     title: 'Majuli Island\nPottery Workshop',
+  //     location: 'Assam',
+  //     image: 'assets/handicraft.jpg',
+  //     category: 'Adventure',
+  //     emoji: '🏺',
+  //     date: '5 May 2026',
+  //     time: '11:00 AM',
+  //     organizer: 'Local Artisans',
+  //     description:
+  //         'Learn traditional pottery techniques from local craftsmen of Majuli.',
+  //     price: 19.99,
+  //   ),
+  //   VocalItem(
+  //     title: 'Assam Silk\nWeaving',
+  //     location: 'Assam',
+  //     image: 'assets/handicraft.jpg',
+  //     category: 'Shopping',
+  //     emoji: '🧵',
+  //     date: '5 May 2026',
+  //     time: '11:00 AM',
+  //     organizer: 'Local Artisans',
+  //     description:
+  //         'Learn traditional pottery techniques from local craftsmen of Majuli.',
+  //     price: 19.99,
+  //   ),
+  //   VocalItem(
+  //     title: 'Bamboo Craft\nFestival',
+  //     location: 'Tripura',
+  //     image: 'assets/handicraft.jpg',
+  //     category: 'Adventure',
+  //     emoji: '🎋',
+  //     date: '5 May 2026',
+  //     time: '11:00 AM',
+  //     organizer: 'Local Artisans',
+  //     description:
+  //         'Learn traditional pottery techniques from local craftsmen of Majuli.',
+  //     price: 19.99,
+  //   ),
+  // ];
 
   // static const List<StayItem> _stayData = [
   //   StayItem(
