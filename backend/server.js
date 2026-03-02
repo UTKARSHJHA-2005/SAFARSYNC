@@ -54,6 +54,47 @@ app.get('/vocals', async (req, res) => {
     }
 });
 
+app.post("/api/generate", async (req, res) => {
+    try {
+        const { prompt } = req.body;
+
+        if (!prompt) {
+            return res.status(400).json({
+                success: false,
+                error: "Prompt is required"
+            });
+        }
+
+        const response = await client.chat.completions.create({
+            model: "tngtech/tng-r1t-chimera:free",
+            messages: [
+                {
+                    role: "system",
+                    content:
+                        "You are a professional content writer. Expand clearly. Do not use markdown symbols like *, ###, or -."
+                },
+                {
+                    role: "user",
+                    content: prompt
+                }
+            ],
+            temperature: 0.7,
+            max_tokens: 800
+        });
+
+        res.json({
+            success: true,
+            content: response.choices[0].message.content
+        });
+    } catch (err) {
+        console.error("AI ERROR:", err);
+        res.status(500).json({
+            success: false,
+            error: err.message
+        });
+    }
+});
+
 app.get('/vehicles', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM vehicles');
