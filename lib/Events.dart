@@ -353,6 +353,9 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     }
   }
 
+  List<StayItem> _stays = [];
+  bool _isStayLoading = true;
+
   List<StayItem> get _filteredStays {
     if (selectedFilter == 'For You') return _stays;
     return _stays.where((s) => s.category == selectedFilter).toList();
@@ -820,14 +823,14 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                         color: const Color.fromRGBO(237, 245, 126, 1),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Text(
-                        '$_totalCount',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w900,
-                          color: Color(0xFF1A1A1A),
-                        ),
-                      ),
+                      // child: Text(
+                      //   '$_totalCount',
+                      //   style: const TextStyle(
+                      //     fontSize: 12,
+                      //     fontWeight: FontWeight.w900,
+                      //     color: Color(0xFF1A1A1A),
+                      //   ),
+                      // ),
                     ),
                   ],
                 ],
