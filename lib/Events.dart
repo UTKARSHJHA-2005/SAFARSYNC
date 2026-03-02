@@ -255,8 +255,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   // ];
 
   Future<List<StayItem>> fetchStays() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:3000/stays'));
-
+    final response = await http.get(Uri.parse('http://192.168.1.3:3000/stays'));
     final List data = json.decode(response.body);
     return data.map((e) => StayItem.fromJson(e)).toList();
   }
@@ -279,7 +278,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
   Future<List<NearbyPlace>> fetchEvents() async {
     final response = await http.get(
-      Uri.parse('http://192.168.1.4:3000/events'),
+      Uri.parse('http://192.168.1.3:3000/events'),
     );
 
     if (response.statusCode == 200) {
@@ -318,21 +317,21 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     return _vocalData.where((v) => v.category == selectedFilter).toList();
   }
 
-  List<StayItem> get _filteredStays {
-    if (selectedFilter == 'For You') return _stayData;
-    return _stayData.where((s) => s.category == selectedFilter).toList();
-  }
+  // List<StayItem> get _filteredStays {
+  //   if (selectedFilter == 'For You') return _stayData;
+  //   return _stayData.where((s) => s.category == selectedFilter).toList();
+  // }
 
-  List<VehicleItem> get _filteredVehicles {
-    if (selectedFilter == 'For You') return _vehicleData;
-    return _vehicleData.where((v) => v.category == selectedFilter).toList();
-  }
+  // List<Vehicle> get _filteredVehicles {
+  //   if (selectedFilter == 'For You') return _vehicleData;
+  //   return _vehicleData.where((v) => v.category == selectedFilter).toList();
+  // }
 
-  int get _totalCount =>
-      _filteredNearby.length +
-      _filteredVocal.length +
-      _filteredStays.length +
-      _filteredVehicles.length;
+  // int get _totalCount =>
+  //     _filteredNearby.length +
+  //     _filteredVocal.length +
+  //     _filteredStays.length +
+  //     _filteredVehicles.length;
 
   @override
   void initState() {
@@ -359,6 +358,15 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
         _isLoading = false;
       });
     }
+  }
+
+  Future<List<Vehicle>> fetchVehicles() async {
+    final response = await http.get(
+      Uri.parse('http://192.168.1.3:3000/vehicles'),
+    );
+
+    final List data = json.decode(response.body);
+    return data.map((e) => Vehicle.fromJson(e)).toList();
   }
 
   @override
