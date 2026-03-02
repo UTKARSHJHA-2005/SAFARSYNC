@@ -322,11 +322,11 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   Future<void> loadVehicles() async {
     try {
       final data = await fetchVehicles();
-
       setState(() {
         _vehicles = data;
         _isVehicleLoading = false;
       });
+      print("Vehicles Loaded: ${data.length}");
     } catch (e) {
       print("Error loading vehicles: $e");
 
@@ -344,6 +344,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
         _stays = data;
         _isStayLoading = false;
       });
+      print("Stays Loaded: ${data.length}");
     } catch (e) {
       print("Error loading stays: $e");
 
