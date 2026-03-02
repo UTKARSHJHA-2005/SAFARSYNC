@@ -363,6 +363,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
     loadEvents();
     loadVehicles();
+    loadStays();
   }
 
   Future<void> loadEvents() async {
