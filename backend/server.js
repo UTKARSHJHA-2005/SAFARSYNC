@@ -23,6 +23,12 @@ const pool = new Pool({
     port: 5432,
 });
 
+const client = new OpenAI({
+    apiKey: "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",
+    baseURL: "https://openrouter.ai/api/v1"
+});
+
+
 // Get all events
 app.get('/events', async (req, res) => {
     try {
