@@ -956,27 +956,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                           : const Color(0xFF4A4A4A),
                     ),
                   ),
-                  if (isSelected) ...[
-                    const SizedBox(width: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 3,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color.fromRGBO(237, 245, 126, 1),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      // child: Text(
-                      //   '$_totalCount',
-                      //   style: const TextStyle(
-                      //     fontSize: 12,
-                      //     fontWeight: FontWeight.w900,
-                      //     color: Color(0xFF1A1A1A),
-                      //   ),
-                      // ),
-                    ),
-                  ],
+                  if (isSelected) ...[const SizedBox(width: 8)],
                 ],
               ),
             ),
