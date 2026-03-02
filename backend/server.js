@@ -241,11 +241,8 @@ app.get("/verify-user/:phone", async (req, res) => {
     try {
         const phone = req.params.phone;
         const phoneHash = hashPhone(phone);
-
         const exists = await contract.verifyPhone(phoneHash);
-
         res.json({ exists });
-
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -258,19 +255,16 @@ function normalizePhone(phone) {
 app.get("/get-profile/:phoneHash", async (req, res) => {
     try {
         const phone = req.params.phoneHash;
-
         const phoneHash = hashPhone(normalizePhone(phone));
         console.log("FETCH HASH:", phoneHash);
         console.log("REGISTER PHONE RAW:", phone);
         console.log("REGISTER HASH:", phoneHash);
-
         const cid = await contract.getProfileCID(phoneHash);
-
         res.json({ cid });
-
     } catch (error) {
         console.error("Fetch error:", error);
         res.status(500).json({ error: error.reason || error.message });
     }
 });
+
 app.listen(3000, () => console.log("Server running on port 3000"));
