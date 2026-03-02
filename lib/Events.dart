@@ -336,10 +336,10 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     }
   }
 
-  // List<StayItem> get _filteredStays {
-  //   if (selectedFilter == 'For You') return _stayData;
-  //   return _stayData.where((s) => s.category == selectedFilter).toList();
-  // }
+  List<StayItem> get _filteredStays {
+    if (selectedFilter == 'For You') return _stays;
+    return _stays.where((s) => s.category == selectedFilter).toList();
+  }
 
   // List<Vehicle> get _filteredVehicles {
   //   if (selectedFilter == 'For You') return _vehicleData;
