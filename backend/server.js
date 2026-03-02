@@ -131,7 +131,8 @@ app.get("/state-images/:state", async (req, res) => {
 
 app.get('/vehicles', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM vehicles');
+        const { location } = req.query;
+        const result = await pool.query('SELECT * FROM vehicles WHERE location=$1');
         res.json(result.rows);
     } catch (err) {
         console.error(err);
