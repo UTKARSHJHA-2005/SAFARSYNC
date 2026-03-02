@@ -329,7 +329,9 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
 
   Future<List<NearbyPlace>> fetchEvents() async {
     final response = await http.get(
-      Uri.parse('http://192.168.1.3:3000/events'),
+      Uri.parse(
+        'http://192.168.1.3:3000/events?location=${widget.selectedState}',
+      ),
     );
 
     if (response.statusCode == 200) {
