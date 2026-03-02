@@ -302,7 +302,11 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   // ];
 
   Future<List<StayItem>> fetchStays() async {
-    final response = await http.get(Uri.parse('http://192.168.1.3:3000/stays'));
+    final response = await http.get(
+      Uri.parse(
+        'http://192.168.1.3:3000/stays?location=${widget.selectedState}',
+      ),
+    );
     final List data = json.decode(response.body);
     return data.map((e) => StayItem.fromJson(e)).toList();
   }
