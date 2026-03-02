@@ -14,7 +14,9 @@ import 'package:safarsync/phone.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String selectedState;
+
+  const Home({super.key, required this.selectedState});
 
   @override
   State<Home> createState() => _HomeState();
