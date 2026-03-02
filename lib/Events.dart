@@ -684,10 +684,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     }
 
     if (_vehicles.isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Text("No vehicles found"),
-      );
+      return _emptyState();
     }
 
     return SizedBox(
