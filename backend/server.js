@@ -43,7 +43,8 @@ app.get('/events', async (req, res) => {
 
 app.get('/stays', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM stays');
+        const { location } = req.query;
+        const result = await pool.query('SELECT * FROM stays WHERE location=$1');
         res.json(result.rows);
     } catch (err) {
         console.error(err);
