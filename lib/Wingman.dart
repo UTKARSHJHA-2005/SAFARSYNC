@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safarsync/components/chatgrad.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -27,8 +29,7 @@ class _ChatPageState extends State<ChatPage> {
     _controller.clear();
   }
 
-    const [isGenerating, setIsGenerating] = useState(false);// Generation of AI State
-
+bool isGenerating = false;
 
   const GenerateAI = async () => {
     if (!formData.content.trim()) {
