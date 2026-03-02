@@ -683,8 +683,6 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-
-                  /// 🔹 Rating Badge
                   Positioned(
                     top: 14,
                     right: 14,
