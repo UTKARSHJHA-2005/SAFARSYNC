@@ -245,7 +245,9 @@ class _SelectStatePageState extends State<SelectStatePage> {
 
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => const Home()),
+                    MaterialPageRoute(
+                      builder: (_) => const Home(selectedState: selectedState!),
+                    ),
                   );
                 }),
 
