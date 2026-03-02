@@ -235,24 +235,31 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   //   ),
   // ];
 
-  static const List<VehicleItem> _vehicleData = [
-    VehicleItem(
-      title: "Royal Enfield",
-      location: "Assam",
-      image: "assets/assam.jpg",
-      category: "Vehicle",
-      type: "Bike Rental",
-      price: 14.99,
-    ),
-    VehicleItem(
-      title: "SUV Self Drive",
-      location: "Meghalaya",
-      image: "assets/assam.jpg",
-      category: "Vehicle",
-      type: "Car Rental",
-      price: 39.99,
-    ),
-  ];
+  // static const List<VehicleItem> _vehicleData = [
+  //   VehicleItem(
+  //     title: "Royal Enfield",
+  //     location: "Assam",
+  //     image: "assets/assam.jpg",
+  //     category: "Vehicle",
+  //     type: "Bike Rental",
+  //     price: 14.99,
+  //   ),
+  //   VehicleItem(
+  //     title: "SUV Self Drive",
+  //     location: "Meghalaya",
+  //     image: "assets/assam.jpg",
+  //     category: "Vehicle",
+  //     type: "Car Rental",
+  //     price: 39.99,
+  //   ),
+  // ];
+
+  Future<List<StayItem>> fetchStays() async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:3000/stays'));
+
+    final List data = json.decode(response.body);
+    return data.map((e) => StayItem.fromJson(e)).toList();
+  }
 
   static const List<List<Color>> _vocalPalettes = [
     [Color(0xFFFFF3E0), Color(0xFFE65100)],
