@@ -220,6 +220,9 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   //   ),
   // ];
 
+  List<VocalItem> _vocalData = [];
+  bool _isVocalLoading = true;
+
   // static const List<StayItem> _stayData = [
   //   StayItem(
   //     title: "Ziro Valley\nHomestay",
