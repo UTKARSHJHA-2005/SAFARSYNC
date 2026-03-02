@@ -44,6 +44,16 @@ app.get('/stays', async (req, res) => {
     }
 });
 
+app.get('/vehicles', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM vehicles');
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+});
+
 function hashPhone(phone) {
     return ethers.keccak256(
         ethers.toUtf8Bytes(phone)
