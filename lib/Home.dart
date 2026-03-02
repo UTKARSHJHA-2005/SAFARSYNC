@@ -875,7 +875,16 @@ class _HomeState extends State<Home> {
                       currentPage.value = index;
                     },
                     itemBuilder: (context, index) {
-                      return Image.asset(images[index], fit: BoxFit.cover);
+                      return Image.network(
+                        images[index],
+                        fit: BoxFit.cover,
+                        loadingBuilder: (context, child, progress) {
+                          if (progress == null) return child;
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      );
                     },
                   ),
 
