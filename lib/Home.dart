@@ -509,7 +509,10 @@ class _HomeState extends State<Home> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const Events()),
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              Events(selectedState: widget.selectedState),
+                        ),
                       );
                     },
                     child: _squareCard(
