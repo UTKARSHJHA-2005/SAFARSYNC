@@ -217,20 +217,16 @@ const contract = new ethers.Contract(
 app.post("/register-user", async (req, res) => {
     try {
         const { phone, profileCID } = req.body;
-
         const phoneHash = hashPhone(phone);
         console.log("REGISTER PHONE RAW:", phone);
         console.log("REGISTER HASH:", phoneHash);
-
         const tx = await contract.registerUser(phoneHash, profileCID);
         await tx.wait();
-
         res.json({
             success: true,
             txHash: tx.hash,
         });
         console.log("User registered on blockchain:", tx.hash);
-
     } catch (error) {
         console.error("Blockchain error:", error);
         res.status(500).json({ error: error.message });
