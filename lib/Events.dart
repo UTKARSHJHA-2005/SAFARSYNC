@@ -298,7 +298,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               time: e['time'] ?? '',
               organizer: e['organizer'] ?? '',
               description: e['description'] ?? '',
-              price: (e['price'] ?? 0).toDouble(),
+              price: double.tryParse(e['price'].toString()) ?? 0.0,
             ),
           )
           .toList();
@@ -645,6 +645,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                 ),
                 Text(vehicle.name),
                 Text("₹ ${vehicle.price}"),
+                Text("Location: ${vehicle.rating}"),
               ],
             ),
           );
