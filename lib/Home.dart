@@ -3,6 +3,8 @@ import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:safarsync/Events.dart';
 import 'package:safarsync/State.dart';
 import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:safarsync/User.dart';
 import 'package:safarsync/notification.dart';
 import 'package:safarsync/Eventpage.dart';
@@ -40,6 +42,23 @@ class _HomeState extends State<Home> {
 
   bool _showBottomButtons = false;
   Timer? _hideTimer;
+
+  List<String> stateImages = [];
+  bool isLoading = true;
+
+  Future<void> fetchStateImages() async {
+    final response = await http.get(
+      Uri.parse("http://192.168.1.3:3000/state-images/${widget.selectedState}"),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      setState(() {
+        stateImages = List<String>.from(data["images"]);
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   void dispose() {
