@@ -75,7 +75,9 @@ class Hello extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => const Home()),
+                        MaterialPageRoute(
+                          builder: (_) => const SelectStatePage(),
+                        ),
                       );
                     },
                     child: const Text(
