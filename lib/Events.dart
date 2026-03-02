@@ -65,47 +65,61 @@ class VocalItem {
 }
 
 class StayItem {
-  final String title;
+  final String name;
   final String location;
   final String image;
-  final String rating;
-  final String date;
-  final String time;
-  final String category;
-  final String organizer;
-  final String description;
   final double price;
+  final String rating;
+  final String category;
 
-  const StayItem({
-    required this.title,
+  StayItem({
+    required this.name,
     required this.location,
     required this.image,
-    required this.rating,
-    required this.date,
-    required this.time,
-    required this.category,
-    required this.organizer,
-    required this.description,
     required this.price,
+    required this.rating,
+    required this.category,
   });
+
+  factory Stay.fromJson(Map<String, dynamic> json) {
+    return Stay(
+      name: json['name'] ?? '',
+      location: json['location'] ?? '',
+      image: json['image'] ?? '',
+      price: (json['price'] ?? 0).toDouble(),
+      rating: json['rating'] ?? '',
+      category: json['category'] ?? '',
+    );
+  }
 }
 
-class VehicleItem {
-  final String title;
-  final String location;
-  final String image;
+class Vehicle {
+  final String name;
   final String type;
+  final String image;
   final double price;
+  final String rating;
   final String category;
 
-  const VehicleItem({
-    required this.title,
-    required this.location,
-    required this.image,
-    required this.category,
+  Vehicle({
+    required this.name,
     required this.type,
+    required this.image,
     required this.price,
+    required this.rating,
+    required this.category,
   });
+
+  factory Vehicle.fromJson(Map<String, dynamic> json) {
+    return Vehicle(
+      name: json['name'] ?? '',
+      type: json['type'] ?? '',
+      image: json['image'] ?? '',
+      price: (json['price'] ?? 0).toDouble(),
+      rating: json['rating'] ?? '',
+      category: json['category'] ?? '',
+    );
+  }
 }
 
 class Events extends StatefulWidget {
@@ -206,20 +220,20 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     ),
   ];
 
-  static const List<StayItem> _stayData = [
-    StayItem(
-      title: "Ziro Valley\nHomestay",
-      location: "Arunachal Pradesh",
-      image: "assets/assam.jpg",
-      rating: "4.8",
-      category: "Stays",
-      date: "Available Now",
-      time: "Check-in 12 PM",
-      organizer: "Local Host",
-      description: "Experience traditional Apatani hospitality.",
-      price: 59.99,
-    ),
-  ];
+  // static const List<StayItem> _stayData = [
+  //   StayItem(
+  //     title: "Ziro Valley\nHomestay",
+  //     location: "Arunachal Pradesh",
+  //     image: "assets/assam.jpg",
+  //     rating: "4.8",
+  //     category: "Stays",
+  //     date: "Available Now",
+  //     time: "Check-in 12 PM",
+  //     organizer: "Local Host",
+  //     description: "Experience traditional Apatani hospitality.",
+  //     price: 59.99,
+  //   ),
+  // ];
 
   static const List<VehicleItem> _vehicleData = [
     VehicleItem(
