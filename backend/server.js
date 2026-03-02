@@ -55,7 +55,8 @@ app.get('/stays', async (req, res) => {
 
 app.get('/vocals', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM vocals');
+        const { location } = req.query;
+        const result = await pool.query('SELECT * FROM vocals WHERE location=$1', [location]);
         res.json(result.rows);
     } catch (err) {
         console.error(err);
