@@ -250,6 +250,21 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
     }
   }
 
+  Future<void> loadVocals() async {
+    try {
+      final data = await fetchVocals();
+      setState(() {
+        _vocalData = data;
+        _isVocalLoading = false;
+      });
+    } catch (e) {
+      print("Error loading vocals: $e");
+      setState(() {
+        _isVocalLoading = false;
+      });
+    }
+  }
+
   // static const List<StayItem> _stayData = [
   //   StayItem(
   //     title: "Ziro Valley\nHomestay",
