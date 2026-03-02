@@ -16,53 +16,53 @@ class _ChatPageState extends State<ChatPage> {
     {"text": "Hello 👋 How can I help you?", "isUser": false},
   ];
 
-  void sendMessage() {
-    if (_controller.text.trim().isEmpty) return;
+  Future<void> sendMessage() async {
+    final text = _controller.text.trim();
+    if (text.isEmpty) return;
 
     setState(() {
-      messages.add({"text": _controller.text, "isUser": true});
-
-      // Fake AI reply
-      messages.add({"text": "This is AI response 🤖", "isUser": false});
+      messages.add({"text": text, "isUser": true});
+      isGenerating = true;
     });
 
     _controller.clear();
-  }
 
-bool isGenerating = false;
-
-  const GenerateAI = async () => {
-    if (!formData.content.trim()) {
-      toast.info("Ask what you want");
-      return;
-    }
-    setIsGenerating(true);
     try {
-      const res = await axios.post(
-        "https://192.168.1.3:3000/generate",
-        {
-          prompt: formData.content,
-          userId: user?.id || user?.email
-        },
-        {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
+      final response = await http.post(
+        Uri.parse("http://192.168.1.3:3000/generate"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"prompt": text, "userId": "flutter_user"}),
       );
 
-      if (res.data.success) {
-        handleChange("content", res.data.content);
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200 && data["success"] == true) {
+        setState(() {
+          messages.add({"text": data["content"], "isUser": false});
+        });
       } else {
-        toast.error(res.data.error || "AI generation failed");
+        setState(() {
+          messages.add({
+            "text": "AI Error: ${data["error"] ?? "Failed"}",
+            "isUser": false,
+          });
+        });
       }
-    } catch (error) {
-      console.error("AI Generate Error:", error);
-      toast.error("Failed to generate content. Please try again later.");
+    } catch (e) {
+      setState(() {
+        messages.add({
+          "text": "Server error. Try again later.",
+          "isUser": false,
+        });
+      });
     } finally {
-      setIsGenerating(false);
+      setState(() {
+        isGenerating = false;
+      });
     }
-  };
+  }
+
+  bool isGenerating = false;
 
   @override
   Widget build(BuildContext context) {
