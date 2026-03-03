@@ -603,7 +603,23 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
         itemBuilder: (_, i) {
           final stay = items[i];
 
-          return Container(
+          return GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => StayVehicleDetailPage(
+          title: stay.name,
+          image: stay.image,
+          location: stay.location,
+          price: stay.price,
+          rating: stay.rating,
+          category: "stays",
+        ),
+      ),
+    );
+  },
+  child:Container(
             width: 260,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
@@ -615,7 +631,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                 ),
               ],
             ),
-            child: ClipRRect(
+            ClipRRect(
               borderRadius: BorderRadius.circular(24),
               child: Stack(
                 children: [
@@ -669,8 +685,8 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                 ],
               ),
             ),
+          ),
           );
-        },
       ),
     );
   }
