@@ -6,6 +6,28 @@ class Hello extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> showLocalNotification() async {
+      const AndroidNotificationDetails androidDetails =
+          AndroidNotificationDetails(
+            'safarsync_channel',
+            'SafarSync Notifications',
+            channelDescription: 'Notifications for SafarSync app',
+            importance: Importance.max,
+            priority: Priority.high,
+          );
+
+      const NotificationDetails notificationDetails = NotificationDetails(
+        android: androidDetails,
+      );
+
+      await flutterLocalNotificationsPlugin.show(
+        0,
+        'Welcome to SafarSync ✈️',
+        'Let’s explore your journey!',
+        notificationDetails,
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
