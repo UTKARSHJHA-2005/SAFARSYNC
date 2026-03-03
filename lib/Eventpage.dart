@@ -642,7 +642,10 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
                         const Text("🎉  "),
                         Text(
                           "Booked $_ticketCount ticket${_ticketCount > 1 ? 's' : ''} successfully!",
-                          style: const TextStyle(fontWeight: FontWeight.w600),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
                         ),
                       ],
                     ),
