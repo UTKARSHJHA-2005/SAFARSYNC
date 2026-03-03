@@ -81,7 +81,7 @@ class HelpPage extends StatelessWidget {
                         ),
                         _faqCard(
                           "How much time will it take for the app to inform the authorities and friends after an emergency?",
-                          "The app sends an immediate alert after 10 sec to the authorities and friends within seconds of detecting an emergency.",
+                          "The app sends an immediate alert to the authorities and friends within 10 seconds of detecting an emergency.",
                         ),
 
                         const SizedBox(height: 30),
