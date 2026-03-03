@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:safarsync/Hello.dart';
 import 'package:safarsync/phone.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 void main() {
   runApp(const MyApp());
