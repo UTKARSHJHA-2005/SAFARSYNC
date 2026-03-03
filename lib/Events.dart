@@ -731,7 +731,6 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                     location: vehicle.location,
                     price: vehicle.price,
                     rating: vehicle.rating,
-                    type: vehicle.type,
                     category: "vehicle",
                   ),
                 ),
