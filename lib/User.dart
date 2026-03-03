@@ -38,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage>
       }
       final response = await http.get(
         Uri.parse(
-          "http://192.168.1.3:3000/get-profile/${Uri.encodeComponent(userPhone)}",
+          "http://192.168.1.5:3000/get-profile/${Uri.encodeComponent(userPhone)}",
         ),
       );
 
@@ -73,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage>
         phoneController.text = data["phone"] ?? "";
         bloodController.text = data["bloodType"] ?? "";
         medicationController.text = data["medications"] ?? "";
-        addressController.text = data["country"] ?? "";
+        addressController.text = data["summary"] ?? "";
         final photoCid = data["photo"];
         profilePhotoUrl = photoCid != null && photoCid.isNotEmpty
             ? "https://gateway.pinata.cloud/ipfs/$photoCid"
@@ -222,7 +222,7 @@ class _ProfilePageState extends State<ProfilePage>
                               profilePhotoUrl != null &&
                                   profilePhotoUrl!.isNotEmpty
                               ? NetworkImage(profilePhotoUrl!)
-                              : const AssetImage("assets/p1.jpg")
+                              : const AssetImage("assets/logo2.png")
                                     as ImageProvider,
                         ),
                       ],
@@ -287,7 +287,7 @@ class _ProfilePageState extends State<ProfilePage>
                           keyboardType: TextInputType.phone,
                         ),
                         _styledField(
-                          label: "Address",
+                          label: "Summary",
                           controller: addressController,
                           icon: Icons.home_rounded,
                           maxLines: 2,
