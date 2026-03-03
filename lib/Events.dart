@@ -227,7 +227,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   Future<List<VocalItem>> fetchVocals() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.1.3:3000/vocals?location=${widget.selectedState}',
+        'http://192.168.1.5:3000/vocals?location=${widget.selectedState}',
       ),
     );
 
@@ -306,7 +306,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   Future<List<StayItem>> fetchStays() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.1.3:3000/stays?location=${widget.selectedState}',
+        'http://192.168.1.5:3000/stays?location=${widget.selectedState}',
       ),
     );
     final List data = json.decode(response.body);
@@ -332,7 +332,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   Future<List<NearbyPlace>> fetchEvents() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.1.3:3000/events?location=${widget.selectedState}',
+        'http://192.168.1.5:3000/events?location=${widget.selectedState}',
       ),
     );
 
@@ -461,7 +461,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   Future<List<Vehicle>> fetchVehicles() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.1.3:3000/vehicles?location=${widget.selectedState}',
+        'http://192.168.1.5:3000/vehicles?location=${widget.selectedState}',
       ),
     );
 
