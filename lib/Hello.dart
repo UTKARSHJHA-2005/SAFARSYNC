@@ -16,6 +16,7 @@ class Hello extends StatelessWidget {
             channelDescription: 'Notifications for SafarSync app',
             importance: Importance.max,
             priority: Priority.high,
+            icon: 'logo2',
           );
 
       const NotificationDetails notificationDetails = NotificationDetails(
