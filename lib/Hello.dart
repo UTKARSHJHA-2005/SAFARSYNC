@@ -94,7 +94,9 @@ class Hello extends StatelessWidget {
                         borderRadius: BorderRadius.circular(14),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      await showLocalNotification();
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
