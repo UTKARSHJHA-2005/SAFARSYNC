@@ -41,6 +41,7 @@ dependencies:
   url_launcher: ^6.2.5
   walletconnect_flutter_v2: ^2.0.0
   http: ^1.2.0
+  flutter_local_notifications: ^17.0.0
   web3dart: ^2.7.0
   crypto: ^3.0.3
   intl_phone_field: ^3.0.1
