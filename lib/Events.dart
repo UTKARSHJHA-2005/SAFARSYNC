@@ -797,7 +797,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              vehicle.location,
+                              vehicle.rating,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -1168,7 +1168,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            place.location,
+                            place.rating,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14,
