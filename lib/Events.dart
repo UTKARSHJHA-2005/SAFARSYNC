@@ -120,6 +120,7 @@ class Vehicle {
       image: json['image'] ?? '',
       price: double.parse(json['price'].toString()),
       rating: json['rating'] ?? '',
+      location: json['location'] ?? '',
       category: json['category'] ?? '',
     );
   }
@@ -727,9 +728,10 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                   builder: (_) => StayVehicleDetailPage(
                     title: vehicle.name,
                     image: vehicle.image,
-                    location: vehicle.type,
+                    location: vehicle.location,
                     price: vehicle.price,
                     rating: vehicle.rating,
+                    type: vehicle.type,
                     category: "vehicle",
                   ),
                 ),
