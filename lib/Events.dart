@@ -99,6 +99,7 @@ class Vehicle {
   final String type;
   final String image;
   final double price;
+  final String location;
   final String rating;
   final String category;
 
@@ -107,6 +108,7 @@ class Vehicle {
     required this.type,
     required this.image,
     required this.price,
+    required this.location,
     required this.rating,
     required this.category,
   });
