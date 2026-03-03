@@ -6,7 +6,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:safarsync/User.dart';
-import 'package:safarsync/notification.dart';
 import 'package:safarsync/Eventpage.dart';
 import 'package:safarsync/Wingman.dart';
 import 'package:safarsync/Help.dart';
