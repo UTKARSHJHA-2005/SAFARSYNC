@@ -11,6 +11,7 @@ import 'package:safarsync/Wingman.dart';
 import 'package:safarsync/Help.dart';
 import 'package:safarsync/Map.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:intl/intl.dart';
 import 'package:safarsync/phone.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -389,7 +390,7 @@ class _HomeState extends State<Home> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          DateTime.now().toString().substring(0, 10),
+                          DateFormat('dd MMM yyyy').format(DateTime.now()),
                           style: const TextStyle(
                             color: Colors.black54,
                             fontSize: 14,
