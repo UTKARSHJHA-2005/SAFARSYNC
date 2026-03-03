@@ -49,9 +49,7 @@ class _HomeState extends State<Home> {
 
   Future<void> fetchStateImages() async {
     final response = await http.get(
-      Uri.parse(
-        "http://192.168.1.3:3000/state-images/${Uri.encodeComponent(widget.selectedState)}",
-      ),
+      Uri.parse("http://192.168.1.5:3000/state-images/${widget.selectedState}"),
     );
 
     if (response.statusCode == 200) {
