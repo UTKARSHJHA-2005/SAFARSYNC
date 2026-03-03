@@ -154,7 +154,10 @@ class StayVehicleDetailPage extends StatelessWidget {
                           onPressed: () {},
                           child: Text(
                             isStay ? "Book Stay" : "Rent Now",
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],

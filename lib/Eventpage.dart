@@ -689,7 +689,7 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w800,
                         letterSpacing: 0.3,
                       ),
                     ),
