@@ -11,6 +11,8 @@ class EventsPage extends StatefulWidget {
   final String description;
   final double price;
 
+  final bool isVocals; // 👈 ADD THIS
+
   const EventsPage({
     super.key,
     required this.title,
@@ -21,6 +23,7 @@ class EventsPage extends StatefulWidget {
     required this.organizer,
     required this.description,
     required this.price,
+    required this.isVocals,
   });
 
   @override
@@ -103,7 +106,22 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
                         fit: StackFit.expand,
                         children: [
                           /// Hero image
-                          Image.network(widget.image, fit: BoxFit.cover),
+                          Image.network(
+                            widget.image,
+                            fit: BoxFit.cover,
+                            loadingBuilder: (context, child, progress) {
+                              if (progress == null) return child;
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            },
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.grey[300],
+                                child: const Icon(Icons.broken_image, size: 50),
+                              );
+                            },
+                          ),
 
                           /// Layered gradient for text legibility
                           DecoratedBox(
@@ -281,15 +299,18 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
                             const SizedBox(height: 28),
 
                             /// Ticket counter section
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
+                            if (!widget.isVocals) ...[
+                              const SizedBox(height: 28),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                ),
+                                child: _ticketCounterSection(),
                               ),
-                              child: _ticketCounterSection(),
-                            ),
+                            ],
 
                             /// Space for bottom bar
-                            const SizedBox(height: 120),
+                            if (!widget.isVocals) const SizedBox(height: 120),
                           ],
                         ),
                       ),
@@ -298,13 +319,13 @@ class _EventsPageState extends State<EventsPage> with TickerProviderStateMixin {
                 ],
               ),
 
-              /// ── BOTTOM BOOKING BAR ───────────────────────────────────
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: _bottomBar(context),
-              ),
+              if (!widget.isVocals)
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: _bottomBar(context),
+                ),
             ],
           ),
         ),

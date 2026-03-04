@@ -516,6 +516,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                         organizer: event.organizer,
                         description: event.description,
                         price: event.price,
+                        isVocals: false,
                       ),
                     ),
                   );
@@ -544,6 +545,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
                         organizer: event.organizer,
                         description: event.description,
                         price: event.price,
+                        isVocals: true,
                       ),
                     ),
                   );
@@ -1140,6 +1142,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               organizer: place.organizer,
               description: place.description,
               price: place.price,
+              isVocals: false,
             ),
           ),
         );
@@ -1361,6 +1364,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               organizer: item.organizer,
               description: item.description,
               price: item.price,
+              isVocals: false,
             ),
           ),
         );
