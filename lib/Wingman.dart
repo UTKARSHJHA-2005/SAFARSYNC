@@ -29,7 +29,7 @@ class _ChatPageState extends State<ChatPage> {
 
     try {
       final response = await http.post(
-        Uri.parse("http://192.168.1.3:3000/generate"),
+        Uri.parse("https://safarsync-7g9l.onrender.com/generate"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({"prompt": text, "userId": "flutter_user"}),
       );

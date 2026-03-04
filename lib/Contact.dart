@@ -4,7 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:safarsync/components/gradient.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'main.dart';
 import 'package:safarsync/Home.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:safarsync/State.dart';
 import 'package:safarsync/model/user_register.dart';
 
@@ -95,10 +97,33 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
     );
   }
 
+  Future<void> showLocalNotification() async {
+    const AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+          'safarsync_channel',
+          'SafarSync Notifications',
+          channelDescription: 'Notifications for SafarSync app',
+          importance: Importance.max,
+          priority: Priority.high,
+          icon: 'logo2',
+        );
+
+    const NotificationDetails notificationDetails = NotificationDetails(
+      android: androidDetails,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'Welcome to SafarSync ✈️',
+      'Let’s explore your journey!',
+      notificationDetails,
+    );
+  }
+
   Future<String?> uploadFullProfile(UserRegistration user) async {
     try {
       final response = await http.post(
-        Uri.parse("http://192.168.1.5:3000/upload-json"),
+        Uri.parse("https://safarsync-7g9l.onrender.com/upload-json"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(user.toJson()),
       );
@@ -309,6 +334,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                 const SizedBox(height: 28),
 
                 _nextButton(() async {
+                  await showLocalNotification();
                   if (contacts.length < 2) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -337,7 +363,9 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
 
                     // 2️⃣ Call backend to register on blockchain
                     final response = await http.post(
-                      Uri.parse("http://192.168.1.5:3000/register-user"),
+                      Uri.parse(
+                        "https://safarsync-7g9l.onrender.com/register-user",
+                      ),
                       headers: {"Content-Type": "application/json"},
                       body: jsonEncode({
                         "phone": widget.user.phone,

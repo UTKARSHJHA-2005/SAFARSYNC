@@ -231,7 +231,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   Future<List<VocalItem>> fetchVocals() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.1.5:3000/vocals?location=${widget.selectedState}',
+        'https://safarsync-7g9l.onrender.com/vocals?location=${widget.selectedState}',
       ),
     );
 
@@ -310,7 +310,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   Future<List<StayItem>> fetchStays() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.1.5:3000/stays?location=${widget.selectedState}',
+        'https://safarsync-7g9l.onrender.com/stays?location=${widget.selectedState}',
       ),
     );
     final List data = json.decode(response.body);
@@ -336,7 +336,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   Future<List<NearbyPlace>> fetchEvents() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.1.5:3000/events?location=${widget.selectedState}',
+        'https://safarsync-7g9l.onrender.com/events?location=${widget.selectedState}',
       ),
     );
 
@@ -465,7 +465,7 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
   Future<List<Vehicle>> fetchVehicles() async {
     final response = await http.get(
       Uri.parse(
-        'http://192.168.1.5:3000/vehicles?location=${widget.selectedState}',
+        'https://safarsync-7g9l.onrender.com/vehicles?location=${widget.selectedState}',
       ),
     );
 
@@ -891,24 +891,67 @@ class _EventsState extends State<Events> with TickerProviderStateMixin {
               ],
             ),
           ),
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(14),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.06),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: const Icon(
-              Icons.tune_rounded,
-              color: Color(0xFF1A1A1A),
-              size: 20,
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                barrierColor: Colors.transparent,
+                builder: (context) {
+                  return Stack(
+                    children: [
+                      Positioned(
+                        top: 100, // adjust position
+                        right: 20, // adjust position
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Container(
+                            padding: const EdgeInsets.all(12),
+                            width: 240,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 15,
+                                  offset: const Offset(0, 5),
+                                ),
+                              ],
+                            ),
+                            child: const Text(
+                              "Hosting event details will only be added by us.",
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.06),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: const Icon(
+                Icons.tune_rounded,
+                color: Color(0xFF1A1A1A),
+                size: 20,
+              ),
             ),
           ),
         ],

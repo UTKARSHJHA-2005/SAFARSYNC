@@ -391,7 +391,7 @@ class _RegisterStep2State extends State<RegisterStep2>
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://192.168.1.4:3000/upload'),
+        Uri.parse('https://safarsync-7g9l.onrender.com/upload'),
       );
 
       request.files.add(

@@ -6,11 +6,13 @@ import multer from 'multer';
 import fs from 'fs';
 import { ethers } from 'ethers';
 import { Pool } from 'pg';
+import cors from 'cors';
 import OpenAI from "openai";
 
 const app = express();
 app.use(express.json());
 const upload = multer({ dest: 'uploads/' });
+app.use(cors());
 
 const pinata = new pinataSDK({
     pinataJWTKey: process.env.PINATA_JWT_KEY,
