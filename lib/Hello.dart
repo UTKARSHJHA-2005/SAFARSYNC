@@ -5,32 +5,31 @@ import 'main.dart';
 
 class Hello extends StatelessWidget {
   const Hello({super.key});
+  Future<void> showLocalNotification() async {
+    const AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+          'safarsync_channel',
+          'SafarSync Notifications',
+          channelDescription: 'Notifications for SafarSync app',
+          importance: Importance.max,
+          priority: Priority.high,
+          icon: 'logo2',
+        );
+
+    const NotificationDetails notificationDetails = NotificationDetails(
+      android: androidDetails,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'Welcome to SafarSync ✈️',
+      'Let’s explore your journey!',
+      notificationDetails,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    Future<void> showLocalNotification() async {
-      const AndroidNotificationDetails androidDetails =
-          AndroidNotificationDetails(
-            'safarsync_channel',
-            'SafarSync Notifications',
-            channelDescription: 'Notifications for SafarSync app',
-            importance: Importance.max,
-            priority: Priority.high,
-            icon: 'logo2',
-          );
-
-      const NotificationDetails notificationDetails = NotificationDetails(
-        android: androidDetails,
-      );
-
-      await flutterLocalNotificationsPlugin.show(
-        0,
-        'Welcome to SafarSync ✈️',
-        'Let’s explore your journey!',
-        notificationDetails,
-      );
-    }
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -97,15 +96,19 @@ class Hello extends StatelessWidget {
                         borderRadius: BorderRadius.circular(14),
                       ),
                     ),
-                    onPressed: () async {
-                      await showLocalNotification();
+                    onPressed: () {
+                      try {
+                        showLocalNotification();
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const SelectStatePage(),
-                        ),
-                      );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SelectStatePage(),
+                          ),
+                        );
+                      } catch (e) {
+                        print("Error: $e");
+                      }
                     },
                     child: const Text(
                       "Continue",
