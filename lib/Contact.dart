@@ -334,7 +334,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                 const SizedBox(height: 28),
 
                 _nextButton(() async {
-                  await showLocalNotification();
                   if (contacts.length < 2) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -354,14 +353,14 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                   }).toList();
 
                   try {
-                    // 1️⃣ Upload full profile JSON
+                    // Upload full profile JSON
                     final profileCid = await uploadFullProfile(widget.user);
 
-                    if (profileCid == null) {
-                      throw Exception("Profile upload failed");
-                    }
+                    // if (profileCid == null) {
+                    //   throw Exception("Profile upload failed");
+                    // }
 
-                    // 2️⃣ Call backend to register on blockchain
+                    //  Call backend to register on blockchain
                     final response = await http.post(
                       Uri.parse(
                         "https://safarsync-7g9l.onrender.com/register-user",
@@ -377,7 +376,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage>
                       throw Exception("Blockchain registration failed");
                     }
 
-                    // 3️⃣ Success
+                    // Success
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
